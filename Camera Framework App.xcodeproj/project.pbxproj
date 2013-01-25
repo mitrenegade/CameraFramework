@@ -24,6 +24,48 @@
 		9E00528E1697CB9D00A4983D /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E00528D1697CB9D00A4983D /* second@2x.png */; };
 		9E0052911697CB9D00A4983D /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E00528F1697CB9D00A4983D /* FirstViewController.xib */; };
 		9E0052941697CB9D00A4983D /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E0052921697CB9D00A4983D /* SecondViewController.xib */; };
+		9E00529B1697CC8000A4983D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E00529A1697CC8000A4983D /* Parse.framework */; };
+		9E0052A41697CCD300A4983D /* ParseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E00529E1697CCD300A4983D /* ParseHelper.m */; };
+		9E0052A51697CCD300A4983D /* ParseLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0052A01697CCD300A4983D /* ParseLocationAnnotation.m */; };
+		9E0052A61697CCD300A4983D /* ParseUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0052A21697CCD300A4983D /* ParseUserInfo.m */; };
+		9E3BB5B516B0DF5100467266 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5B316B0DF5000467266 /* ProfileViewController.m */; };
+		9E3BB5B616B0DF5100467266 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3BB5B416B0DF5000467266 /* ProfileViewController.xib */; };
+		9E3BB5C416B0E06500467266 /* AsyncImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5BE16B0E06500467266 /* AsyncImageUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E3BB5C516B0E06500467266 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5C016B0E06500467266 /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E3BB5C616B0E06500467266 /* AWSHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5C216B0E06500467266 /* AWSHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E3BB5C716B0E06500467266 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3BB5C316B0E06500467266 /* AWSiOSSDK.framework */; };
+		9E3BB5CB16B0E14000467266 /* GenericRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5C916B0E14000467266 /* GenericRefreshViewController.m */; };
+		9E3BB5CC16B0E14000467266 /* GenericRefreshViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3BB5CA16B0E14000467266 /* GenericRefreshViewController.xib */; };
+		9E3BB5CF16B0E47700467266 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5CE16B0E47700467266 /* UserInfo.m */; };
+		9E3BB5DD16B0E8EC00467266 /* LoadingAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */; };
+		9E3BB5E016B0EB4800467266 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9ECE137B1697D3C0000055ED /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13761697D3C0000055ED /* EmailLoginViewController.m */; };
+		9ECE137C1697D3C0000055ED /* EmailLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */; };
+		9ECE137D1697D3C0000055ED /* PreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13791697D3C0000055ED /* PreviewController.m */; };
+		9ECE137E1697D3C0000055ED /* PreviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE137A1697D3C0000055ED /* PreviewController.xib */; };
+		9ECE13821697D56A000055ED /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13801697D56A000055ED /* SignupViewController.m */; };
+		9ECE13831697D56A000055ED /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE13811697D56A000055ED /* SignupViewController.xib */; };
+		9ECE13861697D744000055ED /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13851697D744000055ED /* Constants.m */; };
+		9ECE13881697DA62000055ED /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE13871697DA62000055ED /* AudioToolbox.framework */; };
+		9ECE138A1697DA66000055ED /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE13891697DA66000055ED /* Accounts.framework */; };
+		9ECE138C1697DA69000055ED /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE138B1697DA68000055ED /* AdSupport.framework */; };
+		9ECE138E1697DA6D000055ED /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE138D1697DA6D000055ED /* CFNetwork.framework */; };
+		9ECE13901697DA74000055ED /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE138F1697DA74000055ED /* CoreLocation.framework */; };
+		9ECE13921697DA84000055ED /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE13911697DA84000055ED /* libsqlite3.dylib */; };
+		9ECE13941697DA8F000055ED /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE13931697DA8E000055ED /* libz.1.1.3.dylib */; };
+		9ECE13961697DA99000055ED /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE13951697DA99000055ED /* MobileCoreServices.framework */; };
+		9ECE13981697DAA1000055ED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE13971697DAA1000055ED /* QuartzCore.framework */; };
+		9ECE139D1697DAAC000055ED /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE13991697DAAC000055ED /* Security.framework */; };
+		9ECE139E1697DAAC000055ED /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE139A1697DAAC000055ED /* Social.framework */; };
+		9ECE139F1697DAAC000055ED /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE139B1697DAAC000055ED /* StoreKit.framework */; };
+		9ECE13A01697DAAC000055ED /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECE139C1697DAAC000055ED /* SystemConfiguration.framework */; };
+		9ED0BF1C16992D110059D8F3 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF1716992D110059D8F3 /* NSObject+MKBlockAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9ED0BF1D16992D110059D8F3 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF1916992D110059D8F3 /* UIActionSheet+MKBlockAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9ED0BF1E16992D110059D8F3 /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF1B16992D110059D8F3 /* UIAlertView+MKBlockAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9ED0BF231699305C0059D8F3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF211699305C0059D8F3 /* LoginViewController.m */; };
+		9ED0BF241699305C0059D8F3 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF221699305C0059D8F3 /* LoginViewController.xib */; };
+		9ED0BF28169931EA0059D8F3 /* EmailSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */; };
+		9ED0BF29169931EA0059D8F3 /* EmailSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +92,70 @@
 		9E00528D1697CB9D00A4983D /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		9E0052901697CB9D00A4983D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController.xib; sourceTree = "<group>"; };
 		9E0052931697CB9D00A4983D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
+		9E00529A1697CC8000A4983D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		9E00529D1697CCD300A4983D /* ParseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseHelper.h; sourceTree = "<group>"; };
+		9E00529E1697CCD300A4983D /* ParseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseHelper.m; sourceTree = "<group>"; };
+		9E00529F1697CCD300A4983D /* ParseLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseLocationAnnotation.h; sourceTree = "<group>"; };
+		9E0052A01697CCD300A4983D /* ParseLocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLocationAnnotation.m; sourceTree = "<group>"; };
+		9E0052A11697CCD300A4983D /* ParseUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUserInfo.h; sourceTree = "<group>"; };
+		9E0052A21697CCD300A4983D /* ParseUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseUserInfo.m; sourceTree = "<group>"; };
+		9E0052A31697CCD300A4983D /* PFObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFObjectFactory.h; sourceTree = "<group>"; };
+		9E3BB5B216B0DF5000467266 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		9E3BB5B316B0DF5000467266 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		9E3BB5B416B0DF5000467266 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		9E3BB5BD16B0E06500467266 /* AsyncImageUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageUploader.h; sourceTree = "<group>"; };
+		9E3BB5BE16B0E06500467266 /* AsyncImageUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageUploader.m; sourceTree = "<group>"; };
+		9E3BB5BF16B0E06500467266 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		9E3BB5C016B0E06500467266 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		9E3BB5C116B0E06500467266 /* AWSHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWSHelper.h; sourceTree = "<group>"; };
+		9E3BB5C216B0E06500467266 /* AWSHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWSHelper.m; sourceTree = "<group>"; };
+		9E3BB5C316B0E06500467266 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
+		9E3BB5C816B0E13F00467266 /* GenericRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericRefreshViewController.h; sourceTree = "<group>"; };
+		9E3BB5C916B0E14000467266 /* GenericRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericRefreshViewController.m; sourceTree = "<group>"; };
+		9E3BB5CA16B0E14000467266 /* GenericRefreshViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenericRefreshViewController.xib; sourceTree = "<group>"; };
+		9E3BB5CD16B0E47600467266 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		9E3BB5CE16B0E47700467266 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		9E3BB5DB16B0E8EB00467266 /* LoadingAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimationView.h; sourceTree = "<group>"; };
+		9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimationView.m; sourceTree = "<group>"; };
+		9E3BB5DE16B0EB4600467266 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		9ECE13751697D3C0000055ED /* EmailLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailLoginViewController.h; sourceTree = "<group>"; };
+		9ECE13761697D3C0000055ED /* EmailLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailLoginViewController.m; sourceTree = "<group>"; };
+		9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailLoginViewController.xib; sourceTree = "<group>"; };
+		9ECE13781697D3C0000055ED /* PreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewController.h; sourceTree = "<group>"; };
+		9ECE13791697D3C0000055ED /* PreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewController.m; sourceTree = "<group>"; };
+		9ECE137A1697D3C0000055ED /* PreviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewController.xib; sourceTree = "<group>"; };
+		9ECE137F1697D56A000055ED /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		9ECE13801697D56A000055ED /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		9ECE13811697D56A000055ED /* SignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupViewController.xib; sourceTree = "<group>"; };
+		9ECE13841697D744000055ED /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		9ECE13851697D744000055ED /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		9ECE13871697DA62000055ED /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9ECE13891697DA66000055ED /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		9ECE138B1697DA68000055ED /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		9ECE138D1697DA6D000055ED /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9ECE138F1697DA74000055ED /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9ECE13911697DA84000055ED /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		9ECE13931697DA8E000055ED /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		9ECE13951697DA99000055ED /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		9ECE13971697DAA1000055ED /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9ECE13991697DAAC000055ED /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9ECE139A1697DAAC000055ED /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		9ECE139B1697DAAC000055ED /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9ECE139C1697DAAC000055ED /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9ED0BF1516992D110059D8F3 /* MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlockAdditions.h; sourceTree = "<group>"; };
+		9ED0BF1616992D110059D8F3 /* NSObject+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		9ED0BF1716992D110059D8F3 /* NSObject+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		9ED0BF1816992D110059D8F3 /* UIActionSheet+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		9ED0BF1916992D110059D8F3 /* UIActionSheet+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		9ED0BF1A16992D110059D8F3 /* UIAlertView+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		9ED0BF1B16992D110059D8F3 /* UIAlertView+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		9ED0BF201699305C0059D8F3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		9ED0BF211699305C0059D8F3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		9ED0BF221699305C0059D8F3 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		9ED0BF25169931E90059D8F3 /* EmailSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSignupViewController.h; sourceTree = "<group>"; };
+		9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSignupViewController.m; sourceTree = "<group>"; };
+		9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailSignupViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +163,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ECE139D1697DAAC000055ED /* Security.framework in Frameworks */,
+				9ECE139E1697DAAC000055ED /* Social.framework in Frameworks */,
+				9ECE139F1697DAAC000055ED /* StoreKit.framework in Frameworks */,
+				9ECE13A01697DAAC000055ED /* SystemConfiguration.framework in Frameworks */,
+				9ECE13981697DAA1000055ED /* QuartzCore.framework in Frameworks */,
+				9ECE13961697DA99000055ED /* MobileCoreServices.framework in Frameworks */,
+				9ECE13941697DA8F000055ED /* libz.1.1.3.dylib in Frameworks */,
+				9ECE13921697DA84000055ED /* libsqlite3.dylib in Frameworks */,
+				9ECE13901697DA74000055ED /* CoreLocation.framework in Frameworks */,
+				9ECE138E1697DA6D000055ED /* CFNetwork.framework in Frameworks */,
+				9ECE138C1697DA69000055ED /* AdSupport.framework in Frameworks */,
+				9ECE138A1697DA66000055ED /* Accounts.framework in Frameworks */,
+				9ECE13881697DA62000055ED /* AudioToolbox.framework in Frameworks */,
 				9E00526A1697CB9D00A4983D /* UIKit.framework in Frameworks */,
 				9E00526C1697CB9D00A4983D /* Foundation.framework in Frameworks */,
 				9E00526E1697CB9D00A4983D /* CoreGraphics.framework in Frameworks */,
+				9E00529B1697CC8000A4983D /* Parse.framework in Frameworks */,
+				9E3BB5C716B0E06500467266 /* AWSiOSSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +190,20 @@
 		9E00525A1697CB9C00A4983D = {
 			isa = PBXGroup;
 			children = (
+				9E3BB5BC16B0E06500467266 /* AWSLibs */,
+				9ECE13991697DAAC000055ED /* Security.framework */,
+				9ECE139A1697DAAC000055ED /* Social.framework */,
+				9ECE139B1697DAAC000055ED /* StoreKit.framework */,
+				9ECE139C1697DAAC000055ED /* SystemConfiguration.framework */,
+				9ECE13971697DAA1000055ED /* QuartzCore.framework */,
+				9ECE13951697DA99000055ED /* MobileCoreServices.framework */,
+				9ECE13931697DA8E000055ED /* libz.1.1.3.dylib */,
+				9ECE13911697DA84000055ED /* libsqlite3.dylib */,
+				9ECE138F1697DA74000055ED /* CoreLocation.framework */,
+				9ECE138D1697DA6D000055ED /* CFNetwork.framework */,
+				9ECE138B1697DA68000055ED /* AdSupport.framework */,
+				9ECE13891697DA66000055ED /* Accounts.framework */,
+				9ECE13871697DA62000055ED /* AudioToolbox.framework */,
 				9E00526F1697CB9D00A4983D /* Camera Framework App */,
 				9E0052681697CB9D00A4983D /* Frameworks */,
 				9E0052661697CB9D00A4983D /* Products */,
@@ -96,10 +231,28 @@
 		9E00526F1697CB9D00A4983D /* Camera Framework App */ = {
 			isa = PBXGroup;
 			children = (
+				9ED0BF1416992D110059D8F3 /* MKAdditions */,
+				9E0052A71697CCEA00A4983D /* Login */,
+				9E00529C1697CCD300A4983D /* ParseHelperLibrary */,
+				9E00529A1697CC8000A4983D /* Parse.framework */,
 				9E0052781697CB9D00A4983D /* AppDelegate.h */,
 				9E0052791697CB9D00A4983D /* AppDelegate.m */,
+				9E3BB5DE16B0EB4600467266 /* MBProgressHUD.h */,
+				9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */,
+				9E3BB5DB16B0E8EB00467266 /* LoadingAnimationView.h */,
+				9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */,
+				9E3BB5CD16B0E47600467266 /* UserInfo.h */,
+				9E3BB5CE16B0E47700467266 /* UserInfo.m */,
+				9ECE13841697D744000055ED /* Constants.h */,
+				9ECE13851697D744000055ED /* Constants.m */,
 				9E0052811697CB9D00A4983D /* FirstViewController.h */,
 				9E0052821697CB9D00A4983D /* FirstViewController.m */,
+				9E3BB5B216B0DF5000467266 /* ProfileViewController.h */,
+				9E3BB5B316B0DF5000467266 /* ProfileViewController.m */,
+				9E3BB5B416B0DF5000467266 /* ProfileViewController.xib */,
+				9E3BB5C816B0E13F00467266 /* GenericRefreshViewController.h */,
+				9E3BB5C916B0E14000467266 /* GenericRefreshViewController.m */,
+				9E3BB5CA16B0E14000467266 /* GenericRefreshViewController.xib */,
 				9E0052841697CB9D00A4983D /* first.png */,
 				9E0052861697CB9D00A4983D /* first@2x.png */,
 				9E0052881697CB9D00A4983D /* SecondViewController.h */,
@@ -125,6 +278,72 @@
 				9E00527F1697CB9D00A4983D /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E00529C1697CCD300A4983D /* ParseHelperLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				9E00529D1697CCD300A4983D /* ParseHelper.h */,
+				9E00529E1697CCD300A4983D /* ParseHelper.m */,
+				9E00529F1697CCD300A4983D /* ParseLocationAnnotation.h */,
+				9E0052A01697CCD300A4983D /* ParseLocationAnnotation.m */,
+				9E0052A11697CCD300A4983D /* ParseUserInfo.h */,
+				9E0052A21697CCD300A4983D /* ParseUserInfo.m */,
+				9E0052A31697CCD300A4983D /* PFObjectFactory.h */,
+			);
+			name = ParseHelperLibrary;
+			path = ../../ParseHelperLibrary;
+			sourceTree = "<group>";
+		};
+		9E0052A71697CCEA00A4983D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9ECE13781697D3C0000055ED /* PreviewController.h */,
+				9ECE13791697D3C0000055ED /* PreviewController.m */,
+				9ECE137A1697D3C0000055ED /* PreviewController.xib */,
+				9ED0BF201699305C0059D8F3 /* LoginViewController.h */,
+				9ED0BF211699305C0059D8F3 /* LoginViewController.m */,
+				9ED0BF221699305C0059D8F3 /* LoginViewController.xib */,
+				9ECE137F1697D56A000055ED /* SignupViewController.h */,
+				9ECE13801697D56A000055ED /* SignupViewController.m */,
+				9ECE13811697D56A000055ED /* SignupViewController.xib */,
+				9ECE13751697D3C0000055ED /* EmailLoginViewController.h */,
+				9ECE13761697D3C0000055ED /* EmailLoginViewController.m */,
+				9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */,
+				9ED0BF25169931E90059D8F3 /* EmailSignupViewController.h */,
+				9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */,
+				9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		9E3BB5BC16B0E06500467266 /* AWSLibs */ = {
+			isa = PBXGroup;
+			children = (
+				9E3BB5BD16B0E06500467266 /* AsyncImageUploader.h */,
+				9E3BB5BE16B0E06500467266 /* AsyncImageUploader.m */,
+				9E3BB5BF16B0E06500467266 /* AsyncImageView.h */,
+				9E3BB5C016B0E06500467266 /* AsyncImageView.m */,
+				9E3BB5C116B0E06500467266 /* AWSHelper.h */,
+				9E3BB5C216B0E06500467266 /* AWSHelper.m */,
+				9E3BB5C316B0E06500467266 /* AWSiOSSDK.framework */,
+			);
+			name = AWSLibs;
+			path = ../AWSLibs;
+			sourceTree = "<group>";
+		};
+		9ED0BF1416992D110059D8F3 /* MKAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				9ED0BF1516992D110059D8F3 /* MKBlockAdditions.h */,
+				9ED0BF1616992D110059D8F3 /* NSObject+MKBlockAdditions.h */,
+				9ED0BF1716992D110059D8F3 /* NSObject+MKBlockAdditions.m */,
+				9ED0BF1816992D110059D8F3 /* UIActionSheet+MKBlockAdditions.h */,
+				9ED0BF1916992D110059D8F3 /* UIActionSheet+MKBlockAdditions.m */,
+				9ED0BF1A16992D110059D8F3 /* UIAlertView+MKBlockAdditions.h */,
+				9ED0BF1B16992D110059D8F3 /* UIAlertView+MKBlockAdditions.m */,
+			);
+			path = MKAdditions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +407,13 @@
 				9E00528E1697CB9D00A4983D /* second@2x.png in Resources */,
 				9E0052911697CB9D00A4983D /* FirstViewController.xib in Resources */,
 				9E0052941697CB9D00A4983D /* SecondViewController.xib in Resources */,
+				9ECE137C1697D3C0000055ED /* EmailLoginViewController.xib in Resources */,
+				9ECE137E1697D3C0000055ED /* PreviewController.xib in Resources */,
+				9ECE13831697D56A000055ED /* SignupViewController.xib in Resources */,
+				9ED0BF241699305C0059D8F3 /* LoginViewController.xib in Resources */,
+				9ED0BF29169931EA0059D8F3 /* EmailSignupViewController.xib in Resources */,
+				9E3BB5B616B0DF5100467266 /* ProfileViewController.xib in Resources */,
+				9E3BB5CC16B0E14000467266 /* GenericRefreshViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +428,26 @@
 				9E00527A1697CB9D00A4983D /* AppDelegate.m in Sources */,
 				9E0052831697CB9D00A4983D /* FirstViewController.m in Sources */,
 				9E00528A1697CB9D00A4983D /* SecondViewController.m in Sources */,
+				9E0052A41697CCD300A4983D /* ParseHelper.m in Sources */,
+				9E0052A51697CCD300A4983D /* ParseLocationAnnotation.m in Sources */,
+				9E0052A61697CCD300A4983D /* ParseUserInfo.m in Sources */,
+				9ECE137B1697D3C0000055ED /* EmailLoginViewController.m in Sources */,
+				9ECE137D1697D3C0000055ED /* PreviewController.m in Sources */,
+				9ECE13821697D56A000055ED /* SignupViewController.m in Sources */,
+				9ECE13861697D744000055ED /* Constants.m in Sources */,
+				9ED0BF1C16992D110059D8F3 /* NSObject+MKBlockAdditions.m in Sources */,
+				9ED0BF1D16992D110059D8F3 /* UIActionSheet+MKBlockAdditions.m in Sources */,
+				9ED0BF1E16992D110059D8F3 /* UIAlertView+MKBlockAdditions.m in Sources */,
+				9ED0BF231699305C0059D8F3 /* LoginViewController.m in Sources */,
+				9ED0BF28169931EA0059D8F3 /* EmailSignupViewController.m in Sources */,
+				9E3BB5B516B0DF5100467266 /* ProfileViewController.m in Sources */,
+				9E3BB5C416B0E06500467266 /* AsyncImageUploader.m in Sources */,
+				9E3BB5C516B0E06500467266 /* AsyncImageView.m in Sources */,
+				9E3BB5C616B0E06500467266 /* AWSHelper.m in Sources */,
+				9E3BB5CB16B0E14000467266 /* GenericRefreshViewController.m in Sources */,
+				9E3BB5CF16B0E47700467266 /* UserInfo.m in Sources */,
+				9E3BB5DD16B0E8EC00467266 /* LoadingAnimationView.m in Sources */,
+				9E3BB5E016B0EB4800467266 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,9 +534,15 @@
 		9E0052981697CB9D00A4983D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Camera Framework App\"",
+					"\"$(SRCROOT)/../AWSLibs\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera Framework App/Camera Framework App-Prefix.pch";
 				INFOPLIST_FILE = "Camera Framework App/Camera Framework App-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -299,9 +551,15 @@
 		9E0052991697CB9D00A4983D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Camera Framework App\"",
+					"\"$(SRCROOT)/../AWSLibs\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera Framework App/Camera Framework App-Prefix.pch";
 				INFOPLIST_FILE = "Camera Framework App/Camera Framework App-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -326,6 +584,7 @@
 				9E0052991697CB9D00A4983D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
