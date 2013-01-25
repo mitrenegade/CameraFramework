@@ -39,6 +39,13 @@
 		9E3BB5CF16B0E47700467266 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5CE16B0E47700467266 /* UserInfo.m */; };
 		9E3BB5DD16B0E8EC00467266 /* LoadingAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */; };
 		9E3BB5E016B0EB4800467266 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E9EB2EE16B25DE500693867 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9EB2ED16B25DE500693867 /* CaptureSessionManager.m */; };
+		9E9EB2F216B25E2100693867 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9EB2F016B25E2100693867 /* CameraViewController.m */; };
+		9E9EB2F316B25E2100693867 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9EB2F116B25E2100693867 /* CameraViewController.xib */; };
+		9E9EB2F516B260EA00693867 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9EB2F416B260EA00693867 /* CoreVideo.framework */; };
+		9E9EB2F716B260F500693867 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9EB2F616B260F500693867 /* ImageIO.framework */; };
+		9E9EB2F916B260FB00693867 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9EB2F816B260FA00693867 /* AVFoundation.framework */; };
+		9E9EB2FB16B2610700693867 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9EB2FA16B2610600693867 /* CoreMedia.framework */; };
 		9ECE137B1697D3C0000055ED /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13761697D3C0000055ED /* EmailLoginViewController.m */; };
 		9ECE137C1697D3C0000055ED /* EmailLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */; };
 		9ECE137D1697D3C0000055ED /* PreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13791697D3C0000055ED /* PreviewController.m */; };
@@ -92,7 +99,7 @@
 		9E00528D1697CB9D00A4983D /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		9E0052901697CB9D00A4983D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController.xib; sourceTree = "<group>"; };
 		9E0052931697CB9D00A4983D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
-		9E00529A1697CC8000A4983D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		9E00529A1697CC8000A4983D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "Camera Framework App/Parse.framework"; sourceTree = "<group>"; };
 		9E00529D1697CCD300A4983D /* ParseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseHelper.h; sourceTree = "<group>"; };
 		9E00529E1697CCD300A4983D /* ParseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseHelper.m; sourceTree = "<group>"; };
 		9E00529F1697CCD300A4983D /* ParseLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseLocationAnnotation.h; sourceTree = "<group>"; };
@@ -119,6 +126,15 @@
 		9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimationView.m; sourceTree = "<group>"; };
 		9E3BB5DE16B0EB4600467266 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		9E9EB2EC16B25DE500693867 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
+		9E9EB2ED16B25DE500693867 /* CaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionManager.m; sourceTree = "<group>"; };
+		9E9EB2EF16B25E2100693867 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		9E9EB2F016B25E2100693867 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		9E9EB2F116B25E2100693867 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		9E9EB2F416B260EA00693867 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		9E9EB2F616B260F500693867 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		9E9EB2F816B260FA00693867 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9E9EB2FA16B2610600693867 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		9ECE13751697D3C0000055ED /* EmailLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailLoginViewController.h; sourceTree = "<group>"; };
 		9ECE13761697D3C0000055ED /* EmailLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailLoginViewController.m; sourceTree = "<group>"; };
 		9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailLoginViewController.xib; sourceTree = "<group>"; };
@@ -163,6 +179,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E9EB2FB16B2610700693867 /* CoreMedia.framework in Frameworks */,
+				9E9EB2F916B260FB00693867 /* AVFoundation.framework in Frameworks */,
+				9E9EB2F716B260F500693867 /* ImageIO.framework in Frameworks */,
+				9E9EB2F516B260EA00693867 /* CoreVideo.framework in Frameworks */,
 				9ECE139D1697DAAC000055ED /* Security.framework in Frameworks */,
 				9ECE139E1697DAAC000055ED /* Social.framework in Frameworks */,
 				9ECE139F1697DAAC000055ED /* StoreKit.framework in Frameworks */,
@@ -190,6 +210,10 @@
 		9E00525A1697CB9C00A4983D = {
 			isa = PBXGroup;
 			children = (
+				9E9EB2FA16B2610600693867 /* CoreMedia.framework */,
+				9E9EB2F816B260FA00693867 /* AVFoundation.framework */,
+				9E9EB2F616B260F500693867 /* ImageIO.framework */,
+				9E9EB2F416B260EA00693867 /* CoreVideo.framework */,
 				9E3BB5BC16B0E06500467266 /* AWSLibs */,
 				9ECE13991697DAAC000055ED /* Security.framework */,
 				9ECE139A1697DAAC000055ED /* Social.framework */,
@@ -204,6 +228,7 @@
 				9ECE138B1697DA68000055ED /* AdSupport.framework */,
 				9ECE13891697DA66000055ED /* Accounts.framework */,
 				9ECE13871697DA62000055ED /* AudioToolbox.framework */,
+				9E00529A1697CC8000A4983D /* Parse.framework */,
 				9E00526F1697CB9D00A4983D /* Camera Framework App */,
 				9E0052681697CB9D00A4983D /* Frameworks */,
 				9E0052661697CB9D00A4983D /* Products */,
@@ -234,13 +259,10 @@
 				9ED0BF1416992D110059D8F3 /* MKAdditions */,
 				9E0052A71697CCEA00A4983D /* Login */,
 				9E00529C1697CCD300A4983D /* ParseHelperLibrary */,
-				9E00529A1697CC8000A4983D /* Parse.framework */,
+				9E9EB2EA16B25D5800693867 /* Camera */,
+				9E9EB2EB16B25D8400693867 /* Utilities */,
 				9E0052781697CB9D00A4983D /* AppDelegate.h */,
 				9E0052791697CB9D00A4983D /* AppDelegate.m */,
-				9E3BB5DE16B0EB4600467266 /* MBProgressHUD.h */,
-				9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */,
-				9E3BB5DB16B0E8EB00467266 /* LoadingAnimationView.h */,
-				9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */,
 				9E3BB5CD16B0E47600467266 /* UserInfo.h */,
 				9E3BB5CE16B0E47700467266 /* UserInfo.m */,
 				9ECE13841697D744000055ED /* Constants.h */,
@@ -332,6 +354,29 @@
 			path = ../AWSLibs;
 			sourceTree = "<group>";
 		};
+		9E9EB2EA16B25D5800693867 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				9E9EB2EC16B25DE500693867 /* CaptureSessionManager.h */,
+				9E9EB2ED16B25DE500693867 /* CaptureSessionManager.m */,
+				9E9EB2EF16B25E2100693867 /* CameraViewController.h */,
+				9E9EB2F016B25E2100693867 /* CameraViewController.m */,
+				9E9EB2F116B25E2100693867 /* CameraViewController.xib */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		9E9EB2EB16B25D8400693867 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9E3BB5DE16B0EB4600467266 /* MBProgressHUD.h */,
+				9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */,
+				9E3BB5DB16B0E8EB00467266 /* LoadingAnimationView.h */,
+				9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		9ED0BF1416992D110059D8F3 /* MKAdditions */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +459,7 @@
 				9ED0BF29169931EA0059D8F3 /* EmailSignupViewController.xib in Resources */,
 				9E3BB5B616B0DF5100467266 /* ProfileViewController.xib in Resources */,
 				9E3BB5CC16B0E14000467266 /* GenericRefreshViewController.xib in Resources */,
+				9E9EB2F316B25E2100693867 /* CameraViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +494,8 @@
 				9E3BB5CF16B0E47700467266 /* UserInfo.m in Sources */,
 				9E3BB5DD16B0E8EC00467266 /* LoadingAnimationView.m in Sources */,
 				9E3BB5E016B0EB4800467266 /* MBProgressHUD.m in Sources */,
+				9E9EB2EE16B25DE500693867 /* CaptureSessionManager.m in Sources */,
+				9E9EB2F216B25E2100693867 /* CameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

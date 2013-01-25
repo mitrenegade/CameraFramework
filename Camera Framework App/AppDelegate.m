@@ -13,6 +13,7 @@
 #import "ParseHelper.h"
 #import "PreviewController.h"
 #import "ProfileViewController.h"
+#import "CameraViewController.h"
 
 @implementation AppDelegate
 
@@ -128,11 +129,10 @@
     // dismiss login process
     [self.window.rootViewController dismissModalViewControllerAnimated:YES];
     
-    UIViewController *viewController1 = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-    UIViewController *viewController2 = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+    UIViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
     ProfileViewController * profileController = [[ProfileViewController alloc] init];
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[viewController1, viewController2, profileController];
+    self.tabBarController.viewControllers = @[cameraController, profileController];
     
     self.window.rootViewController = self.tabBarController;
 
