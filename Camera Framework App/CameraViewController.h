@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CaptureSessionManager.h"
+#import "StickerPanelViewController.h"
 
 @interface CameraViewController : UIViewController
 

@@ -14,6 +14,7 @@
 #import "PreviewController.h"
 #import "ProfileViewController.h"
 #import "CameraViewController.h"
+#import "Constants.h"
 
 @implementation AppDelegate
 
@@ -31,6 +32,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // try login process
+#if USE_LOGIN
     PFUser * currentUser = [PFUser currentUser];
     if (currentUser) {
         NSLog(@"Current PFUser exists.");
@@ -73,6 +75,9 @@
         self.window.rootViewController = previewController;
         [self.window makeKeyAndVisible];
     }
+#else
+    [self continueInitForQuickStickr];
+#endif
     
     return YES;
 }
@@ -128,30 +133,23 @@
     
     // dismiss login process
     [self.window.rootViewController dismissModalViewControllerAnimated:YES];
-    
-    UIViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
+    self.myUserInfo = userInfo;
+
+    [self continueInit];
+}
+
+-(void)continueInit {
+    CameraViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
     ProfileViewController * profileController = [[ProfileViewController alloc] init];
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[cameraController, profileController];
     
     self.window.rootViewController = self.tabBarController;
-
-    self.myUserInfo = userInfo;
-    /*
-    // get userInfo
-    [UserInfo GetUserInfoForPFUser:user withBlock:^(UserInfo * userInfo, NSError * error) {
-        if (error) {
-            NSLog(@"GetUserInfoForPFUser failed: error: %@", error);
-        }
-        else {
-            
-        }
-    }];
-     */
-    [self continueInit];
 }
 
--(void)continueInit {
-
+-(void)continueInitForQuickStickr {
+    CameraViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
+    self.window.rootViewController = cameraController;
+    [self.window makeKeyAndVisible];
 }
 @end

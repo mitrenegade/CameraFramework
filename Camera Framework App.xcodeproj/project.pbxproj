@@ -28,6 +28,25 @@
 		9E0052A41697CCD300A4983D /* ParseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E00529E1697CCD300A4983D /* ParseHelper.m */; };
 		9E0052A51697CCD300A4983D /* ParseLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0052A01697CCD300A4983D /* ParseLocationAnnotation.m */; };
 		9E0052A61697CCD300A4983D /* ParseUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0052A21697CCD300A4983D /* ParseUserInfo.m */; };
+		9E0D285E16B5E6BA0036792B /* addsticker_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D284E16B5E6BA0036792B /* addsticker_bar.png */; };
+		9E0D285F16B5E6BA0036792B /* addsticker_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D284F16B5E6BA0036792B /* addsticker_bar@2x.png */; };
+		9E0D286016B5E6BA0036792B /* addsticker_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285016B5E6BA0036792B /* addsticker_btn.png */; };
+		9E0D286116B5E6BA0036792B /* addsticker_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285116B5E6BA0036792B /* addsticker_btn@2x.png */; };
+		9E0D286216B5E6BA0036792B /* choosesticker_slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285216B5E6BA0036792B /* choosesticker_slider.png */; };
+		9E0D286316B5E6BA0036792B /* choosesticker_slider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285316B5E6BA0036792B /* choosesticker_slider@2x.png */; };
+		9E0D286416B5E6BA0036792B /* save_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285416B5E6BA0036792B /* save_btn.png */; };
+		9E0D286516B5E6BA0036792B /* save_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285516B5E6BA0036792B /* save_btn@2x.png */; };
+		9E0D286616B5E6BA0036792B /* share_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285616B5E6BA0036792B /* share_btn.png */; };
+		9E0D286716B5E6BA0036792B /* share_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285716B5E6BA0036792B /* share_btn@2x.png */; };
+		9E0D286816B5E6BA0036792B /* share_slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285816B5E6BA0036792B /* share_slider.png */; };
+		9E0D286916B5E6BA0036792B /* share_slider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285916B5E6BA0036792B /* share_slider@2x.png */; };
+		9E0D286A16B5E6BA0036792B /* takephoto_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285A16B5E6BA0036792B /* takephoto_bar.png */; };
+		9E0D286B16B5E6BA0036792B /* takephoto_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285B16B5E6BA0036792B /* takephoto_bar@2x.png */; };
+		9E0D286C16B5E6BA0036792B /* takephoto_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285C16B5E6BA0036792B /* takephoto_btn.png */; };
+		9E0D286D16B5E6BA0036792B /* takephoto_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285D16B5E6BA0036792B /* takephoto_btn@2x.png */; };
+		9E0D288816B5F4B30036792B /* StickerPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0D288616B5F4B20036792B /* StickerPanelViewController.m */; };
+		9E0D288916B5F4B30036792B /* StickerPanelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D288716B5F4B30036792B /* StickerPanelViewController.xib */; };
+		9E0D28AE16B5F7C60036792B /* Stickers.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D28AD16B5F7C60036792B /* Stickers.bundle */; };
 		9E3BB5B516B0DF5100467266 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5B316B0DF5000467266 /* ProfileViewController.m */; };
 		9E3BB5B616B0DF5100467266 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3BB5B416B0DF5000467266 /* ProfileViewController.xib */; };
 		9E3BB5C416B0E06500467266 /* AsyncImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5BE16B0E06500467266 /* AsyncImageUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -107,6 +126,26 @@
 		9E0052A11697CCD300A4983D /* ParseUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUserInfo.h; sourceTree = "<group>"; };
 		9E0052A21697CCD300A4983D /* ParseUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseUserInfo.m; sourceTree = "<group>"; };
 		9E0052A31697CCD300A4983D /* PFObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFObjectFactory.h; sourceTree = "<group>"; };
+		9E0D284E16B5E6BA0036792B /* addsticker_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addsticker_bar.png; sourceTree = "<group>"; };
+		9E0D284F16B5E6BA0036792B /* addsticker_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addsticker_bar@2x.png"; sourceTree = "<group>"; };
+		9E0D285016B5E6BA0036792B /* addsticker_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addsticker_btn.png; sourceTree = "<group>"; };
+		9E0D285116B5E6BA0036792B /* addsticker_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addsticker_btn@2x.png"; sourceTree = "<group>"; };
+		9E0D285216B5E6BA0036792B /* choosesticker_slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choosesticker_slider.png; sourceTree = "<group>"; };
+		9E0D285316B5E6BA0036792B /* choosesticker_slider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choosesticker_slider@2x.png"; sourceTree = "<group>"; };
+		9E0D285416B5E6BA0036792B /* save_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save_btn.png; sourceTree = "<group>"; };
+		9E0D285516B5E6BA0036792B /* save_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_btn@2x.png"; sourceTree = "<group>"; };
+		9E0D285616B5E6BA0036792B /* share_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_btn.png; sourceTree = "<group>"; };
+		9E0D285716B5E6BA0036792B /* share_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_btn@2x.png"; sourceTree = "<group>"; };
+		9E0D285816B5E6BA0036792B /* share_slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_slider.png; sourceTree = "<group>"; };
+		9E0D285916B5E6BA0036792B /* share_slider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_slider@2x.png"; sourceTree = "<group>"; };
+		9E0D285A16B5E6BA0036792B /* takephoto_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takephoto_bar.png; sourceTree = "<group>"; };
+		9E0D285B16B5E6BA0036792B /* takephoto_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "takephoto_bar@2x.png"; sourceTree = "<group>"; };
+		9E0D285C16B5E6BA0036792B /* takephoto_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takephoto_btn.png; sourceTree = "<group>"; };
+		9E0D285D16B5E6BA0036792B /* takephoto_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "takephoto_btn@2x.png"; sourceTree = "<group>"; };
+		9E0D288516B5F4B20036792B /* StickerPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickerPanelViewController.h; sourceTree = "<group>"; };
+		9E0D288616B5F4B20036792B /* StickerPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickerPanelViewController.m; sourceTree = "<group>"; };
+		9E0D288716B5F4B30036792B /* StickerPanelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StickerPanelViewController.xib; sourceTree = "<group>"; };
+		9E0D28AD16B5F7C60036792B /* Stickers.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Stickers.bundle; sourceTree = "<group>"; };
 		9E3BB5B216B0DF5000467266 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		9E3BB5B316B0DF5000467266 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		9E3BB5B416B0DF5000467266 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -283,6 +322,7 @@
 				9E00528D1697CB9D00A4983D /* second@2x.png */,
 				9E00528F1697CB9D00A4983D /* FirstViewController.xib */,
 				9E0052921697CB9D00A4983D /* SecondViewController.xib */,
+				9E0D284D16B5E6BA0036792B /* Images */,
 				9E0052701697CB9D00A4983D /* Supporting Files */,
 			);
 			path = "Camera Framework App";
@@ -339,6 +379,30 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		9E0D284D16B5E6BA0036792B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9E0D28AD16B5F7C60036792B /* Stickers.bundle */,
+				9E0D284E16B5E6BA0036792B /* addsticker_bar.png */,
+				9E0D284F16B5E6BA0036792B /* addsticker_bar@2x.png */,
+				9E0D285016B5E6BA0036792B /* addsticker_btn.png */,
+				9E0D285116B5E6BA0036792B /* addsticker_btn@2x.png */,
+				9E0D285216B5E6BA0036792B /* choosesticker_slider.png */,
+				9E0D285316B5E6BA0036792B /* choosesticker_slider@2x.png */,
+				9E0D285416B5E6BA0036792B /* save_btn.png */,
+				9E0D285516B5E6BA0036792B /* save_btn@2x.png */,
+				9E0D285616B5E6BA0036792B /* share_btn.png */,
+				9E0D285716B5E6BA0036792B /* share_btn@2x.png */,
+				9E0D285816B5E6BA0036792B /* share_slider.png */,
+				9E0D285916B5E6BA0036792B /* share_slider@2x.png */,
+				9E0D285A16B5E6BA0036792B /* takephoto_bar.png */,
+				9E0D285B16B5E6BA0036792B /* takephoto_bar@2x.png */,
+				9E0D285C16B5E6BA0036792B /* takephoto_btn.png */,
+				9E0D285D16B5E6BA0036792B /* takephoto_btn@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		9E3BB5BC16B0E06500467266 /* AWSLibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +423,9 @@
 			children = (
 				9E9EB2EC16B25DE500693867 /* CaptureSessionManager.h */,
 				9E9EB2ED16B25DE500693867 /* CaptureSessionManager.m */,
+				9E0D288516B5F4B20036792B /* StickerPanelViewController.h */,
+				9E0D288616B5F4B20036792B /* StickerPanelViewController.m */,
+				9E0D288716B5F4B30036792B /* StickerPanelViewController.xib */,
 				9E9EB2EF16B25E2100693867 /* CameraViewController.h */,
 				9E9EB2F016B25E2100693867 /* CameraViewController.m */,
 				9E9EB2F116B25E2100693867 /* CameraViewController.xib */,
@@ -460,6 +527,24 @@
 				9E3BB5B616B0DF5100467266 /* ProfileViewController.xib in Resources */,
 				9E3BB5CC16B0E14000467266 /* GenericRefreshViewController.xib in Resources */,
 				9E9EB2F316B25E2100693867 /* CameraViewController.xib in Resources */,
+				9E0D285E16B5E6BA0036792B /* addsticker_bar.png in Resources */,
+				9E0D285F16B5E6BA0036792B /* addsticker_bar@2x.png in Resources */,
+				9E0D286016B5E6BA0036792B /* addsticker_btn.png in Resources */,
+				9E0D286116B5E6BA0036792B /* addsticker_btn@2x.png in Resources */,
+				9E0D286216B5E6BA0036792B /* choosesticker_slider.png in Resources */,
+				9E0D286316B5E6BA0036792B /* choosesticker_slider@2x.png in Resources */,
+				9E0D286416B5E6BA0036792B /* save_btn.png in Resources */,
+				9E0D286516B5E6BA0036792B /* save_btn@2x.png in Resources */,
+				9E0D286616B5E6BA0036792B /* share_btn.png in Resources */,
+				9E0D286716B5E6BA0036792B /* share_btn@2x.png in Resources */,
+				9E0D286816B5E6BA0036792B /* share_slider.png in Resources */,
+				9E0D286916B5E6BA0036792B /* share_slider@2x.png in Resources */,
+				9E0D286A16B5E6BA0036792B /* takephoto_bar.png in Resources */,
+				9E0D286B16B5E6BA0036792B /* takephoto_bar@2x.png in Resources */,
+				9E0D286C16B5E6BA0036792B /* takephoto_btn.png in Resources */,
+				9E0D286D16B5E6BA0036792B /* takephoto_btn@2x.png in Resources */,
+				9E0D288916B5F4B30036792B /* StickerPanelViewController.xib in Resources */,
+				9E0D28AE16B5F7C60036792B /* Stickers.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +581,7 @@
 				9E3BB5E016B0EB4800467266 /* MBProgressHUD.m in Sources */,
 				9E9EB2EE16B25DE500693867 /* CaptureSessionManager.m in Sources */,
 				9E9EB2F216B25E2100693867 /* CameraViewController.m in Sources */,
+				9E0D288816B5F4B30036792B /* StickerPanelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

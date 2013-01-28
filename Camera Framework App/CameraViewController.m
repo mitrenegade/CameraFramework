@@ -35,9 +35,6 @@
     [self setCaptureManager:[[CaptureSessionManager alloc] init]];
     int flashMode = [captureManager initializeCamera];
 
-	CGRect layerRect = [[[self view] layer] bounds];
-	[[[self captureManager] previewLayer] setBounds:layerRect];
-	[[[self captureManager] previewLayer] setPosition:CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))];
     [[self.view layer] insertSublayer:[self.captureManager previewLayer] atIndex:0];
 
     // add a notification for completion of capture
@@ -45,6 +42,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureImageDidFail:) name:kImageCaptureFailed object:nil];
     
     [self startCamera];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    CGRect fullbounds = self.view.bounds;
+	CGRect layerRect = fullbounds; // [[[self view] layer] bounds];
+	[[[self captureManager] previewLayer] setBounds:layerRect];
+	[[[self captureManager] previewLayer] setPosition:CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))];
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,6 +118,12 @@
 -(void)didTakePhoto:(UIImage*)originalPhoto{
     NSLog(@"Yay!");
     isCapturing = NO;
+
+    StickerPanelViewController * controller = [[StickerPanelViewController alloc] init];
+    [controller setDelegate:self];
+
+    [self presentModalViewController:controller animated:YES];
+    [controller initWithImage:originalPhoto];
 }
 
 @end

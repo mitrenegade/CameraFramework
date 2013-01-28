@@ -11,7 +11,10 @@
 #define FACEBOOK_APP_ID @"406980232709538"//@"191699640937330" //@"406980232709538"
 #define FACEBOOK_APP_SECRET @"9f33ed4635b61a409049c44d6d2673cb"
 
-#define AWS_PHOTO_BUCKET @"com.neroh.cameraframework"
+#define AWS_PHOTO_BUCKET @"com.neroh.quickstickr"
+
+#define USE_LOGIN 0
+
 @interface Constants : NSObject
 
 @end
