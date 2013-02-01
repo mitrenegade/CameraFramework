@@ -39,10 +39,9 @@
 -(IBAction)didClickNextButton:(id)sender {
     NSLog(@"You ready to log in?");
     LoginViewController * controller = [[LoginViewController alloc] init];
-    if (self.navigationController)
-        [self.navigationController pushViewController:controller animated:YES];
-    else
-        [self presentModalViewController:controller animated:YES];
+    
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentModalViewController:nav animated:YES];
 }
 
 @end

@@ -12,7 +12,7 @@
 {
     NSMutableArray * inputFields;
     BOOL didChangePhoto;
-    //NSMutableDictionary * inputViews;
+    NSString * prepopulatedEmail;
     
     IBOutlet UITableView * tableView;
     IBOutlet UIButton * buttonSignup;
@@ -20,5 +20,5 @@
     UIImagePickerController * camera;
 }
 -(IBAction)didClickSignup:(id)sender;
-
+-(void)initializeWithEmail:(NSString*)email;
 @end

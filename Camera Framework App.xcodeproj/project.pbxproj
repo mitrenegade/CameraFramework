@@ -92,10 +92,13 @@
 		9ED0BF241699305C0059D8F3 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF221699305C0059D8F3 /* LoginViewController.xib */; };
 		9ED0BF28169931EA0059D8F3 /* EmailSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */; };
 		9ED0BF29169931EA0059D8F3 /* EmailSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */; };
+		9EE7CE7E16BA1EF40053D78F /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7A16BA1EF40053D78F /* CHANGELOG.md */; };
+		9EE7CE7F16BA1EF40053D78F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7C16BA1EF40053D78F /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9EE7CE8016BA1EF40053D78F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7D16BA1EF40053D78F /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9E0052651697CB9D00A4983D /* Camera Framework App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Camera Framework App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E0052651697CB9D00A4983D /* CameraFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0052691697CB9D00A4983D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E00526B1697CB9D00A4983D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E00526D1697CB9D00A4983D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -211,6 +214,10 @@
 		9ED0BF25169931E90059D8F3 /* EmailSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSignupViewController.h; sourceTree = "<group>"; };
 		9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSignupViewController.m; sourceTree = "<group>"; };
 		9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailSignupViewController.xib; sourceTree = "<group>"; };
+		9EE7CE7A16BA1EF40053D78F /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		9EE7CE7B16BA1EF40053D78F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		9EE7CE7C16BA1EF40053D78F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		9EE7CE7D16BA1EF40053D78F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,7 +284,7 @@
 		9E0052661697CB9D00A4983D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E0052651697CB9D00A4983D /* Camera Framework App.app */,
+				9E0052651697CB9D00A4983D /* CameraFramework.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -295,6 +302,7 @@
 		9E00526F1697CB9D00A4983D /* Camera Framework App */ = {
 			isa = PBXGroup;
 			children = (
+				9EE7CE7916BA1EF40053D78F /* JSONKit */,
 				9ED0BF1416992D110059D8F3 /* MKAdditions */,
 				9E0052A71697CCEA00A4983D /* Login */,
 				9E00529C1697CCD300A4983D /* ParseHelperLibrary */,
@@ -366,15 +374,15 @@
 				9ED0BF201699305C0059D8F3 /* LoginViewController.h */,
 				9ED0BF211699305C0059D8F3 /* LoginViewController.m */,
 				9ED0BF221699305C0059D8F3 /* LoginViewController.xib */,
-				9ECE137F1697D56A000055ED /* SignupViewController.h */,
-				9ECE13801697D56A000055ED /* SignupViewController.m */,
-				9ECE13811697D56A000055ED /* SignupViewController.xib */,
 				9ECE13751697D3C0000055ED /* EmailLoginViewController.h */,
 				9ECE13761697D3C0000055ED /* EmailLoginViewController.m */,
 				9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */,
 				9ED0BF25169931E90059D8F3 /* EmailSignupViewController.h */,
 				9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */,
 				9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */,
+				9ECE137F1697D56A000055ED /* SignupViewController.h */,
+				9ECE13801697D56A000055ED /* SignupViewController.m */,
+				9ECE13811697D56A000055ED /* SignupViewController.xib */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -458,12 +466,23 @@
 			path = MKAdditions;
 			sourceTree = "<group>";
 		};
+		9EE7CE7916BA1EF40053D78F /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				9EE7CE7A16BA1EF40053D78F /* CHANGELOG.md */,
+				9EE7CE7B16BA1EF40053D78F /* JSONKit.h */,
+				9EE7CE7C16BA1EF40053D78F /* JSONKit.m */,
+				9EE7CE7D16BA1EF40053D78F /* README.md */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9E0052641697CB9D00A4983D /* Camera Framework App */ = {
+		9E0052641697CB9D00A4983D /* CameraFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9E0052971697CB9D00A4983D /* Build configuration list for PBXNativeTarget "Camera Framework App" */;
+			buildConfigurationList = 9E0052971697CB9D00A4983D /* Build configuration list for PBXNativeTarget "CameraFramework" */;
 			buildPhases = (
 				9E0052611697CB9D00A4983D /* Sources */,
 				9E0052621697CB9D00A4983D /* Frameworks */,
@@ -473,9 +492,9 @@
 			);
 			dependencies = (
 			);
-			name = "Camera Framework App";
+			name = CameraFramework;
 			productName = "Camera Framework App";
-			productReference = 9E0052651697CB9D00A4983D /* Camera Framework App.app */;
+			productReference = 9E0052651697CB9D00A4983D /* CameraFramework.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -499,7 +518,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9E0052641697CB9D00A4983D /* Camera Framework App */,
+				9E0052641697CB9D00A4983D /* CameraFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -581,6 +600,7 @@
 				9E3BB5E016B0EB4800467266 /* MBProgressHUD.m in Sources */,
 				9E9EB2EE16B25DE500693867 /* CaptureSessionManager.m in Sources */,
 				9E9EB2F216B25E2100693867 /* CameraViewController.m in Sources */,
+				9EE7CE7F16BA1EF40053D78F /* JSONKit.m in Sources */,
 				9E0D288816B5F4B30036792B /* StickerPanelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,7 +731,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9E0052971697CB9D00A4983D /* Build configuration list for PBXNativeTarget "Camera Framework App" */ = {
+		9E0052971697CB9D00A4983D /* Build configuration list for PBXNativeTarget "CameraFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9E0052981697CB9D00A4983D /* Debug */,

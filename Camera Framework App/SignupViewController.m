@@ -5,6 +5,9 @@
 //  Created by Bobby Ren on 1/4/13.
 //  Copyright (c) 2013 Neroh. All rights reserved.
 //
+// signup can be done through login
+
+#if 0
 
 #import "SignupViewController.h"
 #import <Parse/Parse.h>
@@ -17,6 +20,7 @@
 @end
 
 @implementation SignupViewController
+@synthesize userInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,6 +80,30 @@
 
 -(IBAction)didClickTwitterSignup:(id)sender {
     NSLog(@"Clicked twitter signup");
+    [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (!user) {
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Twitter login.");
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+            }
+        } else if (user.isNew) {
+            NSLog(@"User with Twitter signed up and logged in!");
+            [self didGetPFUser:user];
+        } else {
+            NSLog(@"User with facebook logged in!");
+            // can create UserInfo here if necessary
+            [[UIAlertView alertViewWithTitle:@"User already exists!" message:@"Would you like to continue with login?" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Login with this account"] onDismiss:^(int buttonIndex) {
+                if (buttonIndex == 0) {
+                    // login with existing user
+                    [self didGetPFUser:user];
+                }
+            } onCancel:^{
+                NSLog(@"Ok, cancelled");
+                [PFUser logOut];
+            }] show];
+        }
+    }];
 }
 
 -(IBAction)didClickEmailSignup:(id)sender {
@@ -88,4 +116,7 @@
     AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate didLoginPFUser:user withUserInfo:nil];
 }
+
+#endif
+
 @end

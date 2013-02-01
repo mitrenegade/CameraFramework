@@ -8,6 +8,9 @@
 
 #import "EmailSignupViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Parse/Parse.h>
+#import "UIAlertView+MKBlockAdditions.h"
+#import "AppDelegate.h"
 
 @interface EmailSignupViewController ()
 
@@ -40,6 +43,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)initializeWithEmail:(NSString *)email {
+//    [((UITextField*)[inputFields objectAtIndex:0]) setText:email];
+    prepopulatedEmail = [email copy];
 }
 
 #pragma mark - Table view data source
@@ -102,6 +110,11 @@
         
         //[inputViews setObject:view forKey:[NSNumber numberWithInt:index]];
         [inputFields replaceObjectAtIndex:index withObject:inputField];
+        
+        if (prepopulatedEmail) {
+            [inputField setText:prepopulatedEmail];
+        }
+        
         return view;
     }
     else if (index == 1) {
@@ -190,24 +203,74 @@
         return;
     }
     
-    NSLog(@"Using login %@ and password %@", [login text], [password text]);
-    
-    //[k loginWithNameOrEmailWithLoginName:[login text]];
+    NSLog(@"Try to signup %@ and password %@", [login text], [password text]);
     [self tryLogin:[login text] password:[password text]];
 }
 
 #pragma mark ParseHelper login
 -(void)tryLogin:(NSString*)username password:(NSString*)password {
-    /*
-    [ParseHelper ParseHelper_loginUsername:username password:password withBlock:^(PFUser * user, NSError * error) {
-        if (user) {
-            // do something
-        }
-        else {
-            NSLog(@"Invalid login! What you entered was neither a valid username or email!");
-            [[[UIAlertView alloc] initWithTitle:@"Your login was invalid." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            // user does not exist, create
+            PFUser * newUser = [[PFUser alloc] init];
+            [newUser setUsername:username];
+            [newUser setPassword:password];
+            [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!succeeded) {
+                    NSLog(@"Could not sign up user! Error: %@", error);
+                }
+                else {
+                    [self createNewEmailUserInfo:newUser];
+                }
+            }];
+        } else {
+            // user already exists
+            NSLog(@"User with email already exists!");
+            // can create UserInfo here if necessary
+            [[UIAlertView alertViewWithTitle:@"User already exists!" message:@"Would you like to continue with login?" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Login with this account"] onDismiss:^(int buttonIndex) {
+                if (buttonIndex == 0) {
+                    // login with existing user
+                    AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                    [appDelegate didLoginPFUser:user withUserInfo:nil];
+                }
+            } onCancel:^{
+                NSLog(@"Ok, cancelled");
+                [PFUser logOut];
+            }] show];
         }
     }];
-     */
 }
+
+-(void)createNewEmailUserInfo:(PFUser*)user {
+    NSLog(@"Populating userInfo");
+    UserInfo * userInfoNew = [[UserInfo alloc] init];
+    
+    NSString *name = user.username;
+    NSString * photoURL = nil;
+    
+    userInfoNew.username = name;
+    userInfoNew.pfUser = user;
+    userInfoNew.pfUserID = user.objectId;
+    userInfoNew.photoURL = nil;
+    userInfoNew.photo = nil;
+    
+    // download photo and save to aws
+    [userInfoNew savePhotoToAWSWithURL:photoURL withNameKey:userInfoNew.username withBlock:^(BOOL saved) {
+        if (saved) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kMyUserInfoDidChangeNotification object:self userInfo:nil];
+        }
+    }];
+    
+    // save userInfo in parallel
+    [[userInfoNew toPFObject] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            [appDelegate didLoginPFUser:user withUserInfo:userInfoNew];
+        }
+        else {
+            NSLog(@"Could not save userInfo! Error: %@", error);
+        }
+    }];
+}
+
 @end

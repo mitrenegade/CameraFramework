@@ -29,6 +29,9 @@
     // connect to facebook via parse
     [PFFacebookUtils initializeWithApplicationId:FACEBOOK_APP_ID];
     
+    // enable twitter
+    [PFTwitterUtils initializeWithConsumerKey:TWITTER_APP_CONSUMERKEY consumerSecret:TWITTER_APP_CONSUMERSECRET];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // try login process
