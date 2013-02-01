@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UserInfo.h"
 #import "UIActionSheet+MKBlockAdditions.h"
+#import "UIAlertView+MKBlockAdditions.h"
 #import "AppDelegate.h"
 #import "EmailSignupViewController.h"
 
@@ -151,6 +152,14 @@
     [self tryLogin:[login text] password:[password text]];
 }
 
+-(IBAction)didClickSignup:(id)sender {
+    EmailSignupViewController * controller = [[EmailSignupViewController alloc] init];
+    // prepopulate
+    UITextField * login = [inputFields objectAtIndex:0];
+    [controller initializeWithEmail:[login text]];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 -(void)tryLogin:(NSString*)username password:(NSString*)password {
     AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError * error) {
@@ -176,19 +185,18 @@
 }
 
 -(void)promptForSignup {
-    [UIActionSheet actionSheetWithTitle:@"No user found!" message:@"We could not load that user. Would you like to sign up?" buttons:[NSArray arrayWithObjects:@"OK", @"Try again", nil] showInView:self.view onDismiss:^(int buttonIndex) {
-        if (buttonIndex == 0) {
-            // OK
-            EmailSignupViewController * controller = [[EmailSignupViewController alloc] init];
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-        else if (buttonIndex == 1) {
-            // cancel, do nothing
-            ((UITextField*)[inputFields objectAtIndex:0]).text = @"";
-            ((UITextField*)[inputFields objectAtIndex:1]).text = @"";
-        }
+//    [UIActionSheet actionSheetWithTitle:@"No user found!" message:@"We could not load that user. Would you like to sign up?" buttons:[NSArray arrayWithObjects:@"OK", @"Try again", nil] showInView:self.view onDismiss:^(int buttonIndex) {
+    [UIAlertView alertViewWithTitle:@"User not found" message:@"We could not find that user. Would you like to create the user?" cancelButtonTitle:@"No thanks" otherButtonTitles:[NSArray arrayWithObjects:@"Create user", nil] onDismiss:^(int buttonIndex) {
+
+        // OK
+        EmailSignupViewController * controller = [[EmailSignupViewController alloc] init];
+        // prepopulate
+        UITextField * login = [inputFields objectAtIndex:0];
+        [controller initializeWithEmail:[login text]];
+        [self.navigationController pushViewController:controller animated:YES];
+
     } onCancel:^{
-        // do nothing
+        // cancel, do nothing
         ((UITextField*)[inputFields objectAtIndex:0]).text = @"";
         ((UITextField*)[inputFields objectAtIndex:1]).text = @"";
     }];

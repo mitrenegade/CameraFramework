@@ -79,7 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9E0052651697CB9D00A4983D /* Camera Framework App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Camera Framework App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E0052651697CB9D00A4983D /* CameraFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0052691697CB9D00A4983D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E00526B1697CB9D00A4983D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E00526D1697CB9D00A4983D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -245,7 +245,7 @@
 		9E0052661697CB9D00A4983D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E0052651697CB9D00A4983D /* Camera Framework App.app */,
+				9E0052651697CB9D00A4983D /* CameraFramework.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -334,15 +334,15 @@
 				9ED0BF201699305C0059D8F3 /* LoginViewController.h */,
 				9ED0BF211699305C0059D8F3 /* LoginViewController.m */,
 				9ED0BF221699305C0059D8F3 /* LoginViewController.xib */,
-				9ECE137F1697D56A000055ED /* SignupViewController.h */,
-				9ECE13801697D56A000055ED /* SignupViewController.m */,
-				9ECE13811697D56A000055ED /* SignupViewController.xib */,
 				9ECE13751697D3C0000055ED /* EmailLoginViewController.h */,
 				9ECE13761697D3C0000055ED /* EmailLoginViewController.m */,
 				9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */,
 				9ED0BF25169931E90059D8F3 /* EmailSignupViewController.h */,
 				9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */,
 				9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */,
+				9ECE137F1697D56A000055ED /* SignupViewController.h */,
+				9ECE13801697D56A000055ED /* SignupViewController.m */,
+				9ECE13811697D56A000055ED /* SignupViewController.xib */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -413,9 +413,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9E0052641697CB9D00A4983D /* Camera Framework App */ = {
+		9E0052641697CB9D00A4983D /* CameraFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9E0052971697CB9D00A4983D /* Build configuration list for PBXNativeTarget "Camera Framework App" */;
+			buildConfigurationList = 9E0052971697CB9D00A4983D /* Build configuration list for PBXNativeTarget "CameraFramework" */;
 			buildPhases = (
 				9E0052611697CB9D00A4983D /* Sources */,
 				9E0052621697CB9D00A4983D /* Frameworks */,
@@ -425,9 +425,9 @@
 			);
 			dependencies = (
 			);
-			name = "Camera Framework App";
+			name = CameraFramework;
 			productName = "Camera Framework App";
-			productReference = 9E0052651697CB9D00A4983D /* Camera Framework App.app */;
+			productReference = 9E0052651697CB9D00A4983D /* CameraFramework.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -451,7 +451,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9E0052641697CB9D00A4983D /* Camera Framework App */,
+				9E0052641697CB9D00A4983D /* CameraFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -647,7 +647,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9E0052971697CB9D00A4983D /* Build configuration list for PBXNativeTarget "Camera Framework App" */ = {
+		9E0052971697CB9D00A4983D /* Build configuration list for PBXNativeTarget "CameraFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9E0052981697CB9D00A4983D /* Debug */,

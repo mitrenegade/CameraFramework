@@ -65,7 +65,7 @@
             NSLog(@"User with facebook signed up and logged in!");
 
             // can create UserInfo here if necessary
-            [[UIAlertView alertViewWithTitle:@"User does not exist!" message:@"Would you like to create one?" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Create my account"] onDismiss:^(int buttonIndex) {
+            [[UIAlertView alertViewWithTitle:@"User does not exist!" message:@"Would you like to create one?" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Create user"] onDismiss:^(int buttonIndex) {
                 if (buttonIndex == 0) {
                     // create userInfo
                     [self createNewFacebookUserInfo:user];
@@ -98,7 +98,7 @@
             NSLog(@"User with facebook signed up and logged in!");
             
             // can create UserInfo here if necessary
-            [[UIAlertView alertViewWithTitle:@"User does not exist!" message:@"Would you like to create one?" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Create my account"] onDismiss:^(int buttonIndex) {
+            [[UIAlertView alertViewWithTitle:@"User does not exist!" message:@"Would you like to create one?" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Create user"] onDismiss:^(int buttonIndex) {
                 if (buttonIndex == 0) {
                     // create userInfo
                     [self createNewTwitterUserInfo:user];
@@ -224,7 +224,7 @@
     NSString * screenname = parsedData[@"screen_name"];
     NSString * photoURL = parsedData[@"profile_image_url"];
     
-    userInfoNew.username = name;
+    userInfoNew.username = screenname;
     userInfoNew.pfUser = user;
     userInfoNew.pfUserID = user.objectId;
     userInfoNew.photoURL = nil;

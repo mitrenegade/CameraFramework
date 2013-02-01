@@ -5,6 +5,9 @@
 //  Created by Bobby Ren on 1/4/13.
 //  Copyright (c) 2013 Neroh. All rights reserved.
 //
+// signup can be done through login
+
+#if 0
 
 #import "SignupViewController.h"
 #import <Parse/Parse.h>
@@ -113,4 +116,7 @@
     AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate didLoginPFUser:user withUserInfo:nil];
 }
+
+#endif
+
 @end

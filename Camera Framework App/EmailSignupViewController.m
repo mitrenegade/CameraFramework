@@ -45,6 +45,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)initializeWithEmail:(NSString *)email {
+//    [((UITextField*)[inputFields objectAtIndex:0]) setText:email];
+    prepopulatedEmail = [email copy];
+}
+
 #pragma mark - Table view data source
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -105,6 +110,11 @@
         
         //[inputViews setObject:view forKey:[NSNumber numberWithInt:index]];
         [inputFields replaceObjectAtIndex:index withObject:inputField];
+        
+        if (prepopulatedEmail) {
+            [inputField setText:prepopulatedEmail];
+        }
+        
         return view;
     }
     else if (index == 1) {
@@ -210,8 +220,7 @@
                     NSLog(@"Could not sign up user! Error: %@", error);
                 }
                 else {
-                    AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-                    [appDelegate didLoginPFUser:user withUserInfo:nil];
+                    [self createNewEmailUserInfo:newUser];
                 }
             }];
         } else {
@@ -231,4 +240,37 @@
         }
     }];
 }
+
+-(void)createNewEmailUserInfo:(PFUser*)user {
+    NSLog(@"Populating userInfo");
+    UserInfo * userInfoNew = [[UserInfo alloc] init];
+    
+    NSString *name = user.username;
+    NSString * photoURL = nil;
+    
+    userInfoNew.username = name;
+    userInfoNew.pfUser = user;
+    userInfoNew.pfUserID = user.objectId;
+    userInfoNew.photoURL = nil;
+    userInfoNew.photo = nil;
+    
+    // download photo and save to aws
+    [userInfoNew savePhotoToAWSWithURL:photoURL withNameKey:userInfoNew.username withBlock:^(BOOL saved) {
+        if (saved) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kMyUserInfoDidChangeNotification object:self userInfo:nil];
+        }
+    }];
+    
+    // save userInfo in parallel
+    [[userInfoNew toPFObject] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            [appDelegate didLoginPFUser:user withUserInfo:userInfoNew];
+        }
+        else {
+            NSLog(@"Could not save userInfo! Error: %@", error);
+        }
+    }];
+}
+
 @end

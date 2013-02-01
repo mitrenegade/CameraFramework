@@ -5,6 +5,7 @@
 //  Created by Bobby Ren on 1/4/13.
 //  Copyright (c) 2013 Neroh. All rights reserved.
 //
+#if 0
 
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
@@ -17,4 +18,5 @@
 -(IBAction)didClickTwitterSignup:(id)sender;
 -(IBAction)didClickEmailSignup:(id)sender;
 
+#endif
 @end
