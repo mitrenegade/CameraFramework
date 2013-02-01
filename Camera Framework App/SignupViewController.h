@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface SignupViewController : UIViewController <UINavigationControllerDelegate>
+
+@property (nonatomic, strong) UserInfo * newUserInfo;
 
 -(IBAction)didClickFacebookSignup:(id)sender;
 -(IBAction)didClickTwitterSignup:(id)sender;

@@ -12,7 +12,6 @@
 {
     NSMutableArray * inputFields;
     BOOL didChangePhoto;
-    //NSMutableDictionary * inputViews;
     
     IBOutlet UITableView * tableView;
     IBOutlet UIButton * buttonSignup;

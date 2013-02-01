@@ -144,16 +144,14 @@
     }
     
     NSLog(@"Using login %@ and password %@", [login text], [password text]);
-    
-    //[k loginWithNameOrEmailWithLoginName:[login text]];
     [self tryLogin:[login text] password:[password text]];
 }
 
-#pragma mark ParseHelper login
 -(void)tryLogin:(NSString*)username password:(NSString*)password {
     [ParseHelper ParseHelper_loginUsername:username password:password withBlock:^(PFUser * user, NSError * error) {
         if (user) {
             // do something
+            
         }
         else {
             NSLog(@"Invalid login! What you entered was neither a valid username or email!");

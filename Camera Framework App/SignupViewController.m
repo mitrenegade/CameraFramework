@@ -17,6 +17,7 @@
 @end
 
 @implementation SignupViewController
+@synthesize newUserInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,6 +77,30 @@
 
 -(IBAction)didClickTwitterSignup:(id)sender {
     NSLog(@"Clicked twitter signup");
+    [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (!user) {
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Twitter login.");
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+            }
+        } else if (user.isNew) {
+            NSLog(@"User with Twitter signed up and logged in!");
+            [self didGetPFUser:user];
+        } else {
+            NSLog(@"User with facebook logged in!");
+            // can create UserInfo here if necessary
+            [[UIAlertView alertViewWithTitle:@"User already exists!" message:@"Would you like to continue with login?" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Login with this account"] onDismiss:^(int buttonIndex) {
+                if (buttonIndex == 0) {
+                    // login with existing user
+                    [self didGetPFUser:user];
+                }
+            } onCancel:^{
+                NSLog(@"Ok, cancelled");
+                [PFUser logOut];
+            }] show];
+        }
+    }];
 }
 
 -(IBAction)didClickEmailSignup:(id)sender {
