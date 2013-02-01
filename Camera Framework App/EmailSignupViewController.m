@@ -221,7 +221,8 @@
             [[UIAlertView alertViewWithTitle:@"User already exists!" message:@"Would you like to continue with login?" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Login with this account"] onDismiss:^(int buttonIndex) {
                 if (buttonIndex == 0) {
                     // login with existing user
-                    [self didGetPFUser:user];
+                    AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                    [appDelegate didLoginPFUser:user withUserInfo:nil];
                 }
             } onCancel:^{
                 NSLog(@"Ok, cancelled");

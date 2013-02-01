@@ -17,7 +17,7 @@
 @end
 
 @implementation SignupViewController
-@synthesize newUserInfo;
+@synthesize userInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

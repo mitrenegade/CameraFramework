@@ -9,6 +9,10 @@
 #import "EmailLoginViewController.h"
 #import "ParseHelper.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UserInfo.h"
+#import "UIActionSheet+MKBlockAdditions.h"
+#import "AppDelegate.h"
+#import "EmailSignupViewController.h"
 
 @interface EmailLoginViewController ()
 
@@ -148,15 +152,45 @@
 }
 
 -(void)tryLogin:(NSString*)username password:(NSString*)password {
-    [ParseHelper ParseHelper_loginUsername:username password:password withBlock:^(PFUser * user, NSError * error) {
+    AppDelegate * appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError * error) {
         if (user) {
-            // do something
-            
+            // user exists, get userinfo
+            [UserInfo GetUserInfoForPFUser:user withBlock:^(UserInfo * userInfo, NSError * error) {
+                if (error) {
+                    NSLog(@"Could not find userInfo for user!");
+                    // delete pfuser and go to email signup view to create a complete new user
+                    [user deleteInBackground];
+                    [self promptForSignup];
+                }
+                else {
+                    // userinfo found, log in
+                    [appDelegate didLoginPFUser:user withUserInfo:userInfo];
+                }
+            }];
         }
         else {
-            NSLog(@"Invalid login! What you entered was neither a valid username or email!");
-            [[[UIAlertView alloc] initWithTitle:@"Your login was invalid." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            [self promptForSignup];
         }
+    }];
+}
+
+-(void)promptForSignup {
+    [UIActionSheet actionSheetWithTitle:@"No user found!" message:@"We could not load that user. Would you like to sign up?" buttons:[NSArray arrayWithObjects:@"OK", @"Try again", nil] showInView:self.view onDismiss:^(int buttonIndex) {
+        if (buttonIndex == 0) {
+            // OK
+            EmailSignupViewController * controller = [[EmailSignupViewController alloc] init];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else if (buttonIndex == 1) {
+            // cancel, do nothing
+            ((UITextField*)[inputFields objectAtIndex:0]).text = @"";
+            ((UITextField*)[inputFields objectAtIndex:1]).text = @"";
+        }
+    } onCancel:^{
+        // do nothing
+        ((UITextField*)[inputFields objectAtIndex:0]).text = @"";
+        ((UITextField*)[inputFields objectAtIndex:1]).text = @"";
     }];
 }
 

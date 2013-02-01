@@ -11,7 +11,7 @@
 
 @interface SignupViewController : UIViewController <UINavigationControllerDelegate>
 
-@property (nonatomic, strong) UserInfo * newUserInfo;
+@property (nonatomic, strong) UserInfo * userInfo;
 
 -(IBAction)didClickFacebookSignup:(id)sender;
 -(IBAction)didClickTwitterSignup:(id)sender;
