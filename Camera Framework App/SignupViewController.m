@@ -117,6 +117,7 @@
     [appDelegate didLoginPFUser:user withUserInfo:nil];
 }
 
+@end
+
 #endif
 
-@end

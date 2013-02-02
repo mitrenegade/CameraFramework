@@ -126,8 +126,10 @@
 
 -(IBAction)didClickSignup:(id)sender {
     NSLog(@"Clicked signup");
+    /*
     SignupViewController * controller = [[SignupViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
+     */
 }
 
 -(void)didGetPFUser:(PFUser*)user {
