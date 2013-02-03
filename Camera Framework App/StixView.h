@@ -38,7 +38,6 @@
 @interface StixView : UIView <UIGestureRecognizerDelegate, UIActionSheetDelegate>
 {
     // stix to be manipulated: new stix or new aux stix
-    UIImageView * stix;
     NSString * selectStixStringID;
     bool isDragging;
     bool isPinching;
@@ -85,7 +84,8 @@
     NSMutableArray * transformBoxes;
 }
 
-@property (nonatomic) UIImageView * stix;
+@property (nonatomic, strong) UIImageView * stix;
+@property (nonatomic, strong) UIImage * image;
 @property (nonatomic, assign) bool interactionAllowed;
 //@property (nonatomic, assign) float stixScale;
 //@property (nonatomic, assign) float stixRotation;

@@ -71,6 +71,12 @@
 		9EAD9BEC16BCC9B400362D17 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BE716BCC9B400362D17 /* UIImage+Alpha.m */; };
 		9EAD9BED16BCC9B400362D17 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BE916BCC9B400362D17 /* UIImage+Resize.m */; };
 		9EAD9BEE16BCC9B400362D17 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BEB16BCC9B400362D17 /* UIImage+RoundedCorner.m */; };
+		9EAD9BFD16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BFC16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
+		9EAD9BFF16BE1A9300362D17 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAD9BFE16BE1A9200362D17 /* AssetsLibrary.framework */; };
+		9EAD9C0316BE1AF100362D17 /* flash_auto.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0016BE1AF100362D17 /* flash_auto.png */; };
+		9EAD9C0416BE1AF100362D17 /* flash_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0116BE1AF100362D17 /* flash_off.png */; };
+		9EAD9C0516BE1AF100362D17 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0216BE1AF100362D17 /* flash.png */; };
+		9EAD9C0716BE1AFA00362D17 /* switch_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0616BE1AFA00362D17 /* switch_camera.png */; };
 		9ECE137B1697D3C0000055ED /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13761697D3C0000055ED /* EmailLoginViewController.m */; };
 		9ECE137C1697D3C0000055ED /* EmailLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */; };
 		9ECE137D1697D3C0000055ED /* PreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13791697D3C0000055ED /* PreviewController.m */; };
@@ -193,6 +199,13 @@
 		9EAD9BE916BCC9B400362D17 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		9EAD9BEA16BCC9B400362D17 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		9EAD9BEB16BCC9B400362D17 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		9EAD9BFB16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
+		9EAD9BFC16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
+		9EAD9BFE16BE1A9200362D17 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		9EAD9C0016BE1AF100362D17 /* flash_auto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_auto.png; sourceTree = "<group>"; };
+		9EAD9C0116BE1AF100362D17 /* flash_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_off.png; sourceTree = "<group>"; };
+		9EAD9C0216BE1AF100362D17 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
+		9EAD9C0616BE1AFA00362D17 /* switch_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_camera.png; sourceTree = "<group>"; };
 		9ECE13751697D3C0000055ED /* EmailLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailLoginViewController.h; sourceTree = "<group>"; };
 		9ECE13761697D3C0000055ED /* EmailLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailLoginViewController.m; sourceTree = "<group>"; };
 		9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailLoginViewController.xib; sourceTree = "<group>"; };
@@ -241,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EAD9BFF16BE1A9300362D17 /* AssetsLibrary.framework in Frameworks */,
 				9E9EB2FB16B2610700693867 /* CoreMedia.framework in Frameworks */,
 				9E9EB2F916B260FB00693867 /* AVFoundation.framework in Frameworks */,
 				9E9EB2F716B260F500693867 /* ImageIO.framework in Frameworks */,
@@ -272,6 +286,7 @@
 		9E00525A1697CB9C00A4983D = {
 			isa = PBXGroup;
 			children = (
+				9EAD9BFE16BE1A9200362D17 /* AssetsLibrary.framework */,
 				9E9EB2FA16B2610600693867 /* CoreMedia.framework */,
 				9E9EB2F816B260FA00693867 /* AVFoundation.framework */,
 				9E9EB2F616B260F500693867 /* ImageIO.framework */,
@@ -407,6 +422,10 @@
 		9E0D284D16B5E6BA0036792B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9EAD9C0616BE1AFA00362D17 /* switch_camera.png */,
+				9EAD9C0016BE1AF100362D17 /* flash_auto.png */,
+				9EAD9C0116BE1AF100362D17 /* flash_off.png */,
+				9EAD9C0216BE1AF100362D17 /* flash.png */,
 				9E0D28AD16B5F7C60036792B /* Stickers.bundle */,
 				9E0D284E16B5E6BA0036792B /* addsticker_bar.png */,
 				9E0D284F16B5E6BA0036792B /* addsticker_bar@2x.png */,
@@ -471,6 +490,8 @@
 				9EAD9BE916BCC9B400362D17 /* UIImage+Resize.m */,
 				9EAD9BEA16BCC9B400362D17 /* UIImage+RoundedCorner.h */,
 				9EAD9BEB16BCC9B400362D17 /* UIImage+RoundedCorner.m */,
+				9EAD9BFB16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.h */,
+				9EAD9BFC16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -600,6 +621,10 @@
 				9E0D286D16B5E6BA0036792B /* takephoto_btn@2x.png in Resources */,
 				9E0D288916B5F4B30036792B /* StickerPanelViewController.xib in Resources */,
 				9E0D28AE16B5F7C60036792B /* Stickers.bundle in Resources */,
+				9EAD9C0316BE1AF100362D17 /* flash_auto.png in Resources */,
+				9EAD9C0416BE1AF100362D17 /* flash_off.png in Resources */,
+				9EAD9C0516BE1AF100362D17 /* flash.png in Resources */,
+				9EAD9C0716BE1AFA00362D17 /* switch_camera.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +669,7 @@
 				9EAD9BEC16BCC9B400362D17 /* UIImage+Alpha.m in Sources */,
 				9EAD9BED16BCC9B400362D17 /* UIImage+Resize.m in Sources */,
 				9EAD9BEE16BCC9B400362D17 /* UIImage+RoundedCorner.m in Sources */,
+				9EAD9BFD16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

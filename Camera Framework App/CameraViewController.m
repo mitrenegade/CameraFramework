@@ -7,6 +7,7 @@
 //
 
 #import "CameraViewController.h"
+#import "UIActionSheet+MKBlockAdditions.h"
 
 @interface CameraViewController ()
 
@@ -15,6 +16,7 @@
 @implementation CameraViewController
 @synthesize captureManager;
 @synthesize isCapturing;
+@synthesize buttonDevice, buttonFlash, buttonTakePicture;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +44,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureImageDidFail:) name:kImageCaptureFailed object:nil];
     
     [self startCamera];
+    [self toggleFlashMode:0];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -100,8 +103,20 @@
 #pragma mark camera controls
 -(IBAction)toggleFlashMode:(id)sender {
     int flashMode = [captureManager toggleFlash];
-    
-    // todo: [self updateCameraControlButtons:flashMode];
+    switch (flashMode) {
+        case AVCaptureFlashModeAuto:
+            [buttonFlash setImage:[UIImage imageNamed:@"flash_auto.png"] forState:UIControlStateNormal];
+            break;
+        case AVCaptureFlashModeOn:
+            [buttonFlash setImage:[UIImage imageNamed:@"flash.png"] forState:UIControlStateNormal];
+            break;
+        case AVCaptureFlashModeOff:
+            [buttonFlash setImage:[UIImage imageNamed:@"flash_off.png"] forState:UIControlStateNormal];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(IBAction)toggleCameraDevice:(id)sender {
@@ -316,7 +331,7 @@
 
 
 #pragma mark StickerPanelDelegate
--(void)didClickSave {
+-(void)didSaveImage {
     [self dismissModalViewControllerAnimated:YES];
 }
 @end

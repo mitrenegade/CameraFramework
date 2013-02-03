@@ -35,7 +35,8 @@
     NSLog(@"Saving image of size %f %f", image.size.width, image.size.height);
     //[newObject setObject:UIImageJPEGRepresentation(image, .8) forKey:@"imageData"];
     //[newObject setObject:UIImagePNGRepresentation(stixLayer) forKey:@"stixLayerData"];
-    [newObject setObject:username forKey:@"username"];
+    if (username)
+        [newObject setObject:username forKey:@"username"];
     
     return newObject;
 }

@@ -18,7 +18,7 @@
 
 @protocol StickerPanelDelegate <NSObject>
 
--(void)didClickSave;
+-(void)didSaveImage;
 
 @end
 

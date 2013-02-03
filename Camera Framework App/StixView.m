@@ -13,6 +13,7 @@
 @implementation StixView
 
 @synthesize stix;
+@synthesize image;
 @synthesize interactionAllowed;
 //@synthesize stixScale;
 //@synthesize stixRotation;
@@ -27,20 +28,21 @@
 
 static int currentStixViewID = 0;
 
-+(UIImageView*)getStixWithStixStringID:(NSString*)stixStringID {
+-(UIImageView*)getStixWithStixStringID:(NSString*)stixStringID {
     // returns a half size image view
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"Stickers" ofType:@"bundle"];
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
     NSString *imageName = [bundle pathForResource:stixStringID ofType:@"png"];
-    UIImageView * stix = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120*.65, 120*.65)];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120*.65, 120*.65)];
     UIImage *img = [[UIImage alloc] initWithContentsOfFile:imageName];
-    stix.image = img;
-    CGRect frame = stix.frame;
+    imageView.image = img;
+    CGRect frame = imageView.frame;
     frame.size.width = 120*.65;
     frame.size.height = 120*.65;
-    [stix setFrame:frame];
-    return stix;
+    [imageView setFrame:frame];
+    return imageView;
 }
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -58,7 +60,13 @@ static int currentStixViewID = 0;
     [self initializeWithImage:imageData andStixLayer:nil];
 }
 -(void)initializeWithImage:(UIImage*)imageData andStixLayer:(UIImage*)stixLayer {
-    originalImageSize = imageData.size;
+    if (auxStixViews == nil) {
+        auxStixViews = [[NSMutableArray alloc] init];
+        auxStixStringIDs = [[NSMutableArray alloc] init];
+    }
+
+    self.image = imageData;
+    originalImageSize = [self.image size];
     CGRect frame = self.frame;
     frame.origin.x = 0;
     frame.origin.y = 0;
@@ -66,7 +74,7 @@ static int currentStixViewID = 0;
     if (stixLayer) {
         CGSize newSize = self.frame.size;
         UIGraphicsBeginImageContext(newSize);
-        [imageData drawInRect:frame];	
+        [self.image drawInRect:frame];
         [stixLayer drawInRect:frame];
         UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();	
@@ -74,11 +82,21 @@ static int currentStixViewID = 0;
     }
     else {
         imageView = [[UIImageView alloc] initWithFrame:frame];
-        [imageView setImage:imageData];
+        [imageView setImage:self.image];
     }
     [self addSubview:imageView];
     _activeRecognizers = [[NSMutableSet alloc] init];
     isStillPeeling = NO;
+
+    // add pinch and rotate gesture recognizer
+    UIPinchGestureRecognizer * myPinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]; //(pinchGestureHandler:)];
+    [myPinchRecognizer setDelegate:self];
+    
+    UIRotationGestureRecognizer *myRotateRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]; //(pinchRotateHandler:)];
+    [myRotateRecognizer setDelegate:self];
+    
+    [self addGestureRecognizer:myPinchRecognizer];
+    [self addGestureRecognizer:myRotateRecognizer];
 }
 
 -(void)doPeelAnimationForStix {
@@ -150,7 +168,7 @@ static int currentStixViewID = 0;
         CGPoint center; 
         center.x = frame.origin.x + frame.size.width / 2;
         center.y = frame.origin.y + frame.size.height / 2;
-        UIImageView * basicStix = [StixView getStixWithStixStringID:selectStixStringID];
+        UIImageView * basicStix = [self getStixWithStixStringID:selectStixStringID];
         [basicStix setCenter:center];
         frame = basicStix.frame;
     }    
@@ -182,33 +200,10 @@ static int currentStixViewID = 0;
     
     [transformCanvas addSubview:transformBoxShadow];
     [transformCanvas addSubview:transformBox];
-    UIImage * corners = [UIImage imageNamed:@"dot_boundingbox.png"];
-    /*
-    UIImageView * dot1 = [[UIImageView alloc] initWithImage:corners];
-    UIImageView * dot2 = [[UIImageView alloc] initWithImage:corners];
-    UIImageView * dot3 = [[UIImageView alloc] initWithImage:corners];
-    UIImageView * dot4 = [[UIImageView alloc] initWithImage:corners];
-    
-    [transformCanvas addSubview:dot1];
-    [transformCanvas addSubview:dot2];
-    [transformCanvas addSubview:dot3];
-    [transformCanvas addSubview:dot4];
-    float width = frame.size.width / 5;
-    float height = frame.size.height / 5;
-    [dot1 setFrame:CGRectMake(0, 0, width, height)];
-    [dot2 setFrame:CGRectMake(0, 0, width, height)];
-    [dot3 setFrame:CGRectMake(0, 0, width, height)];
-    [dot4 setFrame:CGRectMake(0, 0, width, height)];
-    [dot1 setCenter:CGPointMake(frame.origin.x, frame.origin.y)];
-    [dot2 setCenter:CGPointMake(frame.origin.x, frame.origin.y + frame.size.height)];
-    [dot3 setCenter:CGPointMake(frame.origin.x+frame.size.width, frame.origin.y)];
-    [dot4 setCenter:CGPointMake(frame.origin.x+frame.size.width, frame.origin.y+frame.size.height)];
-     */
 
     if (!CGAffineTransformIsIdentity(t))
         [transformCanvas setTransform:t];
     [self addSubview:transformCanvas];
-    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -245,7 +240,7 @@ static int currentStixViewID = 0;
     }
      */
 	isDragging = 0;
-    CGRect frame = stix.frame;
+    CGRect frame = self.stix.frame;
     // add an allowance of touch
     int border = frame.size.width / 2;
     frame.origin.x -= border;
@@ -470,6 +465,11 @@ static int currentStixViewID = 0;
 #pragma mark Multi stix mode
 
 -(int)multiStixInitializeWithTag:(Tag *)tag useStixLayer:(BOOL)useStixLayer {
+    if (auxStixViews == nil) {
+        auxStixViews = [[NSMutableArray alloc] init];
+        auxStixStringIDs = [[NSMutableArray alloc] init];
+    }
+    
     // clear all existing stix in the stixview
     for (int i=0; i<[auxStixViews count]; i++) {
         UIView * subview = [auxStixViews objectAtIndex:i];
@@ -485,9 +485,6 @@ static int currentStixViewID = 0;
     tagUsername = [[tag username] copy];
     tagID = tagID;
 
-    auxStixViews = [[NSMutableArray alloc] init];
-    auxStixStringIDs = [[NSMutableArray alloc] init];
-    
     if (useStixLayer) {
         // add stix layer
         CGSize newSize = self.frame.size;
@@ -531,36 +528,22 @@ static int currentStixViewID = 0;
     referenceTransform = CGAffineTransformIdentity;
     
     [self setSelectStixStringID:stixStringID];
-    stix = [StixView getStixWithStixStringID:selectStixStringID];
+    self.stix = [self getStixWithStixStringID:selectStixStringID];
     float centerX = x;
     float centerY = y;
 
-    /*
-    // scale stix and label down to 270x270 which is the size of the feedViewItem
-    CGSize originalSize = originalImageSize;
-	CGSize targetSize = self.frame.size;
-	
-    imageScale =  targetSize.width / originalSize.width;
-    
-	CGRect stixFrameScaled = stix.frame;
-	stixFrameScaled.size.width *= imageScale;// * stixScale;
-	stixFrameScaled.size.height *= imageScale;// * stixScale;
-    centerX *= imageScale;
-    centerY *= imageScale;
-     */
 	CGRect stixFrameScaled = stix.frame;
 
-    [stix setFrame:stixFrameScaled];
-    [stix setCenter:CGPointMake(centerX, centerY)];
-    [stix setAlpha:0];
-    [self addSubview:stix];
+    [self.stix setFrame:stixFrameScaled];
+    [self.stix setCenter:CGPointMake(centerX, centerY)];
+    [self.stix setAlpha:0];
+    [self addSubview:self.stix];
     StixAnimation * animation = [[StixAnimation alloc] init];
     //[animation doFade:stix inView:self toAlpha:1 forTime:.25];
-    [animation doFadeIn:stix forTime:1 withCompletion:^(BOOL finished) {
+    [animation doFadeIn:self.stix forTime:1 withCompletion:^(BOOL finished) {
         showTransformCanvas = YES;
-        [self transformBoxShowAtFrame:stix.frame];
+        [self transformBoxShowAtFrame:self.stix.frame];
         
-        //multiStixCurrent = [auxStixViews count];
         [self multiStixSelectCurrent:[auxStixViews count]];
     }];
 }

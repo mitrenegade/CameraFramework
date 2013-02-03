@@ -37,16 +37,16 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIView" id="223720289">
+					<object class="IBUIView" id="589225497">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">276</int>
 						<string key="NSFrameSize">{320, 408}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="15234089"/>
+						<reference key="NSNextKeyView" ref="289061194"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAwLjI5MDUxMjk3NTQgMC4wNjAxMDk3OTYyOAA</bytes>
+						<object class="NSColor" key="IBUIBackgroundColor" id="492888171">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -59,11 +59,8 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 20}, {320, 440}}</string>
 								<reference key="NSSuperview" ref="289061194"/>
-								<reference key="NSNextKeyView" ref="223720289"/>
-								<object class="NSColor" key="IBUIBackgroundColor" id="492888171">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwAA</bytes>
-								</object>
+								<reference key="NSNextKeyView" ref="15234089"/>
+								<reference key="IBUIBackgroundColor" ref="492888171"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">4</int>
@@ -191,7 +188,7 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="289061194"/>
+				<reference key="NSNextKeyView" ref="589225497"/>
 				<reference key="IBUIBackgroundColor" ref="492888171"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -251,7 +248,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">stixView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="223720289"/>
+						<reference key="destination" ref="589225497"/>
 					</object>
 					<int key="connectionID">112</int>
 				</object>
@@ -288,7 +285,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="15234089"/>
 							<reference ref="289061194"/>
-							<reference ref="223720289"/>
+							<reference ref="589225497"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -307,9 +304,9 @@
 						<int key="objectID">72</int>
 						<reference key="object" ref="15234089"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="996962570"/>
 							<reference ref="358507578"/>
 							<reference ref="577111735"/>
+							<reference ref="996962570"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -350,7 +347,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">111</int>
-						<reference key="object" ref="223720289"/>
+						<reference key="object" ref="589225497"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
