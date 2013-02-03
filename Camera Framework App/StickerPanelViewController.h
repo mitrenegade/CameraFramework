@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StixView.h"
 
 #define STIX_PER_ROW 4
 #define STIX_SIZE 70
@@ -15,9 +16,16 @@
 #define STIX_FILENAMES @"stache_fumanchu",@"stache_handlebar",@"stache_horseshoe",@"stache_oldman",@"stache_pencil",@"stache_walrus",@"stache_wedge",@"stache_western",@"stache_bushy", @"stache_rich", @"beard_scruffy", @"eyes_crossed", @"eyes_puppy", @"glasses_3d_glasses", @"glasses_aviatorglasses", @"hat_fedora", @"hat_tophat"
 #define STIX_DESCRIPTIONS @"Fumanchu Mustache",@"Handlebar Mustache",@"Horseshoe Mustache",@"Old Man Mustache",@"Pencil Mustache",@"Walrus Mustache",@"Wedge Mustache",@"Western Mustache",@"Bushy Mushtache", @"Rich Mustache", @"Scruffy Beard", @"Crossed Eyes", @"Puppy Eyes", @"3D Glasses", @"Aviator Glasses", @"Fedora", @"Top Hat"
 
-@interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@protocol StickerPanelDelegate <NSObject>
 
-@property (nonatomic, weak) IBOutlet UIImageView * photoView;
+-(void)didClickSave;
+
+@end
+
+@interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+{
+    BOOL didInitializeImage; // because image is initialized on viewDidAppear
+}
 @property (nonatomic, weak) IBOutlet UIView * panelView;
 @property (nonatomic, weak) IBOutlet UIScrollView * scrollView;
 
@@ -27,6 +35,10 @@
 
 @property (nonatomic, strong) NSMutableArray * allStickerViews;
 @property (nonatomic, weak) id delegate;
+
+@property (nonatomic, strong) UIImage * baseImage;
+
+@property (nonatomic, strong) IBOutlet StixView * stixView;
 
 -(void)initWithImage:(UIImage*)newImage;
 -(IBAction)didClickAddMore:(id)sender;

@@ -11,9 +11,10 @@
 @implementation StickerPanelViewController
 
 @synthesize scrollView;
-@synthesize photoView;
 @synthesize  allStickerViews;
 @synthesize delegate;
+@synthesize stixView;
+@synthesize baseImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,16 +44,21 @@
     
     BOOL visible = YES;
     [self togglePanel:visible];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // add stixview
+    [self.stixView initializeWithImage:self.baseImage];
+    NSLog(@"StixView frame: %f %f", stixView.frame.size.width, stixView.frame.size.height);
+    NSLog(@"BaseImage size: %f %f", self.baseImage.size.width, self.baseImage.size.height);
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)initWithImage:(UIImage *)newImage {
-    [self.photoView setImage:newImage];
 }
 
 -(void)reloadAllStickers {
@@ -107,6 +113,7 @@
 
 -(IBAction)didClickSave:(id)sender {
     NSLog(@"Saving!");
+    [delegate didClickSave];
 }
 
 #pragma mark tapGestureRecognizer
@@ -134,6 +141,14 @@
 -(void)didTapStickerOfType:(NSString*)stickerType {
     NSLog(@"Tapped sticker %@!", stickerType);
     [self togglePanel:NO];
+
+    CGPoint center = stixView.center;
+    // location is in TagDescriptorController's view
+    center.x -= stixView.frame.origin.x;
+    center.y -= stixView.frame.origin.y;
+    
+    [self.stixView setInteractionAllowed:YES];
+    [self.stixView multiStixAddStix:stickerType atLocationX:center.x andLocationY:center.y];
 }
 @end
 

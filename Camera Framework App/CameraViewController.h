@@ -10,7 +10,7 @@
 #import "CaptureSessionManager.h"
 #import "StickerPanelViewController.h"
 
-@interface CameraViewController : UIViewController
+@interface CameraViewController : UIViewController <StickerPanelDelegate>
 
 // CaptureSessionManager
 @property (assign) BOOL isCapturing;
@@ -20,6 +20,8 @@
 @property (nonatomic, weak) IBOutlet UIButton * buttonTakePicture;
 @property (nonatomic, weak) IBOutlet UIButton * buttonFlash;
 @property (nonatomic, weak) IBOutlet UIButton * buttonDevice;
+
+@property (nonatomic, weak) IBOutlet UIView * aperture;
 
 -(IBAction)toggleFlashMode:(id)sender;
 -(IBAction)toggleCameraDevice:(id)sender;

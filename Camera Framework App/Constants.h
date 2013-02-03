@@ -14,8 +14,12 @@
 #define TWITTER_APP_CONSUMERKEY @"TGqIwGetsrJYAoPYsthQ"
 #define TWITTER_APP_CONSUMERSECRET @"EMVxBTllAHbTSFbS91BqplipZYq14J76Pn9QPCUWxk"
 
-#define AWS_PHOTO_BUCKET @"com.neroh.cameraframework"
+//#define AWS_PHOTO_BUCKET @"com.neroh.cameraframework"
 #define AWS_PHOTO_BUCKET @"com.neroh.quickstickr"
+#define IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags"
+#define HIRES_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.highres"
+#define STIXLAYER_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.stixlayer"
+#define THUMBNAIL_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.thumbnail"
 
 #define USE_LOGIN 0
 

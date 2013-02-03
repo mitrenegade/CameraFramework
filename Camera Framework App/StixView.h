@@ -39,10 +39,7 @@
 {
     // stix to be manipulated: new stix or new aux stix
     UIImageView * stix;
-    OutlineLabel * stixCount;
     NSString * selectStixStringID;
-    bool canManipulate;
-    NSMutableArray * auxCanManipulate;
     bool isDragging;
     bool isPinching;
     bool isTap; // tap on stix
@@ -80,9 +77,6 @@
     // key: stixStringID
     // value: array of all auxStix views of this type in this StixView
     // if at any point we've satisfied all stixStringIDs, repopulate this view
-    NSMutableDictionary * stixViewsMissing;
-    BOOL isShowingPlaceholder;
-    
     BOOL isStillPeeling;
     
     // multi stix mode
@@ -92,7 +86,6 @@
 }
 
 @property (nonatomic) UIImageView * stix;
-@property (nonatomic) OutlineLabel * stixCount;
 @property (nonatomic, assign) bool interactionAllowed;
 //@property (nonatomic, assign) float stixScale;
 //@property (nonatomic, assign) float stixRotation;
@@ -104,7 +97,6 @@
 @property (nonatomic, copy) NSString * selectStixStringID;
 @property (nonatomic) NSNumber * tagID;
 @property (nonatomic, assign) int stixViewID;
-@property (nonatomic, assign) BOOL isShowingPlaceholder;
 @property (nonatomic, assign) BOOL bMultiStixMode;
 
 -(void)initializeWithImage:(UIImage*)imageData;

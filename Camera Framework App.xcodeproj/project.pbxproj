@@ -65,6 +65,12 @@
 		9E9EB2F716B260F500693867 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9EB2F616B260F500693867 /* ImageIO.framework */; };
 		9E9EB2F916B260FB00693867 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9EB2F816B260FA00693867 /* AVFoundation.framework */; };
 		9E9EB2FB16B2610700693867 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9EB2FA16B2610600693867 /* CoreMedia.framework */; };
+		9EAD9BDB16BCC63B00362D17 /* StixView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BDA16BCC63B00362D17 /* StixView.m */; };
+		9EAD9BDE16BCC66400362D17 /* ParseTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BDD16BCC66400362D17 /* ParseTag.m */; };
+		9EAD9BE116BCC67800362D17 /* StixAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BE016BCC67800362D17 /* StixAnimation.m */; };
+		9EAD9BEC16BCC9B400362D17 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BE716BCC9B400362D17 /* UIImage+Alpha.m */; };
+		9EAD9BED16BCC9B400362D17 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BE916BCC9B400362D17 /* UIImage+Resize.m */; };
+		9EAD9BEE16BCC9B400362D17 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAD9BEB16BCC9B400362D17 /* UIImage+RoundedCorner.m */; };
 		9ECE137B1697D3C0000055ED /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13761697D3C0000055ED /* EmailLoginViewController.m */; };
 		9ECE137C1697D3C0000055ED /* EmailLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */; };
 		9ECE137D1697D3C0000055ED /* PreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13791697D3C0000055ED /* PreviewController.m */; };
@@ -92,9 +98,7 @@
 		9ED0BF241699305C0059D8F3 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF221699305C0059D8F3 /* LoginViewController.xib */; };
 		9ED0BF28169931EA0059D8F3 /* EmailSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */; };
 		9ED0BF29169931EA0059D8F3 /* EmailSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */; };
-		9EE7CE7E16BA1EF40053D78F /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7A16BA1EF40053D78F /* CHANGELOG.md */; };
 		9EE7CE7F16BA1EF40053D78F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7C16BA1EF40053D78F /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9EE7CE8016BA1EF40053D78F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7D16BA1EF40053D78F /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,6 +181,18 @@
 		9E9EB2F616B260F500693867 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		9E9EB2F816B260FA00693867 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9E9EB2FA16B2610600693867 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		9EAD9BD916BCC63B00362D17 /* StixView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StixView.h; sourceTree = "<group>"; };
+		9EAD9BDA16BCC63B00362D17 /* StixView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StixView.m; sourceTree = "<group>"; };
+		9EAD9BDC16BCC66400362D17 /* ParseTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseTag.h; sourceTree = "<group>"; };
+		9EAD9BDD16BCC66400362D17 /* ParseTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseTag.m; sourceTree = "<group>"; };
+		9EAD9BDF16BCC67800362D17 /* StixAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StixAnimation.h; sourceTree = "<group>"; };
+		9EAD9BE016BCC67800362D17 /* StixAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StixAnimation.m; sourceTree = "<group>"; };
+		9EAD9BE616BCC9B400362D17 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		9EAD9BE716BCC9B400362D17 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		9EAD9BE816BCC9B400362D17 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		9EAD9BE916BCC9B400362D17 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		9EAD9BEA16BCC9B400362D17 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		9EAD9BEB16BCC9B400362D17 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		9ECE13751697D3C0000055ED /* EmailLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailLoginViewController.h; sourceTree = "<group>"; };
 		9ECE13761697D3C0000055ED /* EmailLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailLoginViewController.m; sourceTree = "<group>"; };
 		9ECE13771697D3C0000055ED /* EmailLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailLoginViewController.xib; sourceTree = "<group>"; };
@@ -307,6 +323,7 @@
 				9E0052A71697CCEA00A4983D /* Login */,
 				9E00529C1697CCD300A4983D /* ParseHelperLibrary */,
 				9E9EB2EA16B25D5800693867 /* Camera */,
+				9EAD9BD716BCC5D800362D17 /* StixView */,
 				9E9EB2EB16B25D8400693867 /* Utilities */,
 				9E0052781697CB9D00A4983D /* AppDelegate.h */,
 				9E0052791697CB9D00A4983D /* AppDelegate.m */,
@@ -431,12 +448,12 @@
 			children = (
 				9E9EB2EC16B25DE500693867 /* CaptureSessionManager.h */,
 				9E9EB2ED16B25DE500693867 /* CaptureSessionManager.m */,
-				9E0D288516B5F4B20036792B /* StickerPanelViewController.h */,
-				9E0D288616B5F4B20036792B /* StickerPanelViewController.m */,
-				9E0D288716B5F4B30036792B /* StickerPanelViewController.xib */,
 				9E9EB2EF16B25E2100693867 /* CameraViewController.h */,
 				9E9EB2F016B25E2100693867 /* CameraViewController.m */,
 				9E9EB2F116B25E2100693867 /* CameraViewController.xib */,
+				9E0D288516B5F4B20036792B /* StickerPanelViewController.h */,
+				9E0D288616B5F4B20036792B /* StickerPanelViewController.m */,
+				9E0D288716B5F4B30036792B /* StickerPanelViewController.xib */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -448,8 +465,27 @@
 				9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */,
 				9E3BB5DB16B0E8EB00467266 /* LoadingAnimationView.h */,
 				9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */,
+				9EAD9BE616BCC9B400362D17 /* UIImage+Alpha.h */,
+				9EAD9BE716BCC9B400362D17 /* UIImage+Alpha.m */,
+				9EAD9BE816BCC9B400362D17 /* UIImage+Resize.h */,
+				9EAD9BE916BCC9B400362D17 /* UIImage+Resize.m */,
+				9EAD9BEA16BCC9B400362D17 /* UIImage+RoundedCorner.h */,
+				9EAD9BEB16BCC9B400362D17 /* UIImage+RoundedCorner.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		9EAD9BD716BCC5D800362D17 /* StixView */ = {
+			isa = PBXGroup;
+			children = (
+				9EAD9BDC16BCC66400362D17 /* ParseTag.h */,
+				9EAD9BDD16BCC66400362D17 /* ParseTag.m */,
+				9EAD9BD916BCC63B00362D17 /* StixView.h */,
+				9EAD9BDA16BCC63B00362D17 /* StixView.m */,
+				9EAD9BDF16BCC67800362D17 /* StixAnimation.h */,
+				9EAD9BE016BCC67800362D17 /* StixAnimation.m */,
+			);
+			name = StixView;
 			sourceTree = "<group>";
 		};
 		9ED0BF1416992D110059D8F3 /* MKAdditions */ = {
@@ -602,6 +638,12 @@
 				9E9EB2F216B25E2100693867 /* CameraViewController.m in Sources */,
 				9EE7CE7F16BA1EF40053D78F /* JSONKit.m in Sources */,
 				9E0D288816B5F4B30036792B /* StickerPanelViewController.m in Sources */,
+				9EAD9BDB16BCC63B00362D17 /* StixView.m in Sources */,
+				9EAD9BDE16BCC66400362D17 /* ParseTag.m in Sources */,
+				9EAD9BE116BCC67800362D17 /* StixAnimation.m in Sources */,
+				9EAD9BEC16BCC9B400362D17 /* UIImage+Alpha.m in Sources */,
+				9EAD9BED16BCC9B400362D17 /* UIImage+Resize.m in Sources */,
+				9EAD9BEE16BCC9B400362D17 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

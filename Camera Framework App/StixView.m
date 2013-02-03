@@ -13,7 +13,6 @@
 @implementation StixView
 
 @synthesize stix;
-@synthesize stixCount;
 @synthesize interactionAllowed;
 //@synthesize stixScale;
 //@synthesize stixRotation;
@@ -24,14 +23,24 @@
 @synthesize selectStixStringID;
 @synthesize tagID;
 @synthesize stixViewID;
-@synthesize isShowingPlaceholder;
 @synthesize bMultiStixMode;
-
-static NSMutableDictionary * requestDictionaryForStix;
-//static NSMutableSet * retainedDelegates;
 
 static int currentStixViewID = 0;
 
++(UIImageView*)getStixWithStixStringID:(NSString*)stixStringID {
+    // returns a half size image view
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"Stickers" ofType:@"bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+    NSString *imageName = [bundle pathForResource:stixStringID ofType:@"png"];
+    UIImageView * stix = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120*.65, 120*.65)];
+    UIImage *img = [[UIImage alloc] initWithContentsOfFile:imageName];
+    stix.image = img;
+    CGRect frame = stix.frame;
+    frame.size.width = 120*.65;
+    frame.size.height = 120*.65;
+    [stix setFrame:frame];
+    return stix;
+}
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -39,7 +48,6 @@ static int currentStixViewID = 0;
         // Initialization code
         interactionAllowed = YES;
         
-        stixViewsMissing = [[NSMutableDictionary alloc] init];
         stixViewID = currentStixViewID++;
     }
     return self;
@@ -71,196 +79,6 @@ static int currentStixViewID = 0;
     [self addSubview:imageView];
     _activeRecognizers = [[NSMutableSet alloc] init];
     isStillPeeling = NO;
-}
-
-// originally initializeWithImage: withStix:
-// this function creates a temporary stix object that can be manipulated
--(void)populateWithStixForManipulation:(NSString*)stixStringID withCount:(int)count atLocationX:(int)x andLocationY:(int)y /*andScale:(float)scale andRotation:(float)rotation */{
-    CGRect frame = self.frame;
-    frame.origin.x = 0;
-    frame.origin.y = 0;
-    
-    referenceTransform = CGAffineTransformIdentity;
-    
-    [self setSelectStixStringID:stixStringID];
-#if USE_STIXPANEL_VIEW
-    stix = [[StixPanelView sharedStixPanelView] getStixWithStixStringID:stixStringID];
-#else
-    stix = [BadgeView getBadgeWithStixStringID:stixStringID];
-#endif
-    if (stix.alpha == 0) { // alpha is set to 0 by [BadgeView getBadgeForStixStringId]
-        NSLog(@"Should not get here!");
-        //[self requestStixFromKumulos:stixStringID forStixView:stix inSuperView:self andDelegate:delegate];
-    }
-    //[stix setBackgroundColor:[UIColor whiteColor]]; // for debug
-    float centerX = x;
-    float centerY = y;
-    //NSLog(@"StixView creating %@ stix to %d %d in image of size %f %f", stixStringID, x, y, self.frame.size.width, self.frame.size.height);
-    
-    // scale stix and label down to 270x270 which is the size of the feedViewItem
-    CGSize originalSize = originalImageSize;
-	CGSize targetSize = self.frame.size;
-	
-    imageScale =  targetSize.width / originalSize.width;
-    
-	CGRect stixFrameScaled = stix.frame;
-	stixFrameScaled.size.width *= imageScale;// * stixScale;
-	stixFrameScaled.size.height *= imageScale;// * stixScale;
-    centerX *= imageScale;
-    centerY *= imageScale;
-    //NSLog(@"Scaling badge of %f %f in image %f %f down to %f %f in image %f %f", stix.frame.size.width, stix.frame.size.height, imageData.size.width, imageData.size.height, stixFrameScaled.size.width, stixFrameScaled.size.height, imageView.frame.size.width, imageView.frame.size.height); 
-    [stix setFrame:stixFrameScaled];
-    [stix setCenter:CGPointMake(centerX, centerY)];
-    [self addSubview:stix];
-    //[stix release];
-        
-    // add pinch gesture recognizer
-    // add gesture recognizer
-    UIPinchGestureRecognizer * myPinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]; //(pinchGestureHandler:)];
-    [myPinchRecognizer setDelegate:self];
-    
-    
-    UIRotationGestureRecognizer *myRotateRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]; //(pinchRotateHandler:)];
-    [myRotateRecognizer setDelegate:self];
-        
-    if (interactionAllowed) {
-        [self addGestureRecognizer:myPinchRecognizer];
-        [self addGestureRecognizer:myRotateRecognizer];    
-
-#if 0
-        UITapGestureRecognizer * myDoubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapGestureHandler:)];
-        [myDoubleTapRecognizer setNumberOfTapsRequired:2];
-        [myDoubleTapRecognizer setNumberOfTouchesRequired:1];
-        [myDoubleTapRecognizer setDelegate:self];
-        
-        //if (isPeelable)
-        [self addGestureRecognizer:myDoubleTapRecognizer];
-#endif
-    }
-
-    // display transform box 
-    showTransformCanvas = YES;
-    [self transformBoxShowAtFrame:stix.frame];
-}
-
--(void)updateStixForManipulation:(NSString*)stixStringID {
-    CGPoint center = stix.center;
-    CGAffineTransform transform = stix.transform;
-    [stix removeFromSuperview];
-#if USE_STIXPANEL_VIEW
-    stix = [[StixPanelView sharedStixPanelView] getStixWithStixStringID:stixStringID];
-#else
-    stix = [BadgeView getBadgeWithStixStringID:stixStringID];
-#endif
-    if (transform.a==0 && transform.b==0 && transform.c == 0 && transform.d == 0 && transform.tx == 0 && transform.ty == 0) {
-        NSLog(@"Invalid transform! Why is the stix blank?");
-        transform = CGAffineTransformIdentity;
-        center = self.center;
-    }
-    [stix setCenter:center];
-    [stix setTransform:transform];
-    [self addSubview:stix];
-    [self setSelectStixStringID:stixStringID];
-    //[stix release]; // MRC -> causing zombie
-}
-
--(int)populateWithAuxStixFromTag:(Tag *)tag {
-    // clear all existing stix in the stixview
-    for (int i=0; i<[auxStixViews count]; i++) {
-        UIView * subview = [auxStixViews objectAtIndex:i];
-        [subview removeFromSuperview];
-    }
-    [auxStixViews removeAllObjects];
-    
-    tagUsername = [[tag username] copy];
-    tagID = tagID;
-    int allStixViewsExist = 1; // returns 1 if populated, 0 if missing stix
-    auxStixStringIDs = tag.auxStixStringIDs;
-    NSMutableArray * auxLocations = tag.auxLocations;
-    NSMutableArray * auxTransforms = tag.auxTransforms;
-    auxPeelableByUser = [[NSMutableArray alloc] init]; // = tag.auxPeelable;
-    auxStixViews = [[NSMutableArray alloc] init];
-    
-    for (int i=0; i<[auxStixStringIDs count]; i++) {
-        NSString * stixStringID = [auxStixStringIDs objectAtIndex:i];
-        CGPoint location = [[auxLocations objectAtIndex:i] CGPointValue];
-        CGAffineTransform auxTransform;
-        NSString * transformString = [auxTransforms objectAtIndex:i];
-        auxTransform = CGAffineTransformFromString(transformString); // if fails, returns identity
-#if USE_STIXPANEL_VIEW
-        UIImageView * auxStix = [[StixPanelView sharedStixPanelView] getStixWithStixStringID:stixStringID];
-#else
-        UIImageView * auxStix = [BadgeView getBadgeWithStixStringID:stixStringID];
-#endif
-        // hack: call update
-        if (auxStix.alpha == 0) {
-//            [self requestStixFromKumulos:stixStringID forStix:auxStix inStixView:self];
-            allStixViewsExist = 0;
-        }
-        
-        // shortcircuit populateWithAuxStixFromTag because if any stix doesn't exist
-        // this whole StixView will have to be repopulated once we receive all stix
-        // requests. but we do have to run through all stix to initiate the requests
-        if (!allStixViewsExist) {
-            continue;
-        }
-        
-        //[stix setBackgroundColor:[UIColor whiteColor]]; // for debug
-        float centerX = location.x;
-        float centerY = location.y;
-        
-        // scale stix and label down to 270x270 which is the size of the feedViewItem
-        CGSize originalSize = originalImageSize;
-        CGSize targetSize = self.frame.size;
-        imageScale = targetSize.width / originalSize.width;
-
-        CGRect stixFrameScaled = auxStix.frame;
-        stixFrameScaled.size.width *= imageScale;// * auxScale;
-        stixFrameScaled.size.height *= imageScale;// * auxScale;
-        centerX *= imageScale;
-        centerY *= imageScale;
-        //NSLog(@"StixView: Scaling badge of %f %f at %f %f in image %f %f down to %f %f at %f %f in image %f %f", auxStix.frame.size.width, auxStix.frame.size.height, location.x, location.y, originalImageSize.width, originalImageSize.height, stixFrameScaled.size.width, stixFrameScaled.size.height, centerX, centerY, targetSize.width, targetSize.height); 
-        [auxStix setFrame:stixFrameScaled];
-        [auxStix setCenter:CGPointMake(centerX, centerY)];
-        auxStix.transform = auxTransform;
-        //[auxStix setBackgroundColor:[UIColor blackColor]];
-        
-        bool isPeelableByUser = NO; // now setting this to YES means it has been tapped to display the peel menu if it was already stuck
-        if (isPeelable) {
-            BOOL stixIsPeelable = [[tag.auxPeelable objectAtIndex:i] boolValue];
-            NSString * tagname = tag.username;
-            NSString * delegateUsername = [delegate getUsernameOfApp];
-            if (stixIsPeelable == YES && [tagname isEqualToString:delegateUsername]) {
-
-                isPeelableByUser = YES;
-                // turn this stix into an animated one
-#if 0
-                CABasicAnimation *crossFade = [CABasicAnimation animationWithKeyPath:@"contents"];
-                UIImage * img1 = [[auxStix image] copy];
-                UIImage * img2 = [UIImage imageNamed:@"120_blank.png"];
-                crossFade.duration = 1.0;
-                crossFade.fromValue = (id)(img1.CGImage);
-                crossFade.toValue = (id)(img2.CGImage);
-                crossFade.autoreverses = YES;
-                crossFade.repeatCount = HUGE_VALF;
-                [auxStix.layer addAnimation:crossFade forKey:@"crossFade"];
-                [img1 release];
-#else
-//                [self addPeelableAnimationToStix:auxStix];
-#endif
-            } 
-            else {
-                isPeelableByUser = NO;
-            }
-        }
-        [self addSubview:auxStix];
-        //NSLog(@"StixView: adding %@ auxStix %@ at center %f %f\n", isPeelableByUser?@"peelable":@"attached", stixStringID, centerX, centerY);
-        
-        [auxStixViews addObject:auxStix];
-        //[auxScales addObject:[NSNumber numberWithFloat:auxScale]];
-        [auxPeelableByUser addObject:[NSNumber numberWithBool:isPeelableByUser]];
-    }
-    return allStixViewsExist;
 }
 
 -(void)doPeelAnimationForStix {
@@ -332,11 +150,7 @@ static int currentStixViewID = 0;
         CGPoint center; 
         center.x = frame.origin.x + frame.size.width / 2;
         center.y = frame.origin.y + frame.size.height / 2;
-#if USE_STIXPANEL_VIEW
-        UIImageView * basicStix = [[StixPanelView sharedStixPanelView] getStixWithStixStringID:selectStixStringID];
-#else
-        UIImageView * basicStix = [BadgeView getBadgeWithStixStringID:selectStixStringID];
-#endif
+        UIImageView * basicStix = [StixView getStixWithStixStringID:selectStixStringID];
         [basicStix setCenter:center];
         frame = basicStix.frame;
     }    
@@ -476,8 +290,6 @@ static int currentStixViewID = 0;
             return;
         
         stix.center = CGPointMake(centerX, centerY);
-        if (stixCount != nil)
-            stixCount.center = CGPointMake(centerX + 3, centerY - 9); //[BadgeView getOutlineOffsetX:0], centerY - [BadgeView getOutlineOffsetX:0]);
         if (transformCanvas) {
             [transformCanvas setCenter:stix.center];
         }
@@ -590,11 +402,6 @@ static int currentStixViewID = 0;
     }
 }
 
--(bool)isStixPeelable:(int)index {
-    bool canBePeeled = [[auxPeelableByUser objectAtIndex:index] boolValue];
-    return canBePeeled;
-}
-
 -(bool)isForeground:(CGPoint)point inStix:(UIImageView*)selectedStix {
     BOOL isForeground = NO;
     int dx=0;
@@ -626,74 +433,6 @@ static int currentStixViewID = 0;
     //    }
     // }
     return isForeground;
-}
-
--(void)addPeelableAnimationToStix:(UIImageView*)canvas {
-    StixAnimation * animation = [[StixAnimation alloc] init];
-    [animation doPulse:canvas forTime:1 repeatCount:-1 withCompletion:^(BOOL finished) {
- //       [self addPeelableAnimation:canvas];
-    }];
-}
-// sent through delegate functions for clicks on scrollView; after interaction with main stix is disabled, the touch filters out of StixView but then comes back through its delegates
--(int)findPeelableStixAtLocation:(CGPoint)location {
-    if (isStillPeeling) {
-        NSLog(@"Still peeling stix!");
-        return -1;
-    }
-    if ([self isPeelable]) {
-        
-        NSString * appUsername = [delegate getUsernameOfApp];
-        if (![tagUsername isEqualToString:appUsername])
-            return -1;
-        
-        int topStixIndex = -1;
-        BOOL topStixIsPeelable = NO;
-        NSLog(@"Tap detected in stix view at %f %f", location.x, location.y);
-        int lastStixView = -1;
-        for (int i=0; i<[self.auxStixViews count]; i++) {
-            UIImageView * currStix = [auxStixViews objectAtIndex:i];
-            CGRect frame = [currStix frame];
-            NSLog(@"Stix %d at %f %f %f %f", i, frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
-            CGPoint pointInside = [self convertPoint:location toView:currStix];
-            NSLog(@"Changing point %f %f to %f %f", location.x, location.y, pointInside.x, pointInside.y);
-            
-            // if click is on top of a stix
-            if ([currStix pointInside:pointInside withEvent:nil] && [self isForeground:pointInside inStix:currStix]) {
-                if (1) { //[self isStixPeelable:i]) {
-                    topStixIndex = i;
-                    topStixIsPeelable = YES;
-                }
-            }
-        }
-        if (topStixIsPeelable == NO) 
-            return -1;
-        else {
-            lastStixView = topStixIndex;
-            
-            // display action sheet
-            NSString * stixStringID = [auxStixStringIDs objectAtIndex:lastStixView];
-#if USE_STIXPANEL_VIEW
-            NSString * stixDesc = [[StixPanelView sharedStixPanelView] getStixDescriptorForStixStringID:stixStringID];
-#else
-            NSString * stixDesc = [BadgeView getStixDescriptorForStixStringID:stixStringID];
-#endif
-            NSString * title = [NSString stringWithFormat:@"What do you want to do with your %@", stixDesc];
-            //stixPeelSelected = lastStixView;
-            UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Peel", /*@"Stick", @"Move", */nil];
-            [actionSheet showInView:self];
-
-            UIImageView * currStix = [auxStixViews objectAtIndex:lastStixView];
-            CGPoint center = currStix.center;
-            NSLog(@"Presenting peelable actionsheet for %@ lastStixView %d at center %f %f", stixStringID, lastStixView, center.x, center.y);
-            
-            // save stixStringID and center to find the correct stix to remove later, in case the stix gets reloaded and stixStrings get out of order
-            stixPeelSelected = [stixStringID copy];
-            stixPeelSelectedCenter = center;
-            
-            return lastStixView;
-        }
-    }
-    return -1;
 }
 
 //-(void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -749,49 +488,6 @@ static int currentStixViewID = 0;
     auxStixViews = [[NSMutableArray alloc] init];
     auxStixStringIDs = [[NSMutableArray alloc] init];
     
-#if 0
-    [auxStixStringIDs addObjectsFromArray:tag.auxStixStringIDs];
-    NSMutableArray * auxLocations = tag.auxLocations;
-    NSMutableArray * auxTransforms = tag.auxTransforms;
-    
-    for (int i=0; i<[auxStixStringIDs count]; i++) {
-        NSString * stixStringID = [auxStixStringIDs objectAtIndex:i];
-        CGPoint location = [[auxLocations objectAtIndex:i] CGPointValue];
-        CGAffineTransform auxTransform;
-        NSString * transformString = [auxTransforms objectAtIndex:i];
-        auxTransform = CGAffineTransformFromString(transformString); // if fails, returns identity
-#if USE_STIXPANEL_VIEW
-        UIImageView * auxStix = [[StixPanelView sharedStixPanel] getStixWithStixStringID:stixStringID];
-#else
-        UIImageView * auxStix = [BadgeView getBadgeWithStixStringID:stixStringID];
-#endif
-        // hack: call update
-
-        //[stix setBackgroundColor:[UIColor whiteColor]]; // for debug
-        float centerX = location.x;
-        float centerY = location.y;
-        
-        // scale stix and label down to 270x270 which is the size of the feedViewItem
-        CGSize originalSize = originalImageSize;
-        CGSize targetSize = self.frame.size;
-        imageScale = targetSize.width / originalSize.width;
-        
-        CGRect stixFrameScaled = auxStix.frame;
-        stixFrameScaled.size.width *= imageScale;// * auxScale;
-        stixFrameScaled.size.height *= imageScale;// * auxScale;
-        centerX *= imageScale;
-        centerY *= imageScale;
-
-        [auxStix setFrame:stixFrameScaled];
-        [auxStix setCenter:CGPointMake(centerX, centerY)];
-        auxStix.transform = auxTransform;
-        //[auxStix setBackgroundColor:[UIColor blackColor]];
-        
-        [self addSubview:auxStix];
-        
-        [auxStixViews addObject:auxStix];
-    }
-#else
     if (useStixLayer) {
         // add stix layer
         CGSize newSize = self.frame.size;
@@ -805,7 +501,6 @@ static int currentStixViewID = 0;
         UIImageView * srcImageView = [[UIImageView alloc] initWithImage:result];
         [self addSubview:srcImageView];
     }
-#endif
     
     // add pinch and rotate gesture recognizer
     UIPinchGestureRecognizer * myPinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]; //(pinchGestureHandler:)];
@@ -836,14 +531,11 @@ static int currentStixViewID = 0;
     referenceTransform = CGAffineTransformIdentity;
     
     [self setSelectStixStringID:stixStringID];
-#if USE_STIXPANEL_VIEW
-    stix = [[StixPanelView sharedStixPanelView] getStixWithStixStringID:stixStringID];
-#else
-    stix = [BadgeView getBadgeWithStixStringID:stixStringID];
-#endif
+    stix = [StixView getStixWithStixStringID:selectStixStringID];
     float centerX = x;
     float centerY = y;
-    
+
+    /*
     // scale stix and label down to 270x270 which is the size of the feedViewItem
     CGSize originalSize = originalImageSize;
 	CGSize targetSize = self.frame.size;
@@ -855,19 +547,11 @@ static int currentStixViewID = 0;
 	stixFrameScaled.size.height *= imageScale;// * stixScale;
     centerX *= imageScale;
     centerY *= imageScale;
+     */
+	CGRect stixFrameScaled = stix.frame;
 
     [stix setFrame:stixFrameScaled];
     [stix setCenter:CGPointMake(centerX, centerY)];
-#if 0
-    [self addSubview:stix];
-    //[stix release];
-    // display transform box 
-    showTransformCanvas = YES;
-    [self transformBoxShowAtFrame:stix.frame];
-    
-    //multiStixCurrent = [auxStixViews count];
-    [self multiStixSelectCurrent:[auxStixViews count]];
-#else
     [stix setAlpha:0];
     [self addSubview:stix];
     StixAnimation * animation = [[StixAnimation alloc] init];
@@ -879,7 +563,6 @@ static int currentStixViewID = 0;
         //multiStixCurrent = [auxStixViews count];
         [self multiStixSelectCurrent:[auxStixViews count]];
     }];
-#endif
 }
 
 -(void)multiStixSelectCurrent:(int)stixIndex {
