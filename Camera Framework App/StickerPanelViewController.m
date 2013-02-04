@@ -50,6 +50,7 @@
     BOOL visible = YES;
     [self togglePanel:visible];
     
+    [self.stixView setDelegate:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -157,6 +158,12 @@
     
     [self.stixView setInteractionAllowed:YES];
     [self.stixView multiStixAddStix:stickerType atLocationX:center.x andLocationY:center.y];
+    
+    didBurnImage = NO;
+}
+
+-(void)stixDidChange {
+    didBurnImage = NO;
 }
 
 -(IBAction)didClickSave:(id)sender {
@@ -187,6 +194,8 @@
             else
                 NSLog(@"Could not upload image to AWS! Parse objectID %@", newObjectID);
         }];
+        
+        didBurnImage = YES;
     }
     else {
         [self didClickSaveWithResult:self.burnedImage];

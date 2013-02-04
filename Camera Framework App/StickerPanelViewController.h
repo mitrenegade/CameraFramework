@@ -22,7 +22,7 @@
 
 @end
 
-@interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate, StixViewDelegate>
 {
     BOOL didInitializeImage; // because image is initialized on viewDidAppear
     BOOL didBurnImage; // whether image/stix was burned and uploaded to parse

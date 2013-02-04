@@ -253,10 +253,8 @@ static int currentStixViewID = 0;
         // point where finger clicked badge
         offset_x = (location.x - stix.center.x);
         offset_y = (location.y - stix.center.y);
-        
-    }
-    
-    NSLog(@"Touches began: center %f %f touch location %f %f", stix.center.x, stix.center.y, location.x, location.y);
+        NSLog(@"Touches began: center %f %f touch location %f %f", stix.center.x, stix.center.y, location.x, location.y);
+    }    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -288,8 +286,8 @@ static int currentStixViewID = 0;
         if (transformCanvas) {
             [transformCanvas setCenter:stix.center];
         }
+        NSLog(@"Touches moved: new center %f %f", stix.center.x, stix.center.y);
 	}
-    NSLog(@"Touches moved: new center %f %f", stix.center.x, stix.center.y);
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -298,12 +296,14 @@ static int currentStixViewID = 0;
         return;
     }
     
-    //NSLog(@"Touches ended: new center %f %f", stix.center.x, stix.center.y);
 
 	if (isDragging == 1)
 	{
         isDragging = 0;
         isTap = 0;
+        NSLog(@"Touches ended: new center %f %f", stix.center.x, stix.center.y);
+        if ([self.delegate respondsToSelector:@selector(stixDidChange)])
+            [self.delegate stixDidChange];
 	}
     else if (isTap == 1 || isTouch == 1) {
         isTap = 0;
@@ -388,6 +388,9 @@ static int currentStixViewID = 0;
             if (transformCanvas)
             {
                 transformCanvas.transform = transform;
+                NSLog(@"Transform changed");
+                if ([self.delegate respondsToSelector:@selector(stixDidChange)])
+                    [self.delegate stixDidChange];
             }
             break;
         }

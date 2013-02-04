@@ -18,9 +18,9 @@
 @class StixView;
 
 @protocol StixViewDelegate 
-//-(void)didFinishScalingMotionWithScale:(float)scale;
--(void)didReceiveRequestedStixViewFromKumulos:(NSString*)stixStringID;
--(void)didReceiveAllRequestedMissingStix:(StixView*)stixView;
+// stixView changed
+-(void)stixDidChange;
+
 @optional
 -(NSString*) getUsername;
 -(NSString*) getUsernameOfApp;
@@ -28,11 +28,10 @@
 -(void)didPeelStix:(int)index;
 -(void)peelAnimationDidCompleteForStix:(int)index;
 -(void)didTouchInStixView:(StixView*)stixViewTouched;
--(void)needsRetainForDelegateCall;
--(void)doneWithAsynchronousDelegateCall;
 
 // multiple stix
 -(void)didSelectStixInMultiStixView;
+
 @end
 
 @interface StixView : UIView <UIGestureRecognizerDelegate, UIActionSheetDelegate>
@@ -68,7 +67,6 @@
     bool showTransformCanvas;
     UIView * transformCanvas;
 
-    NSObject<StixViewDelegate> * __unsafe_unretained delegate;    
     NSMutableSet *_activeRecognizers;
     
     NSString * tagUsername;
@@ -92,7 +90,7 @@
 @property (nonatomic) NSMutableArray * auxStixViews;
 @property (nonatomic) NSMutableArray * auxStixStringIDs;
 @property (nonatomic, assign) bool isPeelable;
-@property (nonatomic, unsafe_unretained) NSObject<StixViewDelegate> * delegate;
+@property (nonatomic, weak) id delegate;
 @property (nonatomic, assign) CGAffineTransform referenceTransform;
 @property (nonatomic, copy) NSString * selectStixStringID;
 @property (nonatomic) NSNumber * tagID;
