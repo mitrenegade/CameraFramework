@@ -81,10 +81,14 @@
     int stixHeight = STIX_SIZE + 20;
     
     int ct = 0;
+    int maxRows = 0;
     for (NSString * filename in stickerFilenames) {
+        /*
         NSString * imageName = [bundle pathForResource:filename ofType:@"png"];
         UIImage * img = [[UIImage alloc] initWithContentsOfFile:imageName];
         UIImageView * stickerImage = [[UIImageView alloc] initWithImage:img];
+         */
+        UIImageView * stickerImage = [self.stixView getStixWithStixStringID:filename];
         [stickerImage setTag:ct];
         
         CGRect frame = CGRectMake(0, 0, STIX_SIZE, STIX_SIZE);
@@ -96,10 +100,17 @@
         [stickerImage setCenter:stixCenter];
         [self.scrollView addSubview:stickerImage];
         [self.allStickerViews addObject:stickerImage];
+        NSLog(@"row, col %d %d", row, col);
+        if (row > maxRows) {
+            maxRows = row;
+            NSLog(@"Max rows: %d", maxRows);
+        }
         
         //NSLog(@"Adding sticker %d to panel: %@ frame %f %f %f %f", ct, imageName, stickerImage.frame.origin.x, stickerImage.frame.origin.y, stickerImage.frame.size.width, stickerImage.frame.size.height);
         ct++;
     }
+    [self.scrollView setContentSize:CGSizeMake(STIX_PER_ROW * stixWidth, (maxRows+1) * stixHeight)];
+    NSLog(@"ScrollView frame %f %f %f %f contentSize: %f %f", scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height, scrollView.contentSize.width, scrollView.contentSize.height);
 }
 
 -(void)togglePanel:(BOOL)visible {
@@ -174,13 +185,15 @@
         //UIImage * stixLayer = [self stixLayerFromAuxStix:auxStixViews];
         //UIImage * result = [self burnInImage:stixLayer];
         Tag * tag = [[Tag alloc] init];
+        UIImage * image = stixView.image;
         [tag addImage:stixView.image];
+        [tag setHighResImage:stixView.image];
         NSMutableArray * auxStixStrings = stixView.auxStixStringIDs;
         for (int i=0; i<[auxStixStrings count]; i++) {
             UIImageView * stix = [auxStixViews objectAtIndex:i];
             [tag addStix:[auxStixStrings objectAtIndex:i] withLocation:stix.center withTransform:stix.transform withPeelable:NO];
         }
-        UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:NO];;
+        UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:NO];
         self.burnedImage = [self burnInImage:stixLayer];
         [self didClickSaveWithResult:self.burnedImage];
         
@@ -204,8 +217,8 @@
 
 -(UIImage *)burnInImage:(UIImage*)stixLayer {
     // set size of canvas
-    CGSize newSize;
-    newSize = self.stixView.frame.size;
+    CGSize newSize = self.stixView.frame.size;
+    CGSize highResSize = [self.stixView.image size];
     UIGraphicsBeginImageContext(newSize);
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
     CGRect fullFrame = CGRectMake(0, 0, newSize.width, newSize.height);

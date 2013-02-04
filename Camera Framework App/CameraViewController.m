@@ -161,13 +161,30 @@
     // the raw image is 1936x2592 for high res photo setting == 358x480 or  //720x1280.
     // we want an image at 320x480, so we have to crop the SIDES
     
-    // for iphone 5, full screen is  
+    // iphone 3.5 inch:
+    // source image size is 2448x3264
+    // image capture size is 320x407
+    // scaled image is 305x407 if scaled by height
+    // scaled image is 320 x 427 if scaled by width
+    
+    // iphone 5:
+    // image capture size is is 320x495
+    // scaled down, image is 371x495
     
     float scaled_width = original_width / original_height * targetFrame.size.height;
     float scaled_height = targetFrame.size.height;
     scaled = [originalPhoto resizedImage:CGSizeMake(scaled_width, scaled_height) interpolationQuality:kCGInterpolationHigh];
     float offsetX = (scaled_width - targetFrame.size.width) / 2;
     float offsetY = (scaled_height - targetFrame.size.height) / 2;
+    
+    if (offsetX < 0) {
+        scaled_width = targetFrame.size.width;
+        scaled_height = original_height / original_width * targetFrame.size.width;
+        scaled = [originalPhoto resizedImage:CGSizeMake(scaled_width, scaled_height) interpolationQuality:kCGInterpolationHigh];
+        offsetX = (scaled_width - targetFrame.size.width) / 2;
+        offsetY = (scaled_height - targetFrame.size.height) / 2;
+    }
+    
     NSLog(@"originalWidth %f originalHeight %f", original_width, original_height);
     NSLog(@"scaledWidth %f scaledHeight %f offset %f %f", scaled_width, scaled_height, offsetX, offsetY);
     // target_height is smaller than scaled_height so we only take the middle

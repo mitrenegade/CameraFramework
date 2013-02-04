@@ -33,13 +33,8 @@ static int currentStixViewID = 0;
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"Stickers" ofType:@"bundle"];
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
     NSString *imageName = [bundle pathForResource:stixStringID ofType:@"png"];
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120*.65, 120*.65)];
     UIImage *img = [[UIImage alloc] initWithContentsOfFile:imageName];
-    imageView.image = img;
-    CGRect frame = imageView.frame;
-    frame.size.width = 120*.65;
-    frame.size.height = 120*.65;
-    [imageView setFrame:frame];
+    UIImageView * imageView = [[UIImageView alloc] initWithImage:img];//[[UIImageView 
     return imageView;
 }
 

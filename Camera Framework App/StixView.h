@@ -118,5 +118,6 @@
 -(int) multiStixDeleteCurrentStix;
 -(void) multiStixClearAllStix;
 
+-(UIImageView*)getStixWithStixStringID:(NSString*)stixStringID;
 
 @end
