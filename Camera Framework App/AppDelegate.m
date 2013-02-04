@@ -23,8 +23,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // initialize parse
-    [Parse setApplicationId:@"uFNlSDmQiNUBAbRpK0atWADrK9c7AjZAybEUyOtp"
-                  clientKey:@"tNPVkIuSNiSghL6gdupsqE7esx8WH6wZ48gXgzjC"];
+    [Parse setApplicationId:PARSE_APP_ID
+                  clientKey:PARSE_CLIENT_ID];
     
     // connect to facebook via parse
     [PFFacebookUtils initializeWithApplicationId:FACEBOOK_APP_ID];

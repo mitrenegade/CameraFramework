@@ -350,7 +350,7 @@
         NSString * stixStringID = [auxStixStringIDs objectAtIndex:i];
         NSString * transformString = [auxTransforms objectAtIndex:i];
         CGAffineTransform auxTransform = CGAffineTransformFromString(transformString); // if fails, returns identity
-        UIImageView * stix = [BadgeView getBadgeWithStixStringID:stixStringID];
+        UIImageView * stix = [self getStixWithStixStringID:stixStringID];
         
         // resize and rotate stix image source to correct auxTransform
         CGSize stixSize = stix.frame.size;
@@ -400,6 +400,21 @@
     [t setStixLayer:[self.stixLayer copy]];
     [t setThumbnail:[self.thumbnail copy]];
     return t;
+}
+
+-(UIImageView*)getStixWithStixStringID:(NSString*)stixStringID {
+    // returns a half size image view
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"Stickers" ofType:@"bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+    NSString *imageName = [bundle pathForResource:stixStringID ofType:@"png"];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120*.65, 120*.65)];
+    UIImage *img = [[UIImage alloc] initWithContentsOfFile:imageName];
+    imageView.image = img;
+    CGRect frame = imageView.frame;
+    frame.size.width = 120*.65;
+    frame.size.height = 120*.65;
+    [imageView setFrame:frame];
+    return imageView;
 }
 
 @end

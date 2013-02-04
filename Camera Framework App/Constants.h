@@ -14,6 +14,9 @@
 #define TWITTER_APP_CONSUMERKEY @"TGqIwGetsrJYAoPYsthQ"
 #define TWITTER_APP_CONSUMERSECRET @"EMVxBTllAHbTSFbS91BqplipZYq14J76Pn9QPCUWxk"
 
+#define PARSE_APP_ID @"uFNlSDmQiNUBAbRpK0atWADrK9c7AjZAybEUyOtp"
+#define PARSE_CLIENT_ID @"tNPVkIuSNiSghL6gdupsqE7esx8WH6wZ48gXgzjC"
+
 //#define AWS_PHOTO_BUCKET @"com.neroh.cameraframework"
 #define AWS_PHOTO_BUCKET @"com.neroh.quickstickr"
 #define IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags"

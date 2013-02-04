@@ -58,6 +58,7 @@
 		9E3BB5CF16B0E47700467266 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5CE16B0E47700467266 /* UserInfo.m */; };
 		9E3BB5DD16B0E8EC00467266 /* LoadingAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */; };
 		9E3BB5E016B0EB4800467266 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E9506FF16BF8B0F005C8BC9 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9506FE16BF8B0F005C8BC9 /* Tag.m */; };
 		9E9EB2EE16B25DE500693867 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9EB2ED16B25DE500693867 /* CaptureSessionManager.m */; };
 		9E9EB2F216B25E2100693867 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9EB2F016B25E2100693867 /* CameraViewController.m */; };
 		9E9EB2F316B25E2100693867 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9EB2F116B25E2100693867 /* CameraViewController.xib */; };
@@ -178,6 +179,8 @@
 		9E3BB5DC16B0E8EB00467266 /* LoadingAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimationView.m; sourceTree = "<group>"; };
 		9E3BB5DE16B0EB4600467266 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		9E3BB5DF16B0EB4700467266 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		9E9506FD16BF8B0E005C8BC9 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		9E9506FE16BF8B0F005C8BC9 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		9E9EB2EC16B25DE500693867 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
 		9E9EB2ED16B25DE500693867 /* CaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionManager.m; sourceTree = "<group>"; };
 		9E9EB2EF16B25E2100693867 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
@@ -505,6 +508,8 @@
 				9EAD9BDA16BCC63B00362D17 /* StixView.m */,
 				9EAD9BDF16BCC67800362D17 /* StixAnimation.h */,
 				9EAD9BE016BCC67800362D17 /* StixAnimation.m */,
+				9E9506FD16BF8B0E005C8BC9 /* Tag.h */,
+				9E9506FE16BF8B0F005C8BC9 /* Tag.m */,
 			);
 			name = StixView;
 			sourceTree = "<group>";
@@ -670,6 +675,7 @@
 				9EAD9BED16BCC9B400362D17 /* UIImage+Resize.m in Sources */,
 				9EAD9BEE16BCC9B400362D17 /* UIImage+RoundedCorner.m in Sources */,
 				9EAD9BFD16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
+				9E9506FF16BF8B0F005C8BC9 /* Tag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

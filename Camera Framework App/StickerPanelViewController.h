@@ -18,13 +18,14 @@
 
 @protocol StickerPanelDelegate <NSObject>
 
--(void)didSaveImage;
+-(void)closeStixPanel;
 
 @end
 
 @interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 {
     BOOL didInitializeImage; // because image is initialized on viewDidAppear
+    BOOL didBurnImage; // whether image/stix was burned and uploaded to parse
 }
 @property (nonatomic, weak) IBOutlet UIView * panelView;
 @property (nonatomic, weak) IBOutlet UIScrollView * scrollView;
@@ -37,10 +38,12 @@
 @property (nonatomic, weak) id delegate;
 
 @property (nonatomic, strong) UIImage * baseImage;
-
+@property (nonatomic, strong) UIImage * burnedImage;
 @property (nonatomic, strong) IBOutlet StixView * stixView;
 
 -(void)initWithImage:(UIImage*)newImage;
 -(IBAction)didClickAddMore:(id)sender;
 -(IBAction)didClickSave:(id)sender;
+//-(IBAction)didClickCancel:(id)sender;
+-(IBAction)didClickClosePanel:(id)sender;
 @end

@@ -19,6 +19,7 @@
 @synthesize delegate;
 @synthesize stixView;
 @synthesize baseImage;
+@synthesize burnedImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -119,6 +120,10 @@
     [self togglePanel:YES];
 }
 
+-(IBAction)didClickClosePanel:(id)sender {
+    [self togglePanel:NO];
+}
+
 #pragma mark tapGestureRecognizer
 
 -(void)tapGestureHandler:(UITapGestureRecognizer*) sender {
@@ -158,20 +163,34 @@
     NSMutableArray * auxStixViews = [stixView auxStixViews];
     
     // burn all stix into stixLayer image
-    UIImage * stixLayer = [self stixLayerFromAuxStix:auxStixViews];
-    UIImage * result = [self burnInImage:stixLayer];
-    
-    ParseTag * parseTag = [[ParseTag alloc] init];
-    [parseTag setImage:stixView.image];
-    [parseTag setStixLayer:stixLayer];
-    [parseTag uploadWithBlock:^(NSString *newObjectID, BOOL didUploadImage) {
-        if (didUploadImage) {
-            NSLog(@"Uploaded new picture object to Parse with new objectID: %@...still uploading images to AWS in background", newObjectID);
+    if (!didBurnImage) {
+        //UIImage * stixLayer = [self stixLayerFromAuxStix:auxStixViews];
+        //UIImage * result = [self burnInImage:stixLayer];
+        Tag * tag = [[Tag alloc] init];
+        [tag addImage:stixView.image];
+        NSMutableArray * auxStixStrings = stixView.auxStixStringIDs;
+        for (int i=0; i<[auxStixStrings count]; i++) {
+            UIImageView * stix = [auxStixViews objectAtIndex:i];
+            [tag addStix:[auxStixStrings objectAtIndex:i] withLocation:stix.center withTransform:stix.transform withPeelable:NO];
         }
-        else
-            NSLog(@"Could not upload image to AWS! Parse objectID %@", newObjectID);
-    }];
-    [self didClickSaveWithResult:result];
+        UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:NO];;
+        self.burnedImage = [self burnInImage:stixLayer];
+        [self didClickSaveWithResult:self.burnedImage];
+        
+        ParseTag * parseTag = [[ParseTag alloc] init];
+        [parseTag setImage:stixView.image];
+        [parseTag setStixLayer:stixLayer];
+        [parseTag uploadWithBlock:^(NSString *newObjectID, BOOL didUploadImage) {
+            if (didUploadImage) {
+                NSLog(@"Uploaded new picture object to Parse with new objectID: %@...still uploading images to AWS in background", newObjectID);
+            }
+            else
+                NSLog(@"Could not upload image to AWS! Parse objectID %@", newObjectID);
+        }];
+    }
+    else {
+        [self didClickSaveWithResult:self.burnedImage];
+    }
 }
 
 -(UIImage *)burnInImage:(UIImage*)stixLayer {
@@ -191,7 +210,8 @@
 }
 
 -(UIImage *)stixLayerFromAuxStix:(NSMutableArray *) auxStixViews {
-    
+    // doesn't work like tag
+    /*
     // set size of canvas
     CGSize newSize;
     newSize = self.stixView.frame.size;
@@ -233,6 +253,8 @@
     }
     // save edited image to photo album
     return result;
+     */
+    return nil;
 }
 
 -(void)didClickSaveWithResult:(UIImage*)result {
@@ -246,9 +268,10 @@
         }
         else {
             [[[UIAlertView alloc] initWithTitle:@"Sharing coming soon!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            [self.moreView setHidden:NO];
         }
     } onCancel:^{
-        [self.moreView setHidden:NO];
+        [delegate closeStixPanel];
     }];
 }
 
@@ -266,10 +289,11 @@
             NSString * message = @"Image saved to your album";
             [UIAlertView alertViewWithTitle:title message:message cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
             } onCancel:^{
-                [delegate didSaveImage];
+                [delegate closeStixPanel];
             }];
         }
     }];
 }
+
 @end
 

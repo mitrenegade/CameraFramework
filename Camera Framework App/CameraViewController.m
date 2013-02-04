@@ -331,7 +331,7 @@
 
 
 #pragma mark StickerPanelDelegate
--(void)didSaveImage {
+-(void)closeStixPanel {
     [self dismissModalViewControllerAnimated:YES];
 }
 @end

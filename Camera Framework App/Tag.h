@@ -27,6 +27,7 @@
 #import "UIImage+RoundedCorner.h"
 
 #define THUMBNAIL_SIZE 90
+#define USE_HIGHRES_SHARE 0
 
 @interface Tag : NSObject {
     // elements saved by Kumulos
