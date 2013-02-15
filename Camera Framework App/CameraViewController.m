@@ -17,6 +17,7 @@
 @synthesize captureManager;
 @synthesize isCapturing;
 @synthesize buttonDevice, buttonFlash, buttonTakePicture;
+@synthesize progress;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -73,6 +74,8 @@
 
 - (void)didCaptureImage
 {
+    [self.progress hide:YES];
+    
     //    [[self scanningLabel] setHidden:YES];
     UIImage * originalImage = [self.captureManager stillImage];
     
@@ -126,6 +129,9 @@
 -(IBAction)didClickTakePicture:(id)sender {
     if (isCapturing)
         return;
+    
+    self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.progress setLabelText:@"Capturing..."];
     
     [[self captureManager] captureStillImage];
     isCapturing = YES;

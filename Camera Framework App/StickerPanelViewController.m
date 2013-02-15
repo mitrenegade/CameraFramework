@@ -21,6 +21,7 @@
 @synthesize baseImage;
 @synthesize burnedImage;
 @synthesize highResScale;
+@synthesize progress;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -296,9 +297,13 @@
     [self.moreView setHidden:YES];
     
     [UIActionSheet actionSheetWithTitle:nil message:nil buttons:[NSArray arrayWithObjects:@"Save to Album", @"Facebook", @"Twitter", @"Instagram", nil] showInView:self.view onDismiss:^(int buttonIndex) {
+        
         if (buttonIndex == 0) {
             // save to album
             [self saveToAlbum:result];
+            self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self.progress setLabelText:@"Saving..."];
+            
         }
         else {
             [[[UIAlertView alloc] initWithTitle:@"Sharing coming soon!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
@@ -312,6 +317,7 @@
 -(void)saveToAlbum:(UIImage*)image {
     NSString * title = @"Save to album";
     [[ALAssetsLibrary sharedALAssetsLibrary] saveImage:image toAlbum:@"Stix Album" withCompletionBlock:^(NSError *error) {
+        [self.progress hide:YES];
         if (error!=nil) {
             NSString * message = @"Image could not be saved!";
             [UIAlertView alertViewWithTitle:title message:message cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(int buttonIndex) {

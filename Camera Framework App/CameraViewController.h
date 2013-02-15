@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CaptureSessionManager.h"
 #import "StickerPanelViewController.h"
+#import "MBProgressHUD.h"
 
 @interface CameraViewController : UIViewController <StickerPanelDelegate>
 
@@ -22,6 +23,7 @@
 @property (nonatomic, weak) IBOutlet UIButton * buttonDevice;
 
 @property (nonatomic, weak) IBOutlet UIView * aperture;
+@property (nonatomic, strong) MBProgressHUD * progress;
 
 -(IBAction)toggleFlashMode:(id)sender;
 -(IBAction)toggleCameraDevice:(id)sender;

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "StixView.h"
+#import "MBProgressHUD.h"
 
 #define STIX_PER_ROW 4
 #define STIX_SIZE 70
@@ -41,6 +42,7 @@
 @property (nonatomic, strong) UIImage * burnedImage;
 @property (nonatomic, assign) float highResScale; // scale of actual image to editor frame
 @property (nonatomic, strong) IBOutlet StixView * stixView;
+@property (nonatomic, strong) MBProgressHUD * progress;
 
 -(void)initWithImage:(UIImage*)newImage;
 -(IBAction)didClickAddMore:(id)sender;
