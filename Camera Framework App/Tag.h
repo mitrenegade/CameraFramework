@@ -101,6 +101,7 @@
 @property (nonatomic, retain) NSString * stixLayerURL;
 @property (nonatomic, retain) NSString * highResImageURL;
 @property (nonatomic, retain) NSString * thumbnailURL;
+@property (nonatomic, assign) float highResScale;
 
 - (void)addUsername:(NSString*)newUsername andDescriptor:(NSString*)newDescriptor andComment:(NSString*)newComment andLocationString:(NSString*)newLocation;
 //- (void)addARCoordinate:(ARCoordinate*)ARCoordinate;

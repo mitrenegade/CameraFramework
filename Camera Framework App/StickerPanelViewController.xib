@@ -61,7 +61,7 @@
 								<string key="NSFrame">{{0, 20}, {320, 440}}</string>
 								<reference key="NSSuperview" ref="289061194"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="389116364"/>
+								<reference key="NSNextKeyView" ref="586194834"/>
 								<reference key="IBUIBackgroundColor" ref="492888171"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -81,15 +81,12 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="15234089"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAwLjI5MDUxMjk3NTQgMC4wNjAxMDk3OTYyOAA</bytes>
-								</object>
+								<reference key="IBUIBackgroundColor" ref="492888171"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<object class="IBUIButton" id="389116364">
+							<object class="IBUIButton" id="586194834">
 								<reference key="NSNextResponder" ref="289061194"/>
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{6, 20}, {50, 33}}</string>
@@ -118,7 +115,7 @@
 									<int key="type">2</int>
 									<double key="pointSize">15</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="346435739">
+								<object class="NSFont" key="IBUIFont" id="281436536">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
@@ -177,7 +174,7 @@
 									<string key="NSResourceName">addsticker_btn.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="275218687"/>
-								<reference key="IBUIFont" ref="346435739"/>
+								<reference key="IBUIFont" ref="281436536"/>
 							</object>
 							<object class="IBUIButton" id="577111735">
 								<reference key="NSNextResponder" ref="15234089"/>
@@ -201,7 +198,7 @@
 									<string key="NSResourceName">save_btn.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="275218687"/>
-								<reference key="IBUIFont" ref="346435739"/>
+								<reference key="IBUIFont" ref="281436536"/>
 							</object>
 						</array>
 						<string key="NSFrame">{{0, 407}, {320, 53}}</string>
@@ -307,7 +304,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">didClickClosePanel:</string>
-						<reference key="source" ref="389116364"/>
+						<reference key="source" ref="586194834"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -374,7 +371,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="599417607"/>
 							<reference ref="732466903"/>
-							<reference ref="389116364"/>
+							<reference ref="586194834"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -396,7 +393,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">113</int>
-						<reference key="object" ref="389116364"/>
+						<reference key="object" ref="586194834"/>
 						<reference key="parent" ref="289061194"/>
 					</object>
 				</array>

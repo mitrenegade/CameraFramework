@@ -17,7 +17,7 @@
 @synthesize interactionAllowed;
 //@synthesize stixScale;
 //@synthesize stixRotation;
-@synthesize auxStixViews, auxStixStringIDs;
+@synthesize auxStixViews, auxStixStringIDs, auxStixScaleTransforms;
 @synthesize isPeelable;
 @synthesize delegate;
 @synthesize referenceTransform;
@@ -58,6 +58,7 @@ static int currentStixViewID = 0;
     if (auxStixViews == nil) {
         auxStixViews = [[NSMutableArray alloc] init];
         auxStixStringIDs = [[NSMutableArray alloc] init];
+        auxStixScaleTransforms = [[NSMutableArray alloc] init];
     }
 
     self.image = imageData;
@@ -466,6 +467,7 @@ static int currentStixViewID = 0;
     if (auxStixViews == nil) {
         auxStixViews = [[NSMutableArray alloc] init];
         auxStixStringIDs = [[NSMutableArray alloc] init];
+        auxStixScaleTransforms = [[NSMutableArray alloc] init];
     }
     
     // clear all existing stix in the stixview
@@ -479,6 +481,7 @@ static int currentStixViewID = 0;
     }
     [auxStixViews removeAllObjects];
     [auxStixStringIDs removeAllObjects];
+    [auxStixScaleTransforms removeAllObjects];
     
     tagUsername = [[tag username] copy];
     tagID = tagID;
@@ -531,11 +534,20 @@ static int currentStixViewID = 0;
     float centerY = y;
 
 	CGRect stixFrameScaled = stix.frame;
-
+    float width = stixFrameScaled.size.width;
+    float targetWidth = 120;
+    float scale = targetWidth / width;
+    stixFrameScaled.size.width *= scale;
+    stixFrameScaled.size.height *= scale;
+    
     [self.stix setFrame:stixFrameScaled];
     [self.stix setCenter:CGPointMake(centerX, centerY)];
     [self.stix setAlpha:0];
     [self addSubview:self.stix];
+    
+    CGAffineTransform initialScaleTransform = CGAffineTransformScale(referenceTransform, scale, scale);
+    [auxStixScaleTransforms addObject:NSStringFromCGAffineTransform(initialScaleTransform)];
+    
     StixAnimation * animation = [[StixAnimation alloc] init];
     //[animation doFade:stix inView:self toAlpha:1 forTime:.25];
     [animation doFadeIn:self.stix forTime:1 withCompletion:^(BOOL finished) {
@@ -578,7 +590,6 @@ static int currentStixViewID = 0;
     stix = [auxStixViews objectAtIndex:stixIndex];
     selectStixStringID = [auxStixStringIDs objectAtIndex:stixIndex];
     multiStixCurrent = stixIndex;
-    //referenceTransform = stix.transform;
     
     NSLog(@"Switching to stix at index %d with frame %f %f %f %f and transform %@", stixIndex, stix.frame.origin.x, stix.frame.origin.y, stix.frame.size.width, stix.frame.size.height, NSStringFromCGAffineTransform( stix.transform ) );
     

@@ -151,8 +151,8 @@
 }
 
 -(void)continueInitForQuickStickr {
+    [self.window makeKeyAndVisible];
     CameraViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
     self.window.rootViewController = cameraController;
-    [self.window makeKeyAndVisible];
 }
 @end

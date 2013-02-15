@@ -89,6 +89,7 @@
 //@property (nonatomic, assign) float stixRotation;
 @property (nonatomic) NSMutableArray * auxStixViews;
 @property (nonatomic) NSMutableArray * auxStixStringIDs;
+@property (nonatomic) NSMutableArray * auxStixScaleTransforms;
 @property (nonatomic, assign) bool isPeelable;
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, assign) CGAffineTransform referenceTransform;

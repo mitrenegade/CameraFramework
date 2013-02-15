@@ -47,12 +47,12 @@
     [self toggleFlashMode:0];
 }
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     // must set bounds here for resized views
-    CGRect fullbounds = self.aperture.bounds;//self.view.bounds;
-	CGRect layerRect = fullbounds; // [[[self view] layer] bounds];
-	[[[self captureManager] previewLayer] setBounds:layerRect];
-	[[[self captureManager] previewLayer] setPosition:CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))];
+    CGRect fullbounds = self.aperture.bounds;
+	[[[self captureManager] previewLayer] setBounds:fullbounds];
+	[[[self captureManager] previewLayer] setPosition:CGPointMake(CGRectGetMidX(fullbounds), CGRectGetMidY(fullbounds))];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,6 +136,9 @@
     isCapturing = NO;
     
     CGRect targetFrame = self.aperture.frame;
+    float highResScale = 3;
+    targetFrame.size.width *= highResScale;
+    targetFrame.size.height *= highResScale;
 
     BOOL photoAlbumOpened = NO;
     
@@ -250,6 +253,7 @@
     StickerPanelViewController * controller = [[StickerPanelViewController alloc] init];
     [controller setDelegate:self];
     [controller setBaseImage:final];
+    [controller setHighResScale:highResScale];
     [self presentModalViewController:controller animated:YES];
 }
 

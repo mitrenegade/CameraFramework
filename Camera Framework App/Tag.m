@@ -24,6 +24,7 @@
 //@synthesize stixStringID;
 //@synthesize stixScale, stixRotation;
 @synthesize imageURL, stixLayerURL, highResImageURL, thumbnailURL;
+@synthesize highResScale;
 
 -(void)encodeWithCoder:(NSCoder *)aCoder {
     
@@ -365,10 +366,17 @@
 
         // center context around center of stix
         CGPoint location = [[auxLocations objectAtIndex:i] CGPointValue];
+        if (self.highResScale > 0) {
+            location.x *= self.highResScale;
+            location.y *= self.highResScale;
+        }
         CGContextTranslateCTM(currentContext, location.x, location.y);
         
         // apply stix's transform about this anchor point
         CGContextConcatCTM(currentContext, auxTransform);
+        if (self.highResScale) {
+            CGContextConcatCTM(currentContext, CGAffineTransformMakeScale(self.highResScale, self.highResScale));
+        }
         
         // offset by portion of bounds left and above anchor point
         CGContextTranslateCTM(currentContext, -stixSize.width/2, -stixSize.height/2);

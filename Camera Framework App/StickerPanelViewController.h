@@ -39,6 +39,7 @@
 
 @property (nonatomic, strong) UIImage * baseImage;
 @property (nonatomic, strong) UIImage * burnedImage;
+@property (nonatomic, assign) float highResScale; // scale of actual image to editor frame
 @property (nonatomic, strong) IBOutlet StixView * stixView;
 
 -(void)initWithImage:(UIImage*)newImage;

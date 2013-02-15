@@ -20,6 +20,7 @@
 @synthesize stixView;
 @synthesize baseImage;
 @synthesize burnedImage;
+@synthesize highResScale;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,6 +52,7 @@
     [self togglePanel:visible];
     
     [self.stixView setDelegate:self];
+    [self.stixView setBMultiStixMode:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -188,15 +190,25 @@
         UIImage * image = stixView.image;
         [tag addImage:stixView.image];
         [tag setHighResImage:stixView.image];
+        [tag setHighResScale:self.highResScale];
         NSMutableArray * auxStixStrings = stixView.auxStixStringIDs;
         for (int i=0; i<[auxStixStrings count]; i++) {
             UIImageView * stix = [auxStixViews objectAtIndex:i];
-            [tag addStix:[auxStixStrings objectAtIndex:i] withLocation:stix.center withTransform:stix.transform withPeelable:NO];
+            
+            // we initially transform all imagery by a certain scale
+            CGAffineTransform scaleTransform = CGAffineTransformFromString([stixView.auxStixScaleTransforms objectAtIndex:i]);
+            CGAffineTransform finalTransform = CGAffineTransformConcat(scaleTransform, stix.transform);
+            [tag addStix:[auxStixStrings objectAtIndex:i] withLocation:stix.center withTransform:finalTransform withPeelable:NO];
         }
-        UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:NO];
+#if 0
+        UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:YES];
         self.burnedImage = [self burnInImage:stixLayer];
         [self didClickSaveWithResult:self.burnedImage];
-        
+#else
+        UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:YES];
+        self.burnedImage = [tag tagToUIImageUsingBase:YES retainStixLayer:YES useHighRes:YES];
+        [self didClickSaveWithResult:self.burnedImage];
+#endif
         ParseTag * parseTag = [[ParseTag alloc] init];
         [parseTag setImage:stixView.image];
         [parseTag setStixLayer:stixLayer];

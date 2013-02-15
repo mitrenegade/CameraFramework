@@ -14,7 +14,6 @@
 		9E0052761697CB9D00A4983D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0052751697CB9D00A4983D /* main.m */; };
 		9E00527A1697CB9D00A4983D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0052791697CB9D00A4983D /* AppDelegate.m */; };
 		9E00527C1697CB9D00A4983D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E00527B1697CB9D00A4983D /* Default.png */; };
-		9E00527E1697CB9D00A4983D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E00527D1697CB9D00A4983D /* Default@2x.png */; };
 		9E0052801697CB9D00A4983D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E00527F1697CB9D00A4983D /* Default-568h@2x.png */; };
 		9E0052831697CB9D00A4983D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0052821697CB9D00A4983D /* FirstViewController.m */; };
 		9E0052851697CB9D00A4983D /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0052841697CB9D00A4983D /* first.png */; };
@@ -106,10 +105,15 @@
 		9ED0BF28169931EA0059D8F3 /* EmailSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */; };
 		9ED0BF29169931EA0059D8F3 /* EmailSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */; };
 		9EE7CE7F16BA1EF40053D78F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7C16BA1EF40053D78F /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9EE927F116C88A1A005B4CCC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F016C88A1A005B4CCC /* Default@2x.png */; };
+		9EE927F316C88A92005B4CCC /* StickerApp57.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F216C88A92005B4CCC /* StickerApp57.png */; };
+		9EE927F516C88A9F005B4CCC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */; };
+		9EE927F716C88B2C005B4CCC /* StickerApp114.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F616C88B2C005B4CCC /* StickerApp114.png */; };
+		9EE927F816C88C07005B4CCC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927ED16C889F5005B4CCC /* Default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9E0052651697CB9D00A4983D /* CameraFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E0052651697CB9D00A4983D /* BoothZilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoothZilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0052691697CB9D00A4983D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E00526B1697CB9D00A4983D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E00526D1697CB9D00A4983D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -250,6 +254,11 @@
 		9EE7CE7B16BA1EF40053D78F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		9EE7CE7C16BA1EF40053D78F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		9EE7CE7D16BA1EF40053D78F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9EE927ED16C889F5005B4CCC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		9EE927F016C88A1A005B4CCC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		9EE927F216C88A92005B4CCC /* StickerApp57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StickerApp57.png; sourceTree = "<group>"; };
+		9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9EE927F616C88B2C005B4CCC /* StickerApp114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StickerApp114.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +298,11 @@
 		9E00525A1697CB9C00A4983D = {
 			isa = PBXGroup;
 			children = (
+				9EE927F616C88B2C005B4CCC /* StickerApp114.png */,
+				9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */,
+				9EE927F216C88A92005B4CCC /* StickerApp57.png */,
+				9EE927F016C88A1A005B4CCC /* Default@2x.png */,
+				9EE927ED16C889F5005B4CCC /* Default.png */,
 				9EAD9BFE16BE1A9200362D17 /* AssetsLibrary.framework */,
 				9E9EB2FA16B2610600693867 /* CoreMedia.framework */,
 				9E9EB2F816B260FA00693867 /* AVFoundation.framework */,
@@ -318,7 +332,7 @@
 		9E0052661697CB9D00A4983D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E0052651697CB9D00A4983D /* CameraFramework.app */,
+				9E0052651697CB9D00A4983D /* BoothZilla.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -556,7 +570,7 @@
 			);
 			name = CameraFramework;
 			productName = "Camera Framework App";
-			productReference = 9E0052651697CB9D00A4983D /* CameraFramework.app */;
+			productReference = 9E0052651697CB9D00A4983D /* BoothZilla.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -592,7 +606,6 @@
 			files = (
 				9E0052741697CB9D00A4983D /* InfoPlist.strings in Resources */,
 				9E00527C1697CB9D00A4983D /* Default.png in Resources */,
-				9E00527E1697CB9D00A4983D /* Default@2x.png in Resources */,
 				9E0052801697CB9D00A4983D /* Default-568h@2x.png in Resources */,
 				9E0052851697CB9D00A4983D /* first.png in Resources */,
 				9E0052871697CB9D00A4983D /* first@2x.png in Resources */,
@@ -630,6 +643,11 @@
 				9EAD9C0416BE1AF100362D17 /* flash_off.png in Resources */,
 				9EAD9C0516BE1AF100362D17 /* flash.png in Resources */,
 				9EAD9C0716BE1AFA00362D17 /* switch_camera.png in Resources */,
+				9EE927F116C88A1A005B4CCC /* Default@2x.png in Resources */,
+				9EE927F316C88A92005B4CCC /* StickerApp57.png in Resources */,
+				9EE927F516C88A9F005B4CCC /* Default-568h@2x.png in Resources */,
+				9EE927F716C88B2C005B4CCC /* StickerApp114.png in Resources */,
+				9EE927F816C88C07005B4CCC /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +780,7 @@
 		9E0052981697CB9D00A4983D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bobby Ren (UQA7D88UV9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Camera Framework App\"",
@@ -770,8 +789,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera Framework App/Camera Framework App-Prefix.pch";
 				INFOPLIST_FILE = "Camera Framework App/Camera Framework App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = BoothZilla;
+				PROVISIONING_PROFILE = "A81A7BD0-4E71-47AA-9554-8C5B383C3E7A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -787,8 +807,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera Framework App/Camera Framework App-Prefix.pch";
 				INFOPLIST_FILE = "Camera Framework App/Camera Framework App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = BoothZilla;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
