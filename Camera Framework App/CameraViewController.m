@@ -46,6 +46,7 @@
     
     [self startCamera];
     [self toggleFlashMode:0];
+    [captureManager switchDevices]; // set to front facing
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -133,8 +134,13 @@
     self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.progress setLabelText:@"Capturing..."];
     
+#if TARGET_IPHONE_SIMULATOR
+    [self.progress hide:YES];
+    [self didTakePhoto:[UIImage imageNamed:@"photo 2.JPG"]];
+#else
     [[self captureManager] captureStillImage];
     isCapturing = YES;
+#endif
 }
 
 -(void)didTakePhoto:(UIImage*)originalPhoto{

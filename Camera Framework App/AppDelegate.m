@@ -19,6 +19,7 @@
 @implementation AppDelegate
 
 @synthesize myUserInfo;
+@synthesize instagram;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -105,6 +106,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //[FBSession.activeSession handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -112,9 +114,27 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSLog(@"access token: %@", self.instagram.accessToken);
+    return [self.instagram handleOpenURL:url];
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+#if USE_LOGIN
     return [PFFacebookUtils handleOpenURL:url];
+#else
+    NSLog(@"URL Scheme: %@", url.scheme);
+    if ([url.scheme rangeOfString:FACEBOOK_APP_ID].location != NSNotFound) {
+        NSLog(@"Facebook scheme redirect!");
+        return [FBSession.activeSession handleOpenURL:url];
+    }
+    else if ([url.scheme rangeOfString:INSTAGRAM_CLIENT_ID].location != NSNotFound) {
+        NSLog(@"Instagram scheme redirect!");
+        NSLog(@"access token: %@", self.instagram.accessToken);
+        return [self.instagram handleOpenURL:url];
+    }
+#endif
 }
 
 /*
@@ -155,4 +175,59 @@
     CameraViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
     self.window.rootViewController = cameraController;
 }
+
+-(void)instagramAuth {
+    self.instagram = [[Instagram alloc] initWithClientId:INSTAGRAM_CLIENT_ID
+                                                delegate:nil];
+    // here i can set accessToken received on previous login
+    self.instagram.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    self.instagram.sessionDelegate = self;
+    NSLog(@"access token: %@", self.instagram.accessToken);
+    if ([self.instagram isSessionValid]) {
+        NSLog(@"Has valid instagram!");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramAuthSuccessNotification object:nil];
+    } else {
+        [self.instagram authorize:[NSArray arrayWithObjects:@"comments", @"likes", nil]];
+    }
+}
+
+#pragma - IGSessionDelegate
+
+-(void)igDidLogin {
+    NSLog(@"Instagram did login");
+    // here i can store accessToken
+    [[NSUserDefaults standardUserDefaults] setObject:self.instagram.accessToken forKey:@"accessToken"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramAuthSuccessNotification object:nil];
+}
+
+-(void)igDidNotLogin:(BOOL)cancelled {
+    NSLog(@"Instagram did not login");
+    NSString* message = nil;
+    if (cancelled) {
+        message = @"Access cancelled!";
+    } else {
+        message = @"Access denied!";
+    }
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+    [alertView show];
+}
+
+-(void)igDidLogout {
+    NSLog(@"Instagram did logout");
+    // remove the accessToken
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"accessToken"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)igSessionInvalidated {
+    NSLog(@"Instagram session was invalidated");
+}
+
+
 @end

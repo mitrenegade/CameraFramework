@@ -560,8 +560,13 @@ static int currentStixViewID = 0;
 
 -(void)multiStixSelectCurrent:(int)stixIndex {
     NSLog(@"MultiStixSelectCurrent: currently editing %d, changing to index %d, total existing %d auxStix", multiStixCurrent, stixIndex, [auxStixViews count]);
-    if (stixIndex == -1)
+    if (stixIndex == -1) {
+        if (transformCanvas) {
+            [transformCanvas removeFromSuperview];
+            transformCanvas = nil;
+        }
         return;
+    }
     
     // if a stix is already being manipulated, make sure to sync it with auxStix
     if (multiStixCurrent == -1) {

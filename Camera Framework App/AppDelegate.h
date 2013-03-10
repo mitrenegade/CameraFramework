@@ -10,10 +10,13 @@
 #import <Parse/Parse.h>
 #import "UserInfo.h"
 #import "MBProgressHUD.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import "Instagram.h"
 
 static NSString* const kMyUserInfoDidChangeNotification= @"kMyUserInfoDidChangeNotification";
+static NSString* const kInstagramAuthSuccessNotification= @"kInstagramAuthSuccessNotification";
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, IGSessionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -21,6 +24,9 @@ static NSString* const kMyUserInfoDidChangeNotification= @"kMyUserInfoDidChangeN
 
 @property (strong, atomic) UserInfo * myUserInfo;
 
+@property (nonatomic, strong) Instagram * instagram;
+
 -(void)didLoginPFUser:(PFUser *)user withUserInfo:(UserInfo*)userInfo;
 
+-(void)instagramAuth;
 @end

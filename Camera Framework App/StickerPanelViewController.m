@@ -11,23 +11,35 @@
 #import "UIActionSheet+MKBlockAdditions.h"
 #import "UIAlertView+MKBlockAdditions.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
+#import "FBHelper.h"
+#import "AppDelegate.h"
+#import "MGInstagram.h"
 
 @implementation StickerPanelViewController
 
 @synthesize scrollView;
-@synthesize  allStickerViews;
+@synthesize allStickerViews;
 @synthesize delegate;
 @synthesize stixView;
 @synthesize baseImage;
 @synthesize burnedImage;
 @synthesize highResScale;
 @synthesize progress;
+@synthesize parseObjectID;
+
+@synthesize buttonGlasses, buttonHair, buttonMystery, buttonSave, buttonStache;
+@synthesize moreView, panelView, collectionName;
+@synthesize shareViewController;
+@synthesize accountsArray;
+
+static AppDelegate * appDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"StickerPanelSelectorViewController" bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     }
     return self;
 }
@@ -54,6 +66,8 @@
     
     [self.stixView setDelegate:self];
     [self.stixView setBMultiStixMode:YES];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishInstagramAuth) name:kInstagramAuthSuccessNotification object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -72,10 +86,37 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kInstagramAuthSuccessNotification object:nil];
+}
+
+-(void)dealloc {
+    //keyboard notifications
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kInstagramAuthSuccessNotification object:nil];
 }
 
 -(void)reloadAllStickers {
-    NSArray * stickerFilenames = @[STIX_FILENAMES];
+    for (UIImageView * stickerImage in self.allStickerViews) {
+        [stickerImage removeFromSuperview];
+    }
+    [self.allStickerViews removeAllObjects];
+
+    NSArray * stickerFilenames;
+    if (stickerCollection == STICKER_COLLECTION_HAIR) {
+        stickerFilenames = @[STIX_FILENAMES_HAIR];
+        [collectionName setImage:[UIImage imageNamed:@"ribbon_hair"]];
+    }
+    else if (stickerCollection == STICKER_COLLECTION_GLASSES) {
+        stickerFilenames = @[STIX_FILENAMES_GLASSES];
+        [collectionName setImage:[UIImage imageNamed:@"ribbon_glasses"]];
+    }
+    else if (stickerCollection == STICKER_COLLECTION_STACHE) {
+        stickerFilenames = @[STIX_FILENAMES_STACHE];
+        [collectionName setImage:[UIImage imageNamed:@"ribbon_staches"]];
+    }
+    else if (stickerCollection == STICKER_COLLECTION_MYSTERY) {
+        stickerFilenames = @[STIX_FILENAMES_MYSTERY];
+        [collectionName setImage:[UIImage imageNamed:@"ribbon_mystery"]];
+    }
     
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"Stickers" ofType:@"bundle"];
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
@@ -99,7 +140,7 @@
 
         int row = ct / STIX_PER_ROW;
         int col = ct - row * STIX_PER_ROW;
-        CGPoint stixCenter = CGPointMake(stixWidth*col + stixWidth / 2, stixHeight*row + stixHeight/2);
+        CGPoint stixCenter = CGPointMake(stixWidth*col + stixWidth / 2, stixHeight*row + stixHeight/2 + stixHeight);
         [stickerImage setCenter:stixCenter];
         [self.scrollView addSubview:stickerImage];
         [self.allStickerViews addObject:stickerImage];
@@ -112,7 +153,7 @@
         //NSLog(@"Adding sticker %d to panel: %@ frame %f %f %f %f", ct, imageName, stickerImage.frame.origin.x, stickerImage.frame.origin.y, stickerImage.frame.size.width, stickerImage.frame.size.height);
         ct++;
     }
-    [self.scrollView setContentSize:CGSizeMake(STIX_PER_ROW * stixWidth, (maxRows+1) * stixHeight)];
+    [self.scrollView setContentSize:CGSizeMake(STIX_PER_ROW * stixWidth, (maxRows+2) * stixHeight)];
     NSLog(@"ScrollView frame %f %f %f %f contentSize: %f %f", scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height, scrollView.contentSize.width, scrollView.contentSize.height);
 }
 
@@ -120,10 +161,11 @@
     if (visible) {
         CGRect frame = self.view.frame;
         frame.origin.y += SCROLL_OFFSET_ON;
+        [self reloadAllStickers];
         [self.panelView setFrame:frame];
         [self.moreView setHidden:YES];
     }
-    else {
+    else {        
         CGRect frame = self.view.frame;
         frame.origin.y += SCROLL_OFFSET_OFF;
         [self.panelView setFrame:frame];
@@ -132,6 +174,19 @@
 }
 
 -(IBAction)didClickAddMore:(id)sender {
+    UIButton * button = (UIButton*)sender;
+    if (button == buttonHair) {
+        stickerCollection = STICKER_COLLECTION_HAIR;
+    }
+    else if (button == buttonGlasses) {
+        stickerCollection = STICKER_COLLECTION_GLASSES;
+    }
+    else if (button == buttonStache) {
+        stickerCollection = STICKER_COLLECTION_STACHE;
+    }
+    else if (button == buttonMystery) {
+        stickerCollection = STICKER_COLLECTION_MYSTERY;
+    }
     [self togglePanel:YES];
 }
 
@@ -139,10 +194,22 @@
     [self togglePanel:NO];
 }
 
+-(IBAction)didClickCancel:(id)sender {
+    [delegate closeStixPanel];
+}
 #pragma mark tapGestureRecognizer
 
 -(void)tapGestureHandler:(UITapGestureRecognizer*) sender {
-    NSArray * stickerDescriptions = @[STIX_DESCRIPTIONS];
+//    NSArray * stickerDescriptions = @[STIX_DESCRIPTIONS];
+    NSArray * stickerFilenames;
+    if (stickerCollection == STICKER_COLLECTION_HAIR)
+        stickerFilenames = @[STIX_FILENAMES_HAIR];
+    else if (stickerCollection == STICKER_COLLECTION_GLASSES)
+        stickerFilenames = @[STIX_FILENAMES_GLASSES];
+    else if (stickerCollection == STICKER_COLLECTION_STACHE)
+        stickerFilenames = @[STIX_FILENAMES_STACHE];
+    else if (stickerCollection == STICKER_COLLECTION_MYSTERY)
+        stickerFilenames = @[STIX_FILENAMES_MYSTERY];
     
     if (sender.state == UIGestureRecognizerStateEnded) {
         // so tap is not continuously sent
@@ -153,8 +220,8 @@
             CGRect stickerFrame = [stickerView frame];
             if (CGRectContainsPoint(stickerFrame, location)) {
                 int tag = stickerView.tag;
-                NSString * stickerType = @[STIX_FILENAMES][tag];
-                NSLog(@"Tapped sticker type: %@ index %d description %@", stickerType, tag, stickerDescriptions[tag]);
+                NSString * stickerType = stickerFilenames[tag];
+                //NSLog(@"Tapped sticker type: %@ index %d description %@", stickerType, tag, stickerDescriptions[tag]);
                 [self didTapStickerOfType:stickerType];
             }
         }
@@ -201,21 +268,22 @@
             CGAffineTransform finalTransform = CGAffineTransformConcat(scaleTransform, stix.transform);
             [tag addStix:[auxStixStrings objectAtIndex:i] withLocation:stix.center withTransform:finalTransform withPeelable:NO];
         }
-#if 0
-        UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:YES];
-        self.burnedImage = [self burnInImage:stixLayer];
-        [self didClickSaveWithResult:self.burnedImage];
-#else
         UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:YES];
         self.burnedImage = [tag tagToUIImageUsingBase:YES retainStixLayer:YES useHighRes:YES];
         [self didClickSaveWithResult:self.burnedImage];
-#endif
+
         ParseTag * parseTag = [[ParseTag alloc] init];
-        [parseTag setImage:stixView.image];
+        //[parseTag setImage:stixView.image];
+        [parseTag setImage:self.burnedImage];
         [parseTag setStixLayer:stixLayer];
         [parseTag uploadWithBlock:^(NSString *newObjectID, BOOL didUploadImage) {
             if (didUploadImage) {
                 NSLog(@"Uploaded new picture object to Parse with new objectID: %@...still uploading images to AWS in background", newObjectID);
+                
+                parseObjectID = newObjectID;
+                if (facebookShareCallback) {
+                    [self performSelector:facebookShareCallback];
+                }
             }
             else
                 NSLog(@"Could not upload image to AWS! Parse objectID %@", newObjectID);
@@ -296,6 +364,7 @@
     [self togglePanel:NO];
     [self.moreView setHidden:YES];
     
+#if 0
     [UIActionSheet actionSheetWithTitle:nil message:nil buttons:[NSArray arrayWithObjects:@"Save to Album", @"Facebook", @"Twitter", @"Instagram", nil] showInView:self.view onDismiss:^(int buttonIndex) {
         
         if (buttonIndex == 0) {
@@ -305,6 +374,12 @@
             [self.progress setLabelText:@"Saving..."];
             
         }
+        else if (buttonIndex == 1) {
+            // facebook
+            FBHelper * fbHelper = [[FBHelper alloc] init];
+            fbHelper.delegate = self;
+            [fbHelper openSession];
+        }
         else {
             [[[UIAlertView alloc] initWithTitle:@"Sharing coming soon!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
             [self.moreView setHidden:NO];
@@ -312,27 +387,278 @@
     } onCancel:^{
         [delegate closeStixPanel];
     }];
-}
-
--(void)saveToAlbum:(UIImage*)image {
+#else
+    // save to album
     NSString * title = @"Save to album";
-    [[ALAssetsLibrary sharedALAssetsLibrary] saveImage:image toAlbum:@"Stix Album" withCompletionBlock:^(NSError *error) {
+    self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.progress setLabelText:@"Saving..."];
+    [[ALAssetsLibrary sharedALAssetsLibrary] saveImage:result toAlbum:@"Stix Album" withCompletionBlock:^(NSError *error) {
         [self.progress hide:YES];
         if (error!=nil) {
             NSString * message = @"Image could not be saved!";
-            [UIAlertView alertViewWithTitle:title message:message cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
+            [UIAlertView alertViewWithTitle:title message:message cancelButtonTitle:@"Try again" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
             } onCancel:^{
-                [self didClickSaveWithResult:image];
+                [self didClickSaveWithResult:result];
             }];
         }
         else {
-            NSString * message = @"Image saved to your album";
-            [UIAlertView alertViewWithTitle:title message:message cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
-            } onCancel:^{
-                [delegate closeStixPanel];
-            }];
+            NSString * message = @"Saved to album";
+            [self.progress setLabelText:message];
+            [self.stixView multiStixSelectCurrent:-1]; // remove transform box
+            [self openShareView];
+//            [self presentModalViewController:shareViewController animated:YES];
         }
     }];
+#endif
+}
+
+-(void)didClickFacebookShare {
+    // facebook
+    if (alreadySharedToFacebook) {
+        self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.progress setLabelText:@"Already shared to Facebook!"];
+        [self.progress hide:YES afterDelay:1.5];
+        return;
+    }
+    FBHelper * fbHelper = [[FBHelper alloc] init];
+    fbHelper.delegate = self;
+    [fbHelper openSession];
+}
+
+-(void)didOpenSession {
+    NSLog(@"Did open session!");
+    
+    self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.progress setLabelText:@"Uploading to Facebook..."];
+    
+    if (parseObjectID) {
+        // object has been uploaded to parse thus an image ID has been generated
+        [self publishStory];
+    }
+    else {
+        // parse has not created the object ID, so just set a callback to come back
+        facebookShareCallback = @selector(publishStory);
+    }
+}
+
+- (void)publishStory
+{
+    NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/com.neroh.quickstickr.parse.tags/%@", parseObjectID];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:imageLink, @"link",
+                                    imageLink, @"picture",
+                                    @"My BoothZilla Pic", @"name",
+                                    @"Just messing around with the ol' camera. Check out BoothZilla!", @"caption",
+                                    //                                        @"Description", @"description",
+                                    nil];
+    [FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST"
+                          completionHandler:^(FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+                              NSString *alertText;
+                              if (error) {
+                                  alertText = [NSString stringWithFormat:
+                                               @"error: domain = %@, code = %d",
+                                               error.domain, error.code];
+                              } else {
+                                  alertText = [NSString stringWithFormat:
+                                               @"Posted action, id: %@",
+                                               [result objectForKey:@"id"]];
+                              }
+                              // Show the result in an alert
+                              /*
+                               [[[UIAlertView alloc] initWithTitle:@"Result"
+                               message:alertText
+                               delegate:self
+                               cancelButtonTitle:@"OK!"
+                               otherButtonTitles:nil]
+                               show];
+                               */
+                              UIView *blankView = [[UIView alloc] initWithFrame:CGRectZero];
+                              progress.customView = blankView;
+                              progress.mode = MBProgressHUDModeCustomView;
+                              [self.progress setLabelText:@"Done!"];
+                              [self.progress hide:YES afterDelay:1.5];
+                              //[delegate performSelector:@selector(closeStixPanel) withObject:nil afterDelay:1.5];
+                              alreadySharedToFacebook = YES;
+                          }];
+}
+
+-(void)openShareView {
+    if (!self.shareViewController) {
+        self.shareViewController = [[ShareViewController alloc] init];
+        self.shareViewController.delegate = self;
+        [self.view addSubview:shareViewController.view];
+        CGRect frame = shareViewController.view.frame;
+        frame.origin.y = self.view.frame.size.height + 10;
+        shareViewController.view.frame = frame; // start offscreen
+    }
+    CGRect frame = shareViewController.view.frame;
+    frame.origin.y = self.view.frame.size.height - frame.size.height;
+    [UIView animateWithDuration:.25 animations:^{
+        self.shareViewController.view.frame = frame;
+    }];
+}
+
+-(void)closeShareView {
+    CGRect frame = shareViewController.view.frame;
+    frame.origin.y = self.view.frame.size.height + 10;
+    [UIView animateWithDuration:.25 animations:^{
+        self.shareViewController.view.frame = frame;
+    }completion:^(BOOL finished) {
+        [delegate closeStixPanel];
+
+    }];
+    
+}
+
+#pragma mark twitter
+
+-(void)didClickTwitterShare {
+    if (alreadySharedToTwitter) {
+        self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.progress setLabelText:@"Already shared to Twitter!"];
+        [self.progress hide:YES afterDelay:1.5];
+        return;
+    }
+    
+    self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.progress setLabelText:@"Uploading to Twitter..."];
+    
+    // twitterAuth
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0){
+        if ([TWTweetComposeViewController canSendTweet]){
+            ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+            
+            // Create an account type that ensures Twitter accounts are retrieved.
+            ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+            
+            // Request access from the user to use their Twitter accounts.
+            [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+                if(granted) {
+                    // Get the list of Twitter accounts.
+                    self.accountsArray = [NSMutableArray arrayWithArray: [accountStore accountsWithAccountType:accountType]];
+                    // For the sake of brevity, we'll assume there is only one Twitter account present.
+                    // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
+                    if ([accountsArray count] == 1) {
+                        // Grab the initial Twitter account to tweet from.
+                        ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+                        NSError * twitError;
+                        
+                        // save twitter choice
+                        NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+                        [userDefaults setObject:twitterAccount.identifier forKey:@"TwitterPreferredHandle"];
+                        [userDefaults synchronize];
+                        //twitterAccount.
+                        // Create a request, which in this example, posts a tweet to the user's timeline.
+                        // This example uses version 1 of the Twitter API.
+                        // This may need to be changed to whichever version is currently appropriate.
+                        [self iosSendTweet:twitterAccount];
+                    }
+                    else if ([accountsArray count] > 1) {
+                        NSError * twitError;
+                        ACAccount * foundAccount = nil;
+                        NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+                        BOOL found = NO;
+                        if ([userDefaults objectForKey:@"TwitterPreferredHandle"] != nil) {
+                            NSString * preferredAccount = [userDefaults objectForKey:@"TwitterPreferredHandle"];
+                            for (ACAccount * twitterAccount in accountsArray) {
+                                NSLog(@"Searching for preferred twitter handle %@: current %@", preferredAccount, twitterAccount.identifier);
+                                if ([twitterAccount.identifier isEqualToString:preferredAccount]) {
+                                    found = YES;
+                                    foundAccount = twitterAccount;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if (!found) {
+                            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Choose Account", @"Change Profile Picture")                                                                                     delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:nil];
+                            for (ACAccount *account in accountsArray) {
+                                [actionSheet addButtonWithTitle:account.username];
+                            }
+                            actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+                            
+                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                [actionSheet showFromRect:self.view.frame inView:self.view animated:YES];
+                            });
+                            // show from our table view (pops up in the middle of the table)
+                        }
+                        else {
+                            [self iosSendTweet:foundAccount];
+                        }
+                    }
+                }
+            }];
+        }
+        else {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't access Twitter" message:@"Please download the Twitter app or register your account in the iPhone Settings" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [self.progress setLabelText:@"Please download the Twitter app or register your account in the iPhone Settings"];
+            [self.progress hide:YES afterDelay:3];
+        }
+        
+    }
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSLog(@"No account selected");
+        [self.progress setLabelText:@"Twitter share cancelled"];
+        [self.progress hide:YES afterDelay:3];
+    }
+    else {
+        ACAccount *twitterAccount = [accountsArray objectAtIndex:(buttonIndex - 1)];
+        
+        // save twitter choice
+        NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:twitterAccount.identifier forKey:@"TwitterPreferredHandle"];
+        [userDefaults synchronize];
+        NSLog(@"Setting default twitter account to %@", twitterAccount.identifier);
+        [self iosSendTweet:twitterAccount];
+    }
+}
+
+-(void)iosSendTweet:(ACAccount *)twitterAccount {
+    NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/com.neroh.quickstickr.parse.tags/%@", parseObjectID];
+    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"This is me after too many drinks %@", imageLink] forKey:@"status"] requestMethod:TWRequestMethodPOST];
+    
+    // Set the account used to post the tweet.
+    [postRequest setAccount:twitterAccount];
+    
+    // Perform the request created above and create a handler block to handle the response.
+    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            NSLog(@"Twitter sent!");
+            UIView *blankView = [[UIView alloc] initWithFrame:CGRectZero];
+            progress.customView = blankView;
+            progress.mode = MBProgressHUDModeCustomView;
+            [self.progress setLabelText:@"Done!"];
+            [self.progress hide:YES afterDelay:1.5];
+            //[delegate performSelector:@selector(closeStixPanel) withObject:nil afterDelay:1.5];
+        });
+    }];
+}
+
+-(void)iosReceivedReplyWithResponse: (NSHTTPURLResponse*)response error: (NSError*) error {
+    NSLog(@"Response: %@ error: %@", response, error);
+}
+
+#pragma mark instagram
+
+-(void)didClickInstagramShare {
+#if 0
+    // use api...login in api but cannot post using api
+    [appDelegate instagramAuth];
+#else
+    [self didFinishInstagramAuth];
+#endif
+}
+
+-(void)didFinishInstagramAuth {
+    // do the post here
+    self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.progress setLabelText:@"Opening in Instagram..."];
+    [self.progress hide:YES afterDelay:3];
+    [MGInstagram postImage:self.burnedImage inView:self.view];
 }
 
 @end

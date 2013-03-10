@@ -41,11 +41,14 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb406980232709538</string>
+				<string>ig42e7ce9e73f748aab3823bf2dec91f9e</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
+	<key>FacebookAppID</key>
+	<string>406980232709538</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationExitsOnSuspend</key>
@@ -74,7 +77,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>FacebookAppID</key>
-	<string>406980232709538</string>
 </dict>
 </plist>
