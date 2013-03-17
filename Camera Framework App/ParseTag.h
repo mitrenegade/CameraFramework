@@ -11,6 +11,7 @@
 //#import "Tag.h"
 #import "ParseHelper.h"
 #import "AWSHelper.h"
+#import "Constants.h"
 
 @interface ParseTag : NSObject <PFObjectFactory>
 

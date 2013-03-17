@@ -130,9 +130,16 @@
         //[parseObject refresh];
         //NSLog(@"Refreshed parse image! pfObject has id: %@", parseObject.objectId);
         NSString * objectID = pfObject.objectId;
-        uploadDidComplete(objectID, YES);
 
         // do the rest in background
+        if (self.thumbnail) {
+            [AWSHelper uploadImage:self.thumbnail withName:objectID toBucket:THUMBNAIL_IMAGE_URL_BUCKET withCallback:^(NSString * newURL) {
+                NSLog(@"Thumbnail done!");
+                uploadDidComplete(objectID, YES);
+            }];
+        }
+        else
+            uploadDidComplete(objectID, YES);
         [AWSHelper uploadImage:self.image withName:objectID toBucket:IMAGE_URL_BUCKET withCallback:^(NSString * newURL) {
             // do not save imageURL - this is generated from bucket and objectID each time
             /*
@@ -183,10 +190,6 @@
                     }
                 }];
                  */
-            }];
-        }
-        if (self.thumbnail) {
-            [AWSHelper uploadImage:self.thumbnail withName:objectID toBucket:THUMBNAIL_IMAGE_URL_BUCKET withCallback:^(NSString * newURL) {
             }];
         }
     }];
