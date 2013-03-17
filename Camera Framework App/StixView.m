@@ -158,16 +158,23 @@ static int currentStixViewID = 0;
     if (transformCanvas) {
         [transformCanvas removeFromSuperview];
         transformCanvas = nil;
-    }
+    }   
     int canvasOffset = 5;
     if (!CGAffineTransformIsIdentity(t)) {
         CGPoint center; 
         center.x = frame.origin.x + frame.size.width / 2;
         center.y = frame.origin.y + frame.size.height / 2;
         UIImageView * basicStix = [self getStixWithStixStringID:selectStixStringID];
+        CGRect stixFrameScaled = basicStix.frame;
+        float width = stixFrameScaled.size.width;
+        float targetWidth = 120;
+        float scale = targetWidth / width;
+        stixFrameScaled.size.width *= scale;
+        stixFrameScaled.size.height *= scale;
+        [basicStix setFrame:stixFrameScaled];
         [basicStix setCenter:center];
         frame = basicStix.frame;
-    }    
+    }
     CGRect frameCanvas = frame;
     NSLog(@"frameCanvas: %f %f", frameCanvas.size.width, frameCanvas.size.height);
     frameCanvas.origin.x -= canvasOffset;
@@ -209,13 +216,17 @@ static int currentStixViewID = 0;
         [super touchesBegan:touches withEvent:event];
         return;
     }
-    NSLog(@"Touch allowed!");
+    
+    // always update offsets
+	UITouch *touch = [[event allTouches] anyObject];
+	CGPoint location = [touch locationInView:self];
+    NSLog(@"Touch allowed! touch location: %f %f stixCenter %f %f", location.x, location.y, stix.center.x, stix.center.y);
+    offset_x = (location.x - stix.center.x);
+    offset_y = (location.y - stix.center.y);
     
     isTouch = 1;
     if (isDragging) // will come here if a second finger touches
         return;
-	UITouch *touch = [[event allTouches] anyObject];	
-	CGPoint location = [touch locationInView:self];
     
     /* TODO: enabling this seems to prevent touchesmoved
     if (bMultiStixMode) {
@@ -249,7 +260,7 @@ static int currentStixViewID = 0;
         // point where finger clicked badge
         offset_x = (location.x - stix.center.x);
         offset_y = (location.y - stix.center.y);
-        NSLog(@"Touches began: center %f %f touch location %f %f", stix.center.x, stix.center.y, location.x, location.y);
+        NSLog(@"Touches began: center %f %f touch location %f %f offset %f %f", stix.center.x, stix.center.y, location.x, location.y, offset_x, offset_y);
     }    
 }
 
@@ -266,6 +277,7 @@ static int currentStixViewID = 0;
         isTap = 0;
 		UITouch *touch = [[event allTouches] anyObject];
 		CGPoint location = [touch locationInView:self];
+        NSLog(@"Move allowed! touch location: %f %f stixCenter %f %f offset %f %f width %f", location.x, location.y, stix.center.x, stix.center.y, offset_x, offset_y, stix.frame.size.width/2);
 		// update frame of dragged badge, also scale
 		//float scale = 1; // do not change scale while dragging
         
@@ -273,7 +285,9 @@ static int currentStixViewID = 0;
 		float centerY = location.y - offset_y;
         
         // filter out rogue touches, usually when people are using a pinch
-        if (abs(centerX - stix.center.x) > 50 || abs(centerY - stix.center.y) > 50) 
+        if (abs(centerX - stix.center.x) > 50) //stix.frame.size.width / 2) // > 50
+            return;
+        if (abs(centerY - stix.center.y) > 50) //stix.frame.size.width / 2) // > 50
             return;
         if (centerX < 0 || centerX > self.frame.size.width || centerY < 0 || centerY > self.frame.size.height)
             return;
