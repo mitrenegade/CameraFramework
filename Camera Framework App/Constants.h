@@ -27,6 +27,8 @@
 #define STIXLAYER_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.stixlayer"
 #define THUMBNAIL_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.thumbnail"
 
+#define FLURRY_APP_KEY @"6GZSF69CDVS9QTBFDR95"
+
 #define USE_LOGIN 0
 
 @interface Constants : NSObject
