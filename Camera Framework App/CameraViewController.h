@@ -25,6 +25,8 @@
 @property (nonatomic, weak) IBOutlet UIView * aperture;
 @property (nonatomic, strong) MBProgressHUD * progress;
 
+@property (nonatomic, weak) IBOutlet UIImageView * instructionsView;
+
 -(IBAction)toggleFlashMode:(id)sender;
 -(IBAction)toggleCameraDevice:(id)sender;
 -(IBAction)didClickTakePicture:(id)sender;

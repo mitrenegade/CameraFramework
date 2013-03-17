@@ -14,6 +14,7 @@
 #import "FBHelper.h"
 #import "AppDelegate.h"
 #import "MGInstagram.h"
+#import "Flurry.h"
 
 @implementation StickerPanelViewController
 
@@ -31,6 +32,7 @@
 @synthesize moreView, panelView, collectionName;
 @synthesize shareViewController;
 @synthesize accountsArray;
+@synthesize instructionsView;
 
 static AppDelegate * appDelegate;
 
@@ -66,8 +68,26 @@ static AppDelegate * appDelegate;
     
     [self.stixView setDelegate:self];
     [self.stixView setBMultiStixMode:YES];
+    
+    [buttonMystery setEnabled:NO];
+    [buttonMystery setAlpha:.8];
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    int ct = [defaults integerForKey:@"mysteryPackCount"];
+    if (ct >= MYSTERY_PACK_UNLOCK_COUNT) {
+        [buttonMystery setEnabled:YES];
+        [buttonMystery setAlpha:1];
+    }
+
+    BOOL firstTimeInstructionsClosed = [defaults boolForKey:@"firstTimeInstructions2"];
+    if (firstTimeInstructionsClosed)
+        [self.instructionsView setHidden:YES];;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishInstagramAuth) name:kInstagramAuthSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockMysteryPack) name:kDidUnlockMysteryPackNotification object:nil];
+    
+    UISwipeGestureRecognizer * swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeDown:)];
+    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
+    [self.panelView addGestureRecognizer:swipeGesture];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -87,11 +107,13 @@ static AppDelegate * appDelegate;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kInstagramAuthSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kDidUnlockMysteryPackNotification object:nil];
 }
 
 -(void)dealloc {
     //keyboard notifications
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kInstagramAuthSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kDidUnlockMysteryPackNotification object:nil];
 }
 
 -(void)reloadAllStickers {
@@ -162,30 +184,48 @@ static AppDelegate * appDelegate;
         CGRect frame = self.view.frame;
         frame.origin.y += SCROLL_OFFSET_ON;
         [self reloadAllStickers];
-        [self.panelView setFrame:frame];
-        [self.moreView setHidden:YES];
+        [UIView animateWithDuration:.5 animations:^{
+            [self.panelView setFrame:frame];
+        } completion:^(BOOL finished) {
+            [self.moreView setHidden:YES];
+        }];
     }
     else {        
         CGRect frame = self.view.frame;
         frame.origin.y += SCROLL_OFFSET_OFF;
-        [self.panelView setFrame:frame];
-        [self.moreView setHidden:NO];
+        [UIView animateWithDuration:.5 animations:^{
+            [self.panelView setFrame:frame];
+        } completion:^(BOOL finished) {
+            [self.moreView setHidden:NO];
+        }];
     }
 }
 
+-(void)didSwipeDown:(id)sender {
+    [self togglePanel:NO];
+}
+
 -(IBAction)didClickAddMore:(id)sender {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"firstTimeInstructions2"];
+    [self.instructionsView setHidden:YES];
+    
     UIButton * button = (UIButton*)sender;
     if (button == buttonHair) {
         stickerCollection = STICKER_COLLECTION_HAIR;
+        [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Hair", @"CollectionName", nil]];
     }
     else if (button == buttonGlasses) {
         stickerCollection = STICKER_COLLECTION_GLASSES;
+        [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Glasses", @"CollectionName", nil]];
     }
     else if (button == buttonStache) {
         stickerCollection = STICKER_COLLECTION_STACHE;
+        [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Stache", @"CollectionName", nil]];
     }
     else if (button == buttonMystery) {
         stickerCollection = STICKER_COLLECTION_MYSTERY;
+        [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Mystery", @"CollectionName", nil]];
     }
     [self togglePanel:YES];
 }
@@ -249,7 +289,9 @@ static AppDelegate * appDelegate;
 
 -(IBAction)didClickSave:(id)sender {
     NSMutableArray * auxStixViews = [stixView auxStixViews];
-    
+    int ct = [auxStixViews count];
+    [Flurry logEvent:@"SAVE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:ct], @"NumberOfStixAdded", nil]];
+
     // burn all stix into stixLayer image
     if (!didBurnImage) {
         //UIImage * stixLayer = [self stixLayerFromAuxStix:auxStixViews];
@@ -276,6 +318,8 @@ static AppDelegate * appDelegate;
         //[parseTag setImage:stixView.image];
         [parseTag setImage:self.burnedImage];
         [parseTag setStixLayer:stixLayer];
+        CGSize thumbSize = CGSizeMake(96, 155);
+        [parseTag setThumbnail:[self.burnedImage resizedImage:thumbSize interpolationQuality:kCGInterpolationHigh]];
         [parseTag uploadWithBlock:^(NSString *newObjectID, BOOL didUploadImage) {
             if (didUploadImage) {
                 NSLog(@"Uploaded new picture object to Parse with new objectID: %@...still uploading images to AWS in background", newObjectID);
@@ -412,14 +456,22 @@ static AppDelegate * appDelegate;
 #endif
 }
 
+-(IBAction)didClickDelete:(id)sender {
+    NSLog(@"Did click delete stix");
+    // delete currently selected stix
+    int stixLeft = [stixView multiStixDeleteCurrentStix];
+}
+
 -(void)didClickFacebookShare {
     // facebook
     if (alreadySharedToFacebook) {
         self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        progress.mode = MBProgressHUDModeText;
         [self.progress setLabelText:@"Already shared to Facebook!"];
         [self.progress hide:YES afterDelay:1.5];
         return;
     }
+    [Flurry logEvent:@"SHARE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Facebook", @"Channel", nil]];
     FBHelper * fbHelper = [[FBHelper alloc] init];
     fbHelper.delegate = self;
     [fbHelper openSession];
@@ -443,9 +495,11 @@ static AppDelegate * appDelegate;
 
 - (void)publishStory
 {
-    NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/com.neroh.quickstickr.parse.tags/%@", parseObjectID];
+    NSLog(@"Upload to facebook publishing story");
+    NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", IMAGE_URL_BUCKET, parseObjectID];
+    NSString * thumbLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", THUMBNAIL_IMAGE_URL_BUCKET, parseObjectID];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:imageLink, @"link",
-                                    imageLink, @"picture",
+                                    thumbLink, @"picture",
                                     @"My BoothZilla Pic", @"name",
                                     @"Just messing around with the ol' camera. Check out BoothZilla!", @"caption",
                                     //                                        @"Description", @"description",
@@ -473,13 +527,15 @@ static AppDelegate * appDelegate;
                                otherButtonTitles:nil]
                                show];
                                */
-                              UIView *blankView = [[UIView alloc] initWithFrame:CGRectZero];
-                              progress.customView = blankView;
-                              progress.mode = MBProgressHUDModeCustomView;
+                              progress.mode = MBProgressHUDModeText;
                               [self.progress setLabelText:@"Done!"];
                               [self.progress hide:YES afterDelay:1.5];
                               //[delegate performSelector:@selector(closeStixPanel) withObject:nil afterDelay:1.5];
                               alreadySharedToFacebook = YES;
+                              
+                              [Flurry logEvent:@"SHARE COMPLETED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Facebook", @"Channel", nil]];
+
+                              [appDelegate incrementMysteryPackCount];
                           }];
 }
 
@@ -505,8 +561,8 @@ static AppDelegate * appDelegate;
     [UIView animateWithDuration:.25 animations:^{
         self.shareViewController.view.frame = frame;
     }completion:^(BOOL finished) {
-        [delegate closeStixPanel];
-
+//        [delegate closeStixPanel];
+        [self.moreView setHidden:NO];
     }];
     
 }
@@ -516,11 +572,14 @@ static AppDelegate * appDelegate;
 -(void)didClickTwitterShare {
     if (alreadySharedToTwitter) {
         self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        progress.mode = MBProgressHUDModeText;
         [self.progress setLabelText:@"Already shared to Twitter!"];
         [self.progress hide:YES afterDelay:1.5];
         return;
     }
     
+    [Flurry logEvent:@"SHARE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Twitter", @"Channel", nil]];
+
     self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.progress setLabelText:@"Uploading to Twitter..."];
     
@@ -588,12 +647,19 @@ static AppDelegate * appDelegate;
                         }
                     }
                 }
+                else {
+                    progress.mode = MBProgressHUDModeText;
+                    [self.progress setLabelText:@"Could not access your Twitter account"];
+                    [self.progress hide:YES afterDelay:1.5];
+                }
             }];
         }
         else {
 //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't access Twitter" message:@"Please download the Twitter app or register your account in the iPhone Settings" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            progress.mode = MBProgressHUDModeText;
             [self.progress setLabelText:@"Please download the Twitter app or register your account in the iPhone Settings"];
             [self.progress hide:YES afterDelay:3];
+            [Flurry logEvent:@"SHARE INCOMPLETE" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Twitter", @"Channel", nil]];
         }
         
     }
@@ -628,12 +694,14 @@ static AppDelegate * appDelegate;
     [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             NSLog(@"Twitter sent!");
-            UIView *blankView = [[UIView alloc] initWithFrame:CGRectZero];
-            progress.customView = blankView;
-            progress.mode = MBProgressHUDModeCustomView;
+            progress.mode = MBProgressHUDModeText;
             [self.progress setLabelText:@"Done!"];
             [self.progress hide:YES afterDelay:1.5];
             //[delegate performSelector:@selector(closeStixPanel) withObject:nil afterDelay:1.5];
+            alreadySharedToTwitter = YES;
+            [appDelegate incrementMysteryPackCount];
+
+            [Flurry logEvent:@"SHARE COMPLETED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Twitter", @"Channel", nil]];
         });
     }];
 }
@@ -649,16 +717,45 @@ static AppDelegate * appDelegate;
     // use api...login in api but cannot post using api
     [appDelegate instagramAuth];
 #else
+    [Flurry logEvent:@"SHARE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Instagram", @"Channel", nil]];
+
     [self didFinishInstagramAuth];
 #endif
 }
 
 -(void)didFinishInstagramAuth {
     // do the post here
-    self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.progress setLabelText:@"Opening in Instagram..."];
-    [self.progress hide:YES afterDelay:3];
-    [MGInstagram postImage:self.burnedImage inView:self.view];
+    if ([MGInstagram isAppInstalled] == NO) {
+        self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        progress.mode = MBProgressHUDModeText;
+        [self.progress setLabelText:@"Please download Instagram!"];
+        [self.progress hide:YES afterDelay:1.5];
+
+        [Flurry logEvent:@"SHARE INCOMPLETE" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Instagram", @"Channel", nil]];
+    }
+    else {
+        self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.progress setLabelText:@"Opening in Instagram..."];
+        [self.progress hide:YES afterDelay:1.5];
+        [MGInstagram postImage:self.burnedImage withCaption:@"photo taken with boothzilla" inView:self.view];
+        [Flurry logEvent:@"SHARE COMPLETED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Instagram", @"Channel", nil]];
+    }
+}
+
+-(void)unlockMysteryPack {
+    if (isDisplayingMysteryMessage)
+        return;
+    isDisplayingMysteryMessage = YES;
+    
+    [self.buttonMystery setEnabled:YES];
+    [buttonMystery setAlpha:1];
+    [[UIAlertView alertViewWithTitle:@"Mystery pack unlocked!" message:@"You have received a new sticker pack to play with!" cancelButtonTitle:@"Yay!" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
+        
+    } onCancel:^{
+        isDisplayingMysteryMessage = NO;
+    }] show];
+
+    [Flurry logEvent:@"MYSTERY PACK UNLOCKED"];
 }
 
 @end

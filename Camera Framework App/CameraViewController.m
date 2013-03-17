@@ -8,6 +8,7 @@
 
 #import "CameraViewController.h"
 #import "UIActionSheet+MKBlockAdditions.h"
+#import "Appirater.h"
 
 @interface CameraViewController ()
 
@@ -18,6 +19,7 @@
 @synthesize isCapturing;
 @synthesize buttonDevice, buttonFlash, buttonTakePicture;
 @synthesize progress;
+@synthesize instructionsView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,6 +49,11 @@
     [self startCamera];
     [self toggleFlashMode:0];
     [captureManager switchDevices]; // set to front facing
+
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    BOOL firstTimeInstructionsClosed = [defaults boolForKey:@"firstTimeInstructions"];
+    if (firstTimeInstructionsClosed)
+        [self.instructionsView setHidden:YES];;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -130,6 +137,11 @@
 -(IBAction)didClickTakePicture:(id)sender {
     if (isCapturing)
         return;
+    
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"firstTimeInstructions"];
+    [defaults synchronize];
+    [self.instructionsView setHidden:YES];
     
     self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.progress setLabelText:@"Capturing..."];
@@ -366,5 +378,6 @@
 #pragma mark StickerPanelDelegate
 -(void)closeStixPanel {
     [self dismissModalViewControllerAnimated:YES];
+    [Appirater userDidSignificantEvent:YES];
 }
 @end
