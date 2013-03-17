@@ -15,11 +15,15 @@
 #import "ProfileViewController.h"
 #import "CameraViewController.h"
 #import "Constants.h"
+#import "Flurry.h"
+#import <Crashlytics/Crashlytics.h>
+#import "UIAlertView+MKBlockAdditions.h"
+#import "Appirater.h"
 
 @implementation AppDelegate
 
 @synthesize myUserInfo;
-@synthesize instagram;
+//@synthesize instagram;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -34,6 +38,15 @@
     [PFTwitterUtils initializeWithConsumerKey:TWITTER_APP_CONSUMERKEY consumerSecret:TWITTER_APP_CONSUMERSECRET];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // flurry
+    [Flurry startSession:FLURRY_APP_KEY];
+    
+    // appirater
+    [Appirater appLaunched];
+
+    // crashlytics
+    [Crashlytics startWithAPIKey:@"747b4305662b69b595ac36f88f9c2abe54885ba3"];
     
     // try login process
 #if USE_LOGIN
@@ -101,6 +114,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -114,10 +128,12 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+/*
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     NSLog(@"access token: %@", self.instagram.accessToken);
     return [self.instagram handleOpenURL:url];
 }
+*/
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -130,9 +146,11 @@
         return [FBSession.activeSession handleOpenURL:url];
     }
     else if ([url.scheme rangeOfString:INSTAGRAM_CLIENT_ID].location != NSNotFound) {
+        /*
         NSLog(@"Instagram scheme redirect!");
         NSLog(@"access token: %@", self.instagram.accessToken);
         return [self.instagram handleOpenURL:url];
+         */
     }
 #endif
 }
@@ -176,6 +194,31 @@
     self.window.rootViewController = cameraController;
 }
 
+-(void)incrementMysteryPackCount {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    int ct = [defaults integerForKey:@"mysteryPackCount"];
+    if (ct >= MYSTERY_PACK_UNLOCK_COUNT)
+        return;
+    
+    [Flurry logEvent:@"MYSTERY PACK INCREMENTED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:ct+1], @"Share count", nil]];
+
+    [defaults setInteger:ct+1 forKey:@"mysteryPackCount"];
+    if (ct < MYSTERY_PACK_UNLOCK_COUNT-1) {
+        NSLog(@"Sharing the image incremented mystery box count! %d of 3 shares complete.", ct+1);
+        int n = 3 - (ct+1);
+        [UIAlertView alertViewWithTitle:@"Thanks for sharing" message:[NSString stringWithFormat:@"Share %d more times and you'll get a gift!", n]];
+    }
+    else {
+        // unlock mystery box
+        NSLog(@"Sharing the image unlocked mystery box!");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDidUnlockMysteryPackNotification object:nil];
+    }
+    [defaults synchronize];
+}
+
+#if 0
+// instagram auth not needed since we use app through document handler
+/*
 -(void)instagramAuth {
     self.instagram = [[Instagram alloc] initWithClientId:INSTAGRAM_CLIENT_ID
                                                 delegate:nil];
@@ -228,6 +271,7 @@
 -(void)igSessionInvalidated {
     NSLog(@"Instagram session was invalidated");
 }
-
+ */
+#endif
 
 @end
