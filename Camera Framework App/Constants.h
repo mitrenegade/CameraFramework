@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define FACEBOOK_APP_ID @"406980232709538"//@"191699640937330" //@"406980232709538"
-#define FACEBOOK_APP_SECRET @"9f33ed4635b61a409049c44d6d2673cb"
+#define FACEBOOK_APP_ID @"448859168522891"//@"191699640937330" //@"406980232709538"
+#define FACEBOOK_APP_SECRET @"71061284f32d4f13a29e80e748b206a7"
 
 #define TWITTER_APP_CONSUMERKEY @"TGqIwGetsrJYAoPYsthQ"
 #define TWITTER_APP_CONSUMERSECRET @"EMVxBTllAHbTSFbS91BqplipZYq14J76Pn9QPCUWxk"
@@ -21,15 +21,18 @@
 #define PARSE_CLIENT_ID @"tNPVkIuSNiSghL6gdupsqE7esx8WH6wZ48gXgzjC"
 
 //#define AWS_PHOTO_BUCKET @"com.neroh.cameraframework"
-#define AWS_PHOTO_BUCKET @"com.neroh.quickstickr"
-#define IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags"
-#define HIRES_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.highres"
-#define STIXLAYER_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.stixlayer"
-#define THUMBNAIL_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.thumbnail"
+#define AWS_PHOTO_BUCKET @"com.neroh.nerohcam3in1"
+#define IMAGE_URL_BUCKET @"com.neroh.nerohcam3in1.parse.tags"
+#define HIRES_IMAGE_URL_BUCKET @"com.neroh.nerohcam3in1.parse.tags.highres"
+#define STIXLAYER_IMAGE_URL_BUCKET @"com.neroh.nerohcam3in1.parse.tags.stixlayer"
+#define THUMBNAIL_IMAGE_URL_BUCKET @"com.neroh.nerohcam3in1.parse.tags.thumbnail"
+#define OLD_THUMBNAIL_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.thumbnail"
+#define OLD_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags"
 
 #define FLURRY_APP_KEY @"6GZSF69CDVS9QTBFDR95"
 
 #define USE_LOGIN 0
+#define TESTING 0
 
 @interface Constants : NSObject
 

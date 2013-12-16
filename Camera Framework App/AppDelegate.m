@@ -40,6 +40,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // flurry
+	NSString *version =  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    [Flurry setAppVersion:version];
     [Flurry startSession:FLURRY_APP_KEY];
     
     // appirater
@@ -199,9 +201,9 @@
     int ct = [defaults integerForKey:@"mysteryPackCount"];
     if (ct >= MYSTERY_PACK_UNLOCK_COUNT)
         return;
-    
+#if !TESTING
     [Flurry logEvent:@"MYSTERY PACK INCREMENTED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:ct+1], @"Share count", nil]];
-
+#endif
     [defaults setInteger:ct+1 forKey:@"mysteryPackCount"];
     if (ct < MYSTERY_PACK_UNLOCK_COUNT-1) {
         NSLog(@"Sharing the image incremented mystery box count! %d of 3 shares complete.", ct+1);

@@ -35,7 +35,11 @@
 		9E0D286D16B5E6BA0036792B /* takephoto_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285D16B5E6BA0036792B /* takephoto_btn@2x.png */; };
 		9E0D288816B5F4B30036792B /* StickerPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0D288616B5F4B20036792B /* StickerPanelViewController.m */; };
 		9E0D28AE16B5F7C60036792B /* Stickers.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D28AD16B5F7C60036792B /* Stickers.bundle */; };
+		9E1D61FA17051AAB0064FAE5 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1D61F917051AAB0064FAE5 /* FacebookSDK.framework */; };
+		9E1D61FC17051AC70064FAE5 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E1D61FB17051AC70064FAE5 /* FacebookSDKResources.bundle */; };
 		9E27946B16F67C93009142F1 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E27946A16F67C93009142F1 /* Appirater.m */; };
+		9E3A344C17062749002B6C15 /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3A344A17062748002B6C15 /* ExploreViewController.m */; };
+		9E3A344D17062749002B6C15 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3A344B17062748002B6C15 /* ExploreViewController.xib */; };
 		9E3BB5B516B0DF5100467266 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5B316B0DF5000467266 /* ProfileViewController.m */; };
 		9E3BB5B616B0DF5100467266 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3BB5B416B0DF5000467266 /* ProfileViewController.xib */; };
 		9E3BB5C416B0E06500467266 /* AsyncImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5BE16B0E06500467266 /* AsyncImageUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -107,8 +111,6 @@
 		9EAD9C0516BE1AF100362D17 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0216BE1AF100362D17 /* flash.png */; };
 		9EAD9C0716BE1AFA00362D17 /* switch_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0616BE1AFA00362D17 /* switch_camera.png */; };
 		9EC0835116CEFFD700C7AEE4 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC0835016CEFFD600C7AEE4 /* AWSiOSSDK.framework */; };
-		9EC0835616CF024A00C7AEE4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC0835516CF024A00C7AEE4 /* FacebookSDK.framework */; };
-		9EC0835816CF025300C7AEE4 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9EC0835716CF025300C7AEE4 /* FacebookSDKResources.bundle */; };
 		9EC0835B16CF02F400C7AEE4 /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0835A16CF02F400C7AEE4 /* FBHelper.m */; };
 		9EC0836516CF0BBD00C7AEE4 /* photo 2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 9EC0836416CF0BBD00C7AEE4 /* photo 2.JPG */; };
 		9ECE137B1697D3C0000055ED /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13761697D3C0000055ED /* EmailLoginViewController.m */; };
@@ -138,6 +140,8 @@
 		9ED0BF241699305C0059D8F3 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF221699305C0059D8F3 /* LoginViewController.xib */; };
 		9ED0BF28169931EA0059D8F3 /* EmailSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */; };
 		9ED0BF29169931EA0059D8F3 /* EmailSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */; };
+		9EE0CB471704F8C100A3039A /* ribbon_bonus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0CB451704F8C100A3039A /* ribbon_bonus.png */; };
+		9EE0CB481704F8C100A3039A /* ribbon_bonus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0CB461704F8C100A3039A /* ribbon_bonus@2x.png */; };
 		9EE7CE7F16BA1EF40053D78F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7C16BA1EF40053D78F /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9EE927F116C88A1A005B4CCC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F016C88A1A005B4CCC /* Default@2x.png */; };
 		9EE927F316C88A92005B4CCC /* StickerApp57.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F216C88A92005B4CCC /* StickerApp57.png */; };
@@ -148,7 +152,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9E0052651697CB9D00A4983D /* BoothZilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoothZilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E0052651697CB9D00A4983D /* FaceFXCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceFXCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0052691697CB9D00A4983D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E00526B1697CB9D00A4983D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E00526D1697CB9D00A4983D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -157,7 +161,7 @@
 		9E0052751697CB9D00A4983D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9E0052771697CB9D00A4983D /* Camera Framework App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Camera Framework App-Prefix.pch"; sourceTree = "<group>"; };
 		9E0052781697CB9D00A4983D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		9E0052791697CB9D00A4983D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9E0052791697CB9D00A4983D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9E00527B1697CB9D00A4983D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		9E00527D1697CB9D00A4983D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9E00527F1697CB9D00A4983D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -188,8 +192,13 @@
 		9E0D288516B5F4B20036792B /* StickerPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickerPanelViewController.h; sourceTree = "<group>"; };
 		9E0D288616B5F4B20036792B /* StickerPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickerPanelViewController.m; sourceTree = "<group>"; };
 		9E0D28AD16B5F7C60036792B /* Stickers.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Stickers.bundle; sourceTree = "<group>"; };
+		9E1D61F917051AAB0064FAE5 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK/build/FacebookSDK.framework; sourceTree = "<group>"; };
+		9E1D61FB17051AC70064FAE5 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../FacebookSDK/build/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		9E27946916F67C93009142F1 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		9E27946A16F67C93009142F1 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		9E3A344917062748002B6C15 /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
+		9E3A344A17062748002B6C15 /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
+		9E3A344B17062748002B6C15 /* ExploreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
 		9E3BB5B216B0DF5000467266 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		9E3BB5B316B0DF5000467266 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		9E3BB5B416B0DF5000467266 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -281,8 +290,6 @@
 		9EAD9C0216BE1AF100362D17 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
 		9EAD9C0616BE1AFA00362D17 /* switch_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_camera.png; sourceTree = "<group>"; };
 		9EC0835016CEFFD600C7AEE4 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSiOSSDK.framework; path = "../aws-ios-sdk-1.4.4/AWSiOSSDK.framework"; sourceTree = "<group>"; };
-		9EC0835516CF024A00C7AEE4 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK/build/FacebookSDK.framework; sourceTree = "<group>"; };
-		9EC0835716CF025300C7AEE4 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../FacebookSDK/build/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		9EC0835916CF02F400C7AEE4 /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
 		9EC0835A16CF02F400C7AEE4 /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
 		9EC0836416CF0BBD00C7AEE4 /* photo 2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo 2.JPG"; sourceTree = "<group>"; };
@@ -323,6 +330,8 @@
 		9ED0BF25169931E90059D8F3 /* EmailSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSignupViewController.h; sourceTree = "<group>"; };
 		9ED0BF26169931E90059D8F3 /* EmailSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSignupViewController.m; sourceTree = "<group>"; };
 		9ED0BF27169931E90059D8F3 /* EmailSignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailSignupViewController.xib; sourceTree = "<group>"; };
+		9EE0CB451704F8C100A3039A /* ribbon_bonus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ribbon_bonus.png; sourceTree = "<group>"; };
+		9EE0CB461704F8C100A3039A /* ribbon_bonus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ribbon_bonus@2x.png"; sourceTree = "<group>"; };
 		9EE7CE7A16BA1EF40053D78F /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		9EE7CE7B16BA1EF40053D78F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		9EE7CE7C16BA1EF40053D78F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -365,9 +374,9 @@
 				9E00526E1697CB9D00A4983D /* CoreGraphics.framework in Frameworks */,
 				9E00529B1697CC8000A4983D /* Parse.framework in Frameworks */,
 				9EC0835116CEFFD700C7AEE4 /* AWSiOSSDK.framework in Frameworks */,
-				9EC0835616CF024A00C7AEE4 /* FacebookSDK.framework in Frameworks */,
 				9E761E2916F64E7400AEF2F9 /* libFlurry.a in Frameworks */,
 				9E761E4216F6661D00AEF2F9 /* Crashlytics.framework in Frameworks */,
+				9E1D61FA17051AAB0064FAE5 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,11 +386,11 @@
 		9E00525A1697CB9C00A4983D = {
 			isa = PBXGroup;
 			children = (
+				9E1D61FB17051AC70064FAE5 /* FacebookSDKResources.bundle */,
+				9E1D61F917051AAB0064FAE5 /* FacebookSDK.framework */,
 				9E27946816F67C93009142F1 /* Appirator */,
 				9E761E4116F6661D00AEF2F9 /* Crashlytics.framework */,
 				9E67421216E9F9CE00748BCD /* Twitter.framework */,
-				9EC0835716CF025300C7AEE4 /* FacebookSDKResources.bundle */,
-				9EC0835516CF024A00C7AEE4 /* FacebookSDK.framework */,
 				9EC0835016CEFFD600C7AEE4 /* AWSiOSSDK.framework */,
 				9EE927F616C88B2C005B4CCC /* StickerApp114.png */,
 				9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */,
@@ -417,7 +426,7 @@
 		9E0052661697CB9D00A4983D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E0052651697CB9D00A4983D /* BoothZilla.app */,
+				9E0052651697CB9D00A4983D /* FaceFXCam.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -527,6 +536,8 @@
 		9E0D284D16B5E6BA0036792B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9EE0CB451704F8C100A3039A /* ribbon_bonus.png */,
+				9EE0CB461704F8C100A3039A /* ribbon_bonus@2x.png */,
 				9E85A4D216E48DD7001D7C91 /* share_facebook.png */,
 				9E85A4D316E48DD7001D7C91 /* share_facebook@2x.png */,
 				9E85A4D416E48DD8001D7C91 /* share_instagram.png */,
@@ -623,6 +634,9 @@
 				9E85A4CD16E48D92001D7C91 /* ShareViewController.h */,
 				9E85A4CE16E48D92001D7C91 /* ShareViewController.m */,
 				9E85A4CF16E48D93001D7C91 /* ShareViewController.xib */,
+				9E3A344917062748002B6C15 /* ExploreViewController.h */,
+				9E3A344A17062748002B6C15 /* ExploreViewController.m */,
+				9E3A344B17062748002B6C15 /* ExploreViewController.xib */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -706,7 +720,7 @@
 			);
 			name = CameraFramework;
 			productName = "Camera Framework App";
-			productReference = 9E0052651697CB9D00A4983D /* BoothZilla.app */;
+			productReference = 9E0052651697CB9D00A4983D /* FaceFXCam.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -773,7 +787,6 @@
 				9EE927F516C88A9F005B4CCC /* Default-568h@2x.png in Resources */,
 				9EE927F716C88B2C005B4CCC /* StickerApp114.png in Resources */,
 				9EE927F816C88C07005B4CCC /* Default.png in Resources */,
-				9EC0835816CF025300C7AEE4 /* FacebookSDKResources.bundle in Resources */,
 				9EC0836516CF0BBD00C7AEE4 /* photo 2.JPG in Resources */,
 				9E85A49816E4753C001D7C91 /* faceoverlay.png in Resources */,
 				9E85A49916E4753C001D7C91 /* faceoverlay@2x.png in Resources */,
@@ -811,6 +824,10 @@
 				9E85A4DD16E48DDA001D7C91 /* share_twitter@2x.png in Resources */,
 				9E761E1F16F63CA700AEF2F9 /* delete.png in Resources */,
 				9E761E2016F63CA700AEF2F9 /* delete@2x.png in Resources */,
+				9EE0CB471704F8C100A3039A /* ribbon_bonus.png in Resources */,
+				9EE0CB481704F8C100A3039A /* ribbon_bonus@2x.png in Resources */,
+				9E1D61FC17051AC70064FAE5 /* FacebookSDKResources.bundle in Resources */,
+				9E3A344D17062749002B6C15 /* ExploreViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,6 +894,7 @@
 				9E85A4D016E48D93001D7C91 /* ShareViewController.m in Sources */,
 				9EF1ECDD16ED1563003219FA /* MGInstagram.m in Sources */,
 				9E27946B16F67C93009142F1 /* Appirater.m in Sources */,
+				9E3A344C17062749002B6C15 /* ExploreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,7 +981,7 @@
 		9E0052981697CB9D00A4983D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bobby Ren (UQA7D88UV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Camera Framework App\"",
@@ -981,8 +999,8 @@
 					"\"$(SRCROOT)/Camera Framework App/Flurry\"",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
-				PRODUCT_NAME = BoothZilla;
-				PROVISIONING_PROFILE = "A81A7BD0-4E71-47AA-9554-8C5B383C3E7A";
+				PRODUCT_NAME = FaceFXCam;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1008,8 +1026,8 @@
 					"\"$(SRCROOT)/Camera Framework App/Flurry\"",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
-				PRODUCT_NAME = BoothZilla;
-				PROVISIONING_PROFILE = "A81A7BD0-4E71-47AA-9554-8C5B383C3E7A";
+				PRODUCT_NAME = FaceFXCam;
+				PROVISIONING_PROFILE = "B476373F-323A-4391-909E-BA747AF7104C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

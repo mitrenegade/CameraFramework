@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "MGInstagram.h"
 #import "Flurry.h"
+#import "Constants.h"
 
 @implementation StickerPanelViewController
 
@@ -137,7 +138,7 @@ static AppDelegate * appDelegate;
     }
     else if (stickerCollection == STICKER_COLLECTION_MYSTERY) {
         stickerFilenames = @[STIX_FILENAMES_MYSTERY];
-        [collectionName setImage:[UIImage imageNamed:@"ribbon_mystery"]];
+        [collectionName setImage:[UIImage imageNamed:@"ribbon_bonus"]];
     }
     
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"Stickers" ofType:@"bundle"];
@@ -213,19 +214,27 @@ static AppDelegate * appDelegate;
     UIButton * button = (UIButton*)sender;
     if (button == buttonHair) {
         stickerCollection = STICKER_COLLECTION_HAIR;
+#if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Hair", @"CollectionName", nil]];
+#endif
     }
     else if (button == buttonGlasses) {
         stickerCollection = STICKER_COLLECTION_GLASSES;
+#if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Glasses", @"CollectionName", nil]];
+#endif
     }
     else if (button == buttonStache) {
         stickerCollection = STICKER_COLLECTION_STACHE;
+#if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Stache", @"CollectionName", nil]];
+#endif
     }
     else if (button == buttonMystery) {
         stickerCollection = STICKER_COLLECTION_MYSTERY;
+#if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Mystery", @"CollectionName", nil]];
+#endif
     }
     [self togglePanel:YES];
 }
@@ -290,8 +299,9 @@ static AppDelegate * appDelegate;
 -(IBAction)didClickSave:(id)sender {
     NSMutableArray * auxStixViews = [stixView auxStixViews];
     int ct = [auxStixViews count];
+#if !TESTING
     [Flurry logEvent:@"SAVE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:ct], @"NumberOfStixAdded", nil]];
-
+#endif
     // burn all stix into stixLayer image
     if (!didBurnImage) {
         //UIImage * stixLayer = [self stixLayerFromAuxStix:auxStixViews];
@@ -323,10 +333,12 @@ static AppDelegate * appDelegate;
         [parseTag uploadWithBlock:^(NSString *newObjectID, BOOL didUploadImage) {
             if (didUploadImage) {
                 NSLog(@"Uploaded new picture object to Parse with new objectID: %@...still uploading images to AWS in background", newObjectID);
-                
                 parseObjectID = newObjectID;
                 if (facebookShareCallback) {
                     [self performSelector:facebookShareCallback];
+                }
+                if (twitterShareCallback) {
+                    [self performSelector:twitterShareCallback];
                 }
             }
             else
@@ -464,6 +476,7 @@ static AppDelegate * appDelegate;
 
 -(void)didClickFacebookShare {
     // facebook
+    NSLog(@"Did click facebook share");
     if (alreadySharedToFacebook) {
         self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         progress.mode = MBProgressHUDModeText;
@@ -471,7 +484,12 @@ static AppDelegate * appDelegate;
         [self.progress hide:YES afterDelay:1.5];
         return;
     }
+    self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.progress setLabelText:@"Uploading to Facebook..."];
+    
+#if !TESTING
     [Flurry logEvent:@"SHARE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Facebook", @"Channel", nil]];
+#endif
     FBHelper * fbHelper = [[FBHelper alloc] init];
     fbHelper.delegate = self;
     [fbHelper openSession];
@@ -480,17 +498,29 @@ static AppDelegate * appDelegate;
 -(void)didOpenSession {
     NSLog(@"Did open session!");
     
-    self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.progress setLabelText:@"Uploading to Facebook..."];
-    
     if (parseObjectID) {
         // object has been uploaded to parse thus an image ID has been generated
-        [self publishStory];
+        //[self publishStory];
+        // there's a facebook race condition where you have to request basic read permissions first, then request publish permissions.
+        // if we don't delay, then the read permissions get requested first even though it is in the completion block. and nothing good happens.
+        [self performSelector:@selector(prePublishStory) withObject:nil afterDelay:1.5];
     }
     else {
         // parse has not created the object ID, so just set a callback to come back
-        facebookShareCallback = @selector(publishStory);
+        facebookShareCallback = @selector(prePublishStory);
     }
+}
+
+-(void)prePublishStory {
+    NSLog(@"Prepublish!");
+    FBHelper * fbHelper = [[FBHelper alloc] init];
+    fbHelper.delegate = self;
+    [fbHelper requestPublish];
+}
+
+-(void)didGetPublishPermissions {
+    NSLog(@"Publishing story");
+    [self publishStory];
 }
 
 - (void)publishStory
@@ -498,10 +528,12 @@ static AppDelegate * appDelegate;
     NSLog(@"Upload to facebook publishing story");
     NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", IMAGE_URL_BUCKET, parseObjectID];
     NSString * thumbLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", THUMBNAIL_IMAGE_URL_BUCKET, parseObjectID];
-    NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:imageLink, @"link",
+    NSString * storeLink = @"http://bit.ly/ZIGKqr";
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:storeLink, @"link",
                                     thumbLink, @"picture",
-                                    @"My BoothZilla Pic", @"name",
-                                    @"Just messing around with the ol' camera. Check out BoothZilla!", @"caption",
+                                    //@"My Face Fx Pic", @"name",
+                                    @"My Face Fx Pic: %@", @"name",
+                                    [NSString stringWithFormat:@"3 in 1 photobooth! #facefxcam %@", thumbLink], @"caption",
                                     //                                        @"Description", @"description",
                                     nil];
     [FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST"
@@ -510,33 +542,34 @@ static AppDelegate * appDelegate;
                                               NSError *error) {
                               NSString *alertText;
                               if (error) {
-                                  alertText = [NSString stringWithFormat:
-                                               @"error: domain = %@, code = %d",
-                                               error.domain, error.code];
-                              } else {
-                                  alertText = [NSString stringWithFormat:
-                                               @"Posted action, id: %@",
-                                               [result objectForKey:@"id"]];
+                                  NSDictionary * userInfo = error.userInfo;
+                                  NSDictionary * response = [userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"];
+                                  NSDictionary * body = [response objectForKey:@"body"];
+                                  NSNumber * code = [response objectForKey:@"code"];
+                                  NSLog(@"Error code: %@", code);
+                                  if ([code intValue] == 403) {
+                                      NSLog(@"Need reauth!");
+                                  }
+                                  FBHelper * fbHelper = [[FBHelper alloc] init];
+                                  fbHelper.delegate = self;
+                                  [fbHelper openSession];
                               }
-                              // Show the result in an alert
-                              /*
-                               [[[UIAlertView alloc] initWithTitle:@"Result"
-                               message:alertText
-                               delegate:self
-                               cancelButtonTitle:@"OK!"
-                               otherButtonTitles:nil]
-                               show];
-                               */
-                              progress.mode = MBProgressHUDModeText;
-                              [self.progress setLabelText:@"Done!"];
-                              [self.progress hide:YES afterDelay:1.5];
-                              //[delegate performSelector:@selector(closeStixPanel) withObject:nil afterDelay:1.5];
-                              alreadySharedToFacebook = YES;
-                              
-                              [Flurry logEvent:@"SHARE COMPLETED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Facebook", @"Channel", nil]];
-
-                              [appDelegate incrementMysteryPackCount];
+                              else {
+                                  progress.mode = MBProgressHUDModeText;
+                                  [self.progress setLabelText:@"Done!"];
+                                  [self.progress hide:YES afterDelay:1.5];
+                                  //[delegate performSelector:@selector(closeStixPanel) withObject:nil afterDelay:1.5];
+                                  alreadySharedToFacebook = YES;
+#if !TESTING
+                                  [Flurry logEvent:@"SHARE COMPLETED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Facebook", @"Channel", nil]];
+#endif
+                                  [appDelegate incrementMysteryPackCount];
+                              }
                           }];
+}
+
+-(void)didFailOpen {
+    [self.progress hide:YES];
 }
 
 -(void)openShareView {
@@ -578,8 +611,9 @@ static AppDelegate * appDelegate;
         return;
     }
     
+#if !TESTING
     [Flurry logEvent:@"SHARE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Twitter", @"Channel", nil]];
-
+#endif
     self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.progress setLabelText:@"Uploading to Twitter..."];
     
@@ -600,7 +634,7 @@ static AppDelegate * appDelegate;
                     // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
                     if ([accountsArray count] == 1) {
                         // Grab the initial Twitter account to tweet from.
-                        ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+                        twitterAccount = [accountsArray objectAtIndex:0];
                         NSError * twitError;
                         
                         // save twitter choice
@@ -611,7 +645,7 @@ static AppDelegate * appDelegate;
                         // Create a request, which in this example, posts a tweet to the user's timeline.
                         // This example uses version 1 of the Twitter API.
                         // This may need to be changed to whichever version is currently appropriate.
-                        [self iosSendTweet:twitterAccount];
+                        [self iosSendTweet];
                     }
                     else if ([accountsArray count] > 1) {
                         NSError * twitError;
@@ -620,11 +654,12 @@ static AppDelegate * appDelegate;
                         BOOL found = NO;
                         if ([userDefaults objectForKey:@"TwitterPreferredHandle"] != nil) {
                             NSString * preferredAccount = [userDefaults objectForKey:@"TwitterPreferredHandle"];
-                            for (ACAccount * twitterAccount in accountsArray) {
-                                NSLog(@"Searching for preferred twitter handle %@: current %@", preferredAccount, twitterAccount.identifier);
-                                if ([twitterAccount.identifier isEqualToString:preferredAccount]) {
+                            for (ACAccount * ac in accountsArray) {
+                                NSLog(@"Searching for preferred twitter handle %@: current %@", preferredAccount, ac.identifier);
+                                if ([ac.identifier isEqualToString:preferredAccount]) {
                                     found = YES;
-                                    foundAccount = twitterAccount;
+                                    foundAccount = ac;
+                                    twitterAccount = foundAccount;
                                     break;
                                 }
                             }
@@ -643,13 +678,19 @@ static AppDelegate * appDelegate;
                             // show from our table view (pops up in the middle of the table)
                         }
                         else {
-                            [self iosSendTweet:foundAccount];
+                            if (!parseObjectID) {
+                                NSLog(@"No object id yet! set a callback!");
+                                twitterShareCallback = @selector(iosSendTweet);
+                            }
+                            else {
+                                [self iosSendTweet];
+                            }
                         }
                     }
                 }
                 else {
                     progress.mode = MBProgressHUDModeText;
-                    [self.progress setLabelText:@"Could not access your Twitter account"];
+                    [self.progress setLabelText:@"Could not access Twitter accounts!"];
                     [self.progress hide:YES afterDelay:1.5];
                 }
             }];
@@ -659,7 +700,9 @@ static AppDelegate * appDelegate;
             progress.mode = MBProgressHUDModeText;
             [self.progress setLabelText:@"Please download the Twitter app or register your account in the iPhone Settings"];
             [self.progress hide:YES afterDelay:3];
+#if !TESTING
             [Flurry logEvent:@"SHARE INCOMPLETE" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Twitter", @"Channel", nil]];
+#endif
         }
         
     }
@@ -672,20 +715,20 @@ static AppDelegate * appDelegate;
         [self.progress hide:YES afterDelay:3];
     }
     else {
-        ACAccount *twitterAccount = [accountsArray objectAtIndex:(buttonIndex - 1)];
+        twitterAccount = [accountsArray objectAtIndex:(buttonIndex - 1)];
         
         // save twitter choice
         NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:twitterAccount.identifier forKey:@"TwitterPreferredHandle"];
         [userDefaults synchronize];
         NSLog(@"Setting default twitter account to %@", twitterAccount.identifier);
-        [self iosSendTweet:twitterAccount];
+        [self iosSendTweet];
     }
 }
 
--(void)iosSendTweet:(ACAccount *)twitterAccount {
-    NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/com.neroh.quickstickr.parse.tags/%@", parseObjectID];
-    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"This is me after too many drinks %@", imageLink] forKey:@"status"] requestMethod:TWRequestMethodPOST];
+-(void)iosSendTweet {
+    NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", IMAGE_URL_BUCKET, parseObjectID];
+    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"This is me after too many drinks %@ #facefxcam http://bit.ly/ZIGKqr", imageLink] forKey:@"status"] requestMethod:TWRequestMethodPOST];
     
     // Set the account used to post the tweet.
     [postRequest setAccount:twitterAccount];
@@ -701,7 +744,9 @@ static AppDelegate * appDelegate;
             alreadySharedToTwitter = YES;
             [appDelegate incrementMysteryPackCount];
 
+#if !TESTING
             [Flurry logEvent:@"SHARE COMPLETED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Twitter", @"Channel", nil]];
+#endif
         });
     }];
 }
@@ -713,14 +758,10 @@ static AppDelegate * appDelegate;
 #pragma mark instagram
 
 -(void)didClickInstagramShare {
-#if 0
-    // use api...login in api but cannot post using api
-    [appDelegate instagramAuth];
-#else
+#if !TESTING
     [Flurry logEvent:@"SHARE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Instagram", @"Channel", nil]];
-
-    [self didFinishInstagramAuth];
 #endif
+    [self didFinishInstagramAuth];
 }
 
 -(void)didFinishInstagramAuth {
@@ -731,14 +772,23 @@ static AppDelegate * appDelegate;
         [self.progress setLabelText:@"Please download Instagram!"];
         [self.progress hide:YES afterDelay:1.5];
 
+#if !TESTING
         [Flurry logEvent:@"SHARE INCOMPLETE" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Instagram", @"Channel", nil]];
+#endif
     }
     else {
         self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.progress setLabelText:@"Opening in Instagram..."];
         [self.progress hide:YES afterDelay:1.5];
-        [MGInstagram postImage:self.burnedImage withCaption:@"photo taken with boothzilla" inView:self.view];
+        [MGInstagram postImage:self.burnedImage withCaption:@"#facefxcam 3 in 1 photobooth: http://bit.ly/ZIGKqr" inView:self.view];
+#if !TESTING
         [Flurry logEvent:@"SHARE COMPLETED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Instagram", @"Channel", nil]];
+#endif
+        // for instagram, only give credit on the first time
+        if (!alreadySharedToInstagram) {
+            [appDelegate incrementMysteryPackCount];
+            alreadySharedToInstagram = YES;
+        }
     }
 }
 
@@ -755,7 +805,9 @@ static AppDelegate * appDelegate;
         isDisplayingMysteryMessage = NO;
     }] show];
 
+#if !TESTING
     [Flurry logEvent:@"MYSTERY PACK UNLOCKED"];
+#endif
 }
 
 @end

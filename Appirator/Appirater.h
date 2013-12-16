@@ -47,7 +47,7 @@ extern NSString *const kAppiraterReminderRequestDate;
 /*
  Place your Apple generated software id here.
  */
-#define APPIRATER_APP_ID				520841261 // NOW SET IN Stixx-info.plist
+#define APPIRATER_APP_ID				622947617 // NOW SET IN Stixx-info.plist
 
 /*
  Your app's name.
@@ -126,7 +126,7 @@ extern NSString *const kAppiraterReminderRequestDate;
  'YES' will show the Appirater alert everytime. Useful for testing how your message
  looks and making sure the link to your app's review page works.
  */
-#define APPIRATER_DEBUG				YES
+#define APPIRATER_DEBUG				NO
 
 @interface Appirater : NSObject <UIAlertViewDelegate> {
 

@@ -8,6 +8,8 @@
 
 #import "ShareViewController.h"
 #import "AppDelegate.h"
+#import "UIAlertView+MKBlockAdditions.h"
+#import "Appirater.h"
 
 @interface ShareViewController ()
 
@@ -31,6 +33,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    // check for defaults
+    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([userDefaults objectForKey:@"FirstTimeSaveMessageDone"] == nil) {
+        [[UIAlertView alertViewWithTitle:@"Earn a bonus!" message:@"Share three times on Facebook, Twitter or Instagram to gain a Mystery Pack!" cancelButtonTitle:@"Go!" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
+        } onCancel:^{
+            [userDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"FirstTimeSaveMessageDone"];
+        }] show];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,6 +51,7 @@
 
 -(IBAction)didClickClose:(id)sender {
     //[self dismissModalViewControllerAnimated:YES];
+    [Appirater userDidSignificantEvent:YES];
     [delegate closeShareView];
 }
 

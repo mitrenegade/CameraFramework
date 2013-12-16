@@ -7,6 +7,7 @@
 //
 
 #import "ParseTag.h"
+#import "Flurry.h"
 
 @implementation ParseTag
 
@@ -37,6 +38,8 @@
     //[newObject setObject:UIImagePNGRepresentation(stixLayer) forKey:@"stixLayerData"];
     if (username)
         [newObject setObject:username forKey:@"username"];
+	NSString *version =  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    [newObject setObject:version forKey:@"version"];
     
     return newObject;
 }
@@ -133,65 +136,37 @@
 
         // do the rest in background
         if (self.thumbnail) {
+            [Flurry logEvent:@"AWS THUMBNAIL UPLOAD" timed:YES];
             [AWSHelper uploadImage:self.thumbnail withName:objectID toBucket:THUMBNAIL_IMAGE_URL_BUCKET withCallback:^(NSString * newURL) {
                 NSLog(@"Thumbnail done!");
                 uploadDidComplete(objectID, YES);
+                [Flurry endTimedEvent:@"AWS THUMBNAIL UPLOAD" withParameters:nil];
             }];
         }
         else
             uploadDidComplete(objectID, YES);
+        
+        [Flurry logEvent:@"AWS IMAGE UPLOAD" timed:YES];
         [AWSHelper uploadImage:self.image withName:objectID toBucket:IMAGE_URL_BUCKET withCallback:^(NSString * newURL) {
+            [Flurry endTimedEvent:@"AWS IMAGE UPLOAD" withParameters:nil];
             // do not save imageURL - this is generated from bucket and objectID each time
-            /*
-             NSLog(@"Image for object %@ saved at %@", objectID, newURL);
-            self.imageURL = newURL;
-            NSString * key = @"imageURL";
-            [ParseHelper updateParseObject:pfObject withNewValue:newURL forKey:key withBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    NSLog(@"Updated object with objectID %@ with new value %@ for key %@", pfObject.objectId, newURL, key);
-                }
-                else {
-                    NSLog(@"Update parse object for objectID %@ with newValue %@ could not complete! Error: %@", pfObject.objectId, newURL, error.description);
-                }
-            }];
-             */
         }];
+        
         if (self.highResImage) {
+            [Flurry logEvent:@"AWS HIGHRES UPLOAD" timed:YES];
             [AWSHelper uploadImage:self.highResImage withName:objectID toBucket:HIRES_IMAGE_URL_BUCKET withCallback:^(NSString * newURL) {
-                // do not save imageURL - this is generated from bucket and objectID each time
-                /*
-                NSLog(@"High res image saved at %@", newURL);
-                self.highResImageURL = newURL;
-                NSString * key = @"highResImageURL";
-                [ParseHelper updateParseObject:pfObject withNewValue:newURL forKey:key withBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        NSLog(@"Updated object with objectID %@ with new value %@ for key %@", pfObject.objectId, newURL, key);
-                    }
-                    else {
-                        NSLog(@"Hires image for objectID %@ could not be uploaded", pfObject.objectId);
-                    }
-                }];
-                 */
+                [Flurry endTimedEvent:@"AWS HIGHRES UPLOAD" withParameters:nil];
             }];
         }
+        /*
         if (self.stixLayer) {
+            [Flurry logEvent:@"AWS STIXLAYER UPLOAD" timed:YES];
             [AWSHelper uploadImage:self.stixLayer withName:objectID toBucket:STIXLAYER_IMAGE_URL_BUCKET withCallback:^(NSString * newURL) {
+                [Flurry endTimedEvent:@"AWS STIXLAYER UPLOAD" withParameters:nil];
                 // do not save imageURL - this is generated from bucket and objectID each time
-                /*
-                NSLog(@"Stix layer saved at %@", newURL);
-                self.stixLayerURL = newURL;
-                NSString * key = @"stixLayerURL";
-                [ParseHelper updateParseObject:pfObject withNewValue:newURL forKey:key withBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        NSLog(@"Updated object with objectID %@ with new value %@ for key %@", pfObject.objectId, newURL, key);
-                    }
-                    else {
-                        NSLog(@"Stix layer for objectID %@ could not be uploaded", pfObject.objectId);
-                    }
-                }];
-                 */
             }];
         }
+         */
     }];
 }
 

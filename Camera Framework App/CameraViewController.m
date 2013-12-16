@@ -9,6 +9,7 @@
 #import "CameraViewController.h"
 #import "UIActionSheet+MKBlockAdditions.h"
 #import "Appirater.h"
+#import "ExploreViewController.h"
 
 @interface CameraViewController ()
 
@@ -54,6 +55,14 @@
     BOOL firstTimeInstructionsClosed = [defaults boolForKey:@"firstTimeInstructions"];
     if (firstTimeInstructionsClosed)
         [self.instructionsView setHidden:YES];;
+    
+#if TESTING
+    UIButton * exploreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
+    [exploreButton setBackgroundColor:[UIColor blueColor]];
+    [exploreButton setTitle:@"Explore" forState:UIControlStateNormal];
+    [self.view addSubview:exploreButton];
+    [exploreButton addTarget:self action:@selector(didClickExplore:) forControlEvents:UIControlEventTouchUpInside];
+#endif
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -379,5 +388,15 @@
 -(void)closeStixPanel {
     [self dismissModalViewControllerAnimated:YES];
     [Appirater userDidSignificantEvent:YES];
+}
+
+#pragma mark test explore mode
+-(void)didClickExplore:(id)sender {
+#if TESTING
+    ExploreViewController * explore = [[ExploreViewController alloc] init];
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:explore];
+    [explore.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
+    [self presentModalViewController:nav animated:YES];
+#endif
 }
 @end
