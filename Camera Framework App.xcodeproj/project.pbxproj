@@ -35,16 +35,11 @@
 		9E0D286D16B5E6BA0036792B /* takephoto_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D285D16B5E6BA0036792B /* takephoto_btn@2x.png */; };
 		9E0D288816B5F4B30036792B /* StickerPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0D288616B5F4B20036792B /* StickerPanelViewController.m */; };
 		9E0D28AE16B5F7C60036792B /* Stickers.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E0D28AD16B5F7C60036792B /* Stickers.bundle */; };
-		9E1D61FA17051AAB0064FAE5 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1D61F917051AAB0064FAE5 /* FacebookSDK.framework */; };
-		9E1D61FC17051AC70064FAE5 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E1D61FB17051AC70064FAE5 /* FacebookSDKResources.bundle */; };
 		9E27946B16F67C93009142F1 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E27946A16F67C93009142F1 /* Appirater.m */; };
 		9E3A344C17062749002B6C15 /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3A344A17062748002B6C15 /* ExploreViewController.m */; };
 		9E3A344D17062749002B6C15 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3A344B17062748002B6C15 /* ExploreViewController.xib */; };
 		9E3BB5B516B0DF5100467266 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5B316B0DF5000467266 /* ProfileViewController.m */; };
 		9E3BB5B616B0DF5100467266 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3BB5B416B0DF5000467266 /* ProfileViewController.xib */; };
-		9E3BB5C416B0E06500467266 /* AsyncImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5BE16B0E06500467266 /* AsyncImageUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9E3BB5C516B0E06500467266 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5C016B0E06500467266 /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9E3BB5C616B0E06500467266 /* AWSHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5C216B0E06500467266 /* AWSHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9E3BB5CB16B0E14000467266 /* GenericRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5C916B0E14000467266 /* GenericRefreshViewController.m */; };
 		9E3BB5CC16B0E14000467266 /* GenericRefreshViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3BB5CA16B0E14000467266 /* GenericRefreshViewController.xib */; };
 		9E3BB5CF16B0E47700467266 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BB5CE16B0E47700467266 /* UserInfo.m */; };
@@ -90,6 +85,12 @@
 		9E85A4DB16E48DDA001D7C91 /* share_instagram@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E85A4D516E48DD8001D7C91 /* share_instagram@2x.png */; };
 		9E85A4DC16E48DDA001D7C91 /* share_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E85A4D616E48DD9001D7C91 /* share_twitter.png */; };
 		9E85A4DD16E48DDA001D7C91 /* share_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E85A4D716E48DD9001D7C91 /* share_twitter@2x.png */; };
+		9E85FBB0185FE91E0048B66E /* AWSHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E85FBAF185FE91E0048B66E /* AWSHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E85FBDE185FF0A10048B66E /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E85FBDD185FF0A10048B66E /* FacebookSDK.framework */; };
+		9E85FBE2185FF0F00048B66E /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E85FBE1185FF0F00048B66E /* AWSiOSSDK.framework */; };
+		9E85FBE7185FF1670048B66E /* AsyncImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E85FBE4185FF1670048B66E /* AsyncImageUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E85FBE8185FF1670048B66E /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E85FBE6185FF1670048B66E /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E85FBEA185FF1DF0048B66E /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E85FBE9185FF1DF0048B66E /* FBUserSettingsViewResources.bundle */; };
 		9E9506FF16BF8B0F005C8BC9 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9506FE16BF8B0F005C8BC9 /* Tag.m */; };
 		9E9EB2EE16B25DE500693867 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9EB2ED16B25DE500693867 /* CaptureSessionManager.m */; };
 		9E9EB2F216B25E2100693867 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9EB2F016B25E2100693867 /* CameraViewController.m */; };
@@ -110,7 +111,6 @@
 		9EAD9C0416BE1AF100362D17 /* flash_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0116BE1AF100362D17 /* flash_off.png */; };
 		9EAD9C0516BE1AF100362D17 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0216BE1AF100362D17 /* flash.png */; };
 		9EAD9C0716BE1AFA00362D17 /* switch_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EAD9C0616BE1AFA00362D17 /* switch_camera.png */; };
-		9EC0835116CEFFD700C7AEE4 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC0835016CEFFD600C7AEE4 /* AWSiOSSDK.framework */; };
 		9EC0835B16CF02F400C7AEE4 /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0835A16CF02F400C7AEE4 /* FBHelper.m */; };
 		9EC0836516CF0BBD00C7AEE4 /* photo 2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 9EC0836416CF0BBD00C7AEE4 /* photo 2.JPG */; };
 		9ECE137B1697D3C0000055ED /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE13761697D3C0000055ED /* EmailLoginViewController.m */; };
@@ -192,8 +192,6 @@
 		9E0D288516B5F4B20036792B /* StickerPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickerPanelViewController.h; sourceTree = "<group>"; };
 		9E0D288616B5F4B20036792B /* StickerPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickerPanelViewController.m; sourceTree = "<group>"; };
 		9E0D28AD16B5F7C60036792B /* Stickers.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Stickers.bundle; sourceTree = "<group>"; };
-		9E1D61F917051AAB0064FAE5 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK/build/FacebookSDK.framework; sourceTree = "<group>"; };
-		9E1D61FB17051AC70064FAE5 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../FacebookSDK/build/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		9E27946916F67C93009142F1 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		9E27946A16F67C93009142F1 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		9E3A344917062748002B6C15 /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
@@ -259,6 +257,15 @@
 		9E85A4D516E48DD8001D7C91 /* share_instagram@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_instagram@2x.png"; sourceTree = "<group>"; };
 		9E85A4D616E48DD9001D7C91 /* share_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_twitter.png; sourceTree = "<group>"; };
 		9E85A4D716E48DD9001D7C91 /* share_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_twitter@2x.png"; sourceTree = "<group>"; };
+		9E85FBAE185FE91E0048B66E /* AWSHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWSHelper.h; sourceTree = "<group>"; };
+		9E85FBAF185FE91E0048B66E /* AWSHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWSHelper.m; sourceTree = "<group>"; };
+		9E85FBDD185FF0A10048B66E /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "Camera Framework App/FacebookSDK.framework"; sourceTree = "<group>"; };
+		9E85FBE1185FF0F00048B66E /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSiOSSDK.framework; path = "Camera Framework App/AWSiOSSDK.framework"; sourceTree = "<group>"; };
+		9E85FBE3185FF1670048B66E /* AsyncImageUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageUploader.h; sourceTree = "<group>"; };
+		9E85FBE4185FF1670048B66E /* AsyncImageUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageUploader.m; sourceTree = "<group>"; };
+		9E85FBE5185FF1670048B66E /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		9E85FBE6185FF1670048B66E /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		9E85FBE9185FF1DF0048B66E /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = "Camera Framework App/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle"; sourceTree = "<group>"; };
 		9E9506FD16BF8B0E005C8BC9 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		9E9506FE16BF8B0F005C8BC9 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		9E9EB2EC16B25DE500693867 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
@@ -289,7 +296,6 @@
 		9EAD9C0116BE1AF100362D17 /* flash_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_off.png; sourceTree = "<group>"; };
 		9EAD9C0216BE1AF100362D17 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
 		9EAD9C0616BE1AFA00362D17 /* switch_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_camera.png; sourceTree = "<group>"; };
-		9EC0835016CEFFD600C7AEE4 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSiOSSDK.framework; path = "../aws-ios-sdk-1.4.4/AWSiOSSDK.framework"; sourceTree = "<group>"; };
 		9EC0835916CF02F400C7AEE4 /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
 		9EC0835A16CF02F400C7AEE4 /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
 		9EC0836416CF0BBD00C7AEE4 /* photo 2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo 2.JPG"; sourceTree = "<group>"; };
@@ -358,6 +364,7 @@
 				9E9EB2FB16B2610700693867 /* CoreMedia.framework in Frameworks */,
 				9E9EB2F916B260FB00693867 /* AVFoundation.framework in Frameworks */,
 				9E9EB2F716B260F500693867 /* ImageIO.framework in Frameworks */,
+				9E85FBE2185FF0F00048B66E /* AWSiOSSDK.framework in Frameworks */,
 				9E9EB2F516B260EA00693867 /* CoreVideo.framework in Frameworks */,
 				9ECE139D1697DAAC000055ED /* Security.framework in Frameworks */,
 				9ECE139F1697DAAC000055ED /* StoreKit.framework in Frameworks */,
@@ -373,10 +380,9 @@
 				9E00526C1697CB9D00A4983D /* Foundation.framework in Frameworks */,
 				9E00526E1697CB9D00A4983D /* CoreGraphics.framework in Frameworks */,
 				9E00529B1697CC8000A4983D /* Parse.framework in Frameworks */,
-				9EC0835116CEFFD700C7AEE4 /* AWSiOSSDK.framework in Frameworks */,
+				9E85FBDE185FF0A10048B66E /* FacebookSDK.framework in Frameworks */,
 				9E761E2916F64E7400AEF2F9 /* libFlurry.a in Frameworks */,
 				9E761E4216F6661D00AEF2F9 /* Crashlytics.framework in Frameworks */,
-				9E1D61FA17051AAB0064FAE5 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,13 +392,13 @@
 		9E00525A1697CB9C00A4983D = {
 			isa = PBXGroup;
 			children = (
-				9E1D61FB17051AC70064FAE5 /* FacebookSDKResources.bundle */,
-				9E1D61F917051AAB0064FAE5 /* FacebookSDK.framework */,
+				9E85FBE9185FF1DF0048B66E /* FBUserSettingsViewResources.bundle */,
+				9E85FBDD185FF0A10048B66E /* FacebookSDK.framework */,
 				9E27946816F67C93009142F1 /* Appirator */,
 				9E761E4116F6661D00AEF2F9 /* Crashlytics.framework */,
 				9E67421216E9F9CE00748BCD /* Twitter.framework */,
-				9EC0835016CEFFD600C7AEE4 /* AWSiOSSDK.framework */,
 				9EE927F616C88B2C005B4CCC /* StickerApp114.png */,
+				9E85FBE1185FF0F00048B66E /* AWSiOSSDK.framework */,
 				9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */,
 				9EE927F216C88A92005B4CCC /* StickerApp57.png */,
 				9EE927F016C88A1A005B4CCC /* Default@2x.png */,
@@ -644,6 +650,12 @@
 		9E9EB2EB16B25D8400693867 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				9E85FBAE185FE91E0048B66E /* AWSHelper.h */,
+				9E85FBAF185FE91E0048B66E /* AWSHelper.m */,
+				9E85FBE3185FF1670048B66E /* AsyncImageUploader.h */,
+				9E85FBE4185FF1670048B66E /* AsyncImageUploader.m */,
+				9E85FBE5185FF1670048B66E /* AsyncImageView.h */,
+				9E85FBE6185FF1670048B66E /* AsyncImageView.m */,
 				9EF1ECDB16ED1563003219FA /* MGInstagram.h */,
 				9EF1ECDC16ED1563003219FA /* MGInstagram.m */,
 				9E3BB5DE16B0EB4600467266 /* MBProgressHUD.h */,
@@ -772,6 +784,7 @@
 				9E3BB5CC16B0E14000467266 /* GenericRefreshViewController.xib in Resources */,
 				9E9EB2F316B25E2100693867 /* CameraViewController.xib in Resources */,
 				9E0D286816B5E6BA0036792B /* share_slider.png in Resources */,
+				9E85FBEA185FF1DF0048B66E /* FBUserSettingsViewResources.bundle in Resources */,
 				9E0D286916B5E6BA0036792B /* share_slider@2x.png in Resources */,
 				9E0D286A16B5E6BA0036792B /* takephoto_bar.png in Resources */,
 				9E0D286B16B5E6BA0036792B /* takephoto_bar@2x.png in Resources */,
@@ -826,7 +839,6 @@
 				9E761E2016F63CA700AEF2F9 /* delete@2x.png in Resources */,
 				9EE0CB471704F8C100A3039A /* ribbon_bonus.png in Resources */,
 				9EE0CB481704F8C100A3039A /* ribbon_bonus@2x.png in Resources */,
-				9E1D61FC17051AC70064FAE5 /* FacebookSDKResources.bundle in Resources */,
 				9E3A344D17062749002B6C15 /* ExploreViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -868,18 +880,17 @@
 				9ED0BF1C16992D110059D8F3 /* NSObject+MKBlockAdditions.m in Sources */,
 				9ED0BF1D16992D110059D8F3 /* UIActionSheet+MKBlockAdditions.m in Sources */,
 				9ED0BF1E16992D110059D8F3 /* UIAlertView+MKBlockAdditions.m in Sources */,
+				9E85FBE7185FF1670048B66E /* AsyncImageUploader.m in Sources */,
 				9ED0BF231699305C0059D8F3 /* LoginViewController.m in Sources */,
 				9ED0BF28169931EA0059D8F3 /* EmailSignupViewController.m in Sources */,
 				9E3BB5B516B0DF5100467266 /* ProfileViewController.m in Sources */,
-				9E3BB5C416B0E06500467266 /* AsyncImageUploader.m in Sources */,
-				9E3BB5C516B0E06500467266 /* AsyncImageView.m in Sources */,
-				9E3BB5C616B0E06500467266 /* AWSHelper.m in Sources */,
 				9E3BB5CB16B0E14000467266 /* GenericRefreshViewController.m in Sources */,
 				9E3BB5CF16B0E47700467266 /* UserInfo.m in Sources */,
 				9E3BB5DD16B0E8EC00467266 /* LoadingAnimationView.m in Sources */,
 				9E3BB5E016B0EB4800467266 /* MBProgressHUD.m in Sources */,
 				9E9EB2EE16B25DE500693867 /* CaptureSessionManager.m in Sources */,
 				9E9EB2F216B25E2100693867 /* CameraViewController.m in Sources */,
+				9E85FBE8185FF1670048B66E /* AsyncImageView.m in Sources */,
 				9EE7CE7F16BA1EF40053D78F /* JSONKit.m in Sources */,
 				9E0D288816B5F4B30036792B /* StickerPanelViewController.m in Sources */,
 				9EAD9BDB16BCC63B00362D17 /* StixView.m in Sources */,
@@ -891,6 +902,7 @@
 				9EAD9BFD16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				9E9506FF16BF8B0F005C8BC9 /* Tag.m in Sources */,
 				9EC0835B16CF02F400C7AEE4 /* FBHelper.m in Sources */,
+				9E85FBB0185FE91E0048B66E /* AWSHelper.m in Sources */,
 				9E85A4D016E48D93001D7C91 /* ShareViewController.m in Sources */,
 				9EF1ECDD16ED1563003219FA /* MGInstagram.m in Sources */,
 				9E27946B16F67C93009142F1 /* Appirater.m in Sources */,
@@ -984,11 +996,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Camera Framework App\"",
-					"\"$(SRCROOT)/../AWSLibs\"",
-					"\"$(SRCROOT)/../FacebookSDK/build\"",
-					"\"$(SRCROOT)/../aws-ios-sdk-1.4.4\"",
-					"\"$(SRCROOT)\"",
+					"\\\"$(SRCROOT)/Camera\\ Framework\\ App\\\"",
+					"\\\"$(SRCROOT)/../AWSLibs\\\"",
+					"\\\"$(SRCROOT)/../FacebookSDK/build\\\"",
+					"\\\"$(SRCROOT)/../aws-ios-sdk-1.4.4\\\"",
+					"$(SRCROOT)",
+					"/Users/mitrenegade12/Desktop/Projects/FaceFXCam/Camera\\ Framework\\ App",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera Framework App/Camera Framework App-Prefix.pch";
@@ -1011,11 +1024,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Bobby Ren (UQA7D88UV9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Camera Framework App\"",
-					"\"$(SRCROOT)/../AWSLibs\"",
-					"\"$(SRCROOT)/../FacebookSDK/build\"",
-					"\"$(SRCROOT)/../aws-ios-sdk-1.4.4\"",
-					"\"$(SRCROOT)\"",
+					"\\\"$(SRCROOT)/Camera\\ Framework\\ App\\\"",
+					"\\\"$(SRCROOT)/../AWSLibs\\\"",
+					"\\\"$(SRCROOT)/../FacebookSDK/build\\\"",
+					"\\\"$(SRCROOT)/../aws-ios-sdk-1.4.4\\\"",
+					"$(SRCROOT)",
+					"/Users/mitrenegade12/Desktop/Projects/FaceFXCam/Camera\\ Framework\\ App",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera Framework App/Camera Framework App-Prefix.pch";
