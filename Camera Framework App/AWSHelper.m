@@ -95,12 +95,18 @@ static S3ResponseHandler * s3ResponseHandler = nil;
             NSLog(@"Response: %@", response);
             NSString * url = [self getURLForKey:imageName inBucket:bucket];
             NSLog(@"URL: %@", url);
+
+            if (block)
+                block(url);
         }
         else {
             NSError * error = (NSError*) response;
             NSLog(@"Error: %@", error);
             // todo: handle typical error:
             // Error: AmazonServiceException { RequestId:B13EC740D9C486DA, ErrorCode:RequestTimeout, Message:Your socket connection to the server was not read from or written to within the timeout period. Idle connections will be closed. }
+
+            if (block)
+                block(nil);
         }
     }];
 }
