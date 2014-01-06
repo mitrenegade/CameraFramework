@@ -62,7 +62,7 @@
     NSString *bucketName = bucket; //[NSString stringWithFormat:@"s3-async-demo2-ios-for-%@", [AWS_ACCESS_KEY lowercaseString]];
     NSString *keyName    = imageName; //[NSString stringWithFormat:@"image%d", imageName];
     //NSString *filename   = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
-    NSData * data = UIImagePNGRepresentation(image);
+    NSData * data = UIImageJPEGRepresentation(image, .85);
     
     // Creates the Bucket to put the Object.
     S3CreateBucketResponse *createBucketResponse = [[AWSHelper s3] createBucketWithName:bucketName];

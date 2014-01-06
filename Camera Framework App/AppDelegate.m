@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "FirstViewController.h"
-#import "SecondViewController.h"
 #import <Parse/Parse.h>
 #import "ParseHelper.h"
 #import "PreviewController.h"

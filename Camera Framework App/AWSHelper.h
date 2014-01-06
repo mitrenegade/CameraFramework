@@ -19,10 +19,10 @@
 
 #define AWS_ACCESS_KEY @"AKIAITYWBOUSFNOLYMKQ"
 #define AWS_SECRET_KEY @"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"
-#define IMAGE_URL_BUCKET @"stix.parse.tags"
-#define HIRES_IMAGE_URL_BUCKET @"stix.parse.tags.highres"
-#define STIXLAYER_IMAGE_URL_BUCKET @"stix.parse.tags.stixlayer"
-#define THUMBNAIL_IMAGE_URL_BUCKET @"stix.parse.tags.thumbnail"
+//#define IMAGE_URL_BUCKET @"stix.parse.tags"
+//#define HIRES_IMAGE_URL_BUCKET @"stix.parse.tags.highres"
+//#define STIXLAYER_IMAGE_URL_BUCKET @"stix.parse.tags.stixlayer"
+//#define THUMBNAIL_IMAGE_URL_BUCKET @"stix.parse.tags.thumbnail"
 
 
 @interface AWSHelper : NSObject <AmazonServiceRequestDelegate>
