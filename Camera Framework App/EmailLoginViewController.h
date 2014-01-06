@@ -7,14 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParseHelper.h"
+#import "UserInfo.h"
 
-@interface EmailLoginViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate>
+@protocol EmailLoginDelegate <NSObject>
+
+-(void)didLoginPFUser:(PFUser *)user withUserInfo:(UserInfo*)userInfo;
+
+@end
+
+@interface EmailLoginViewController : UIViewController <UITextFieldDelegate, UINavigationControllerDelegate>
 {
-    NSMutableArray * inputFields;
-    
-    IBOutlet UITableView * tableView;
     IBOutlet UIButton * buttonLogin;
+    __weak IBOutlet UITextField *inputUsername;
+    __weak IBOutlet UITextField *inputPassword;
 }
+@property (nonatomic, weak) id delegate;
+
 -(IBAction)didClickLogin:(id)sender;
 
 @end

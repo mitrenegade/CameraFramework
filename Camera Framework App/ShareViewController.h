@@ -17,6 +17,7 @@
 -(void)closeShareView;
 -(void)didClickTwitterShare;
 -(void)didClickInstagramShare;
+-(void)didClickContactsShare;
 @end
 
 @interface ShareViewController : UIViewController
@@ -24,6 +25,7 @@
 @property (nonatomic, weak) IBOutlet UIButton * buttonInstagram;
 @property (nonatomic, weak) IBOutlet UIButton * buttonFacebook;
 @property (nonatomic, weak) IBOutlet UIButton * buttonTwitter;
+@property (nonatomic, weak) IBOutlet UIButton * buttonContacts;
 @property (nonatomic, weak) id delegate;
 
 -(IBAction)didClickShare:(id)sender;

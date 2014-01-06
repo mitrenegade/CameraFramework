@@ -13,6 +13,7 @@
 #import "ShareViewController.h"
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
+#import "EmailLoginViewController.h"
 
 #define STIX_PER_ROW 3
 #define STIX_SIZE 90
@@ -39,7 +40,7 @@ enum eStickerCollections {
 
 //typedef void (^userSelectionCallback)(NSString *);
 
-@interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate, StixViewDelegate, FBHelperDelegate, ShareViewDelegate, UIActionSheetDelegate>
+@interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate, StixViewDelegate, FBHelperDelegate, ShareViewDelegate, UIActionSheetDelegate, EmailLoginDelegate>
 {
     BOOL didInitializeImage; // because image is initialized on viewDidAppear
     BOOL didBurnImage; // whether image/stix was burned and uploaded to parse

@@ -17,7 +17,7 @@
 
 @implementation ShareViewController
 
-@synthesize buttonFacebook, buttonInstagram, buttonTwitter;
+@synthesize buttonFacebook, buttonInstagram, buttonTwitter, buttonContacts;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -65,6 +65,9 @@
     }
     else if (button == buttonTwitter) {
         [delegate didClickTwitterShare];
+    }
+    else if (button == buttonContacts) {
+        [delegate didClickContactsShare];
     }
 }
 

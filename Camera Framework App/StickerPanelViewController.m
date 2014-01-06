@@ -16,6 +16,8 @@
 #import "MGInstagram.h"
 #import "Flurry.h"
 #import "Constants.h"
+#import "ParseHelper.h"
+#import "EmailLoginViewController.h"
 
 @implementation StickerPanelViewController
 
@@ -810,5 +812,26 @@ static AppDelegate * appDelegate;
 #endif
 }
 
+#pragma mark Contacts share
+-(void)didClickContactsShare {
+    if ([PFUser currentUser]) {
+        NSLog(@"Logged in!");
+    }
+    else {
+        EmailLoginViewController *loginController = [[EmailLoginViewController alloc] init];
+        [loginController setDelegate:self];
+        
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginController];
+        [nav.navigationBar setTranslucent:NO];
+        [nav.navigationBar setBackgroundColor:[UIColor redColor]];
+
+        [self presentViewController:nav animated:YES completion:nil];
+        loginController.navigationController.navigationBar.tintColor = [UIColor redColor];
+    }
+}
+
+-(void)didLoginPFUser:(PFUser *)user withUserInfo:(UserInfo *)userInfo {
+    NSLog(@"Logged in");
+}
 @end
 

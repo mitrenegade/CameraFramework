@@ -42,6 +42,8 @@
 		9E761E2016F63CA700AEF2F9 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E761E1E16F63CA700AEF2F9 /* delete@2x.png */; };
 		9E761E2916F64E7400AEF2F9 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E761E2816F64E7400AEF2F9 /* libFlurry.a */; };
 		9E761E4216F6661D00AEF2F9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E761E4116F6661D00AEF2F9 /* Crashlytics.framework */; };
+		9E7E9077187B12B400AA53AC /* share_contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7E9075187B12B400AA53AC /* share_contacts.png */; };
+		9E7E9078187B12B400AA53AC /* share_contacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7E9076187B12B400AA53AC /* share_contacts@2x.png */; };
 		9E85A49816E4753C001D7C91 /* faceoverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E85A49616E4753C001D7C91 /* faceoverlay.png */; };
 		9E85A49916E4753C001D7C91 /* faceoverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E85A49716E4753C001D7C91 /* faceoverlay@2x.png */; };
 		9E85A49F16E4756F001D7C91 /* instruct_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E85A49B16E4756F001D7C91 /* instruct_01.png */; };
@@ -203,6 +205,8 @@
 		9E761E2716F64E7400AEF2F9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		9E761E2816F64E7400AEF2F9 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		9E761E4116F6661D00AEF2F9 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		9E7E9075187B12B400AA53AC /* share_contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_contacts.png; sourceTree = "<group>"; };
+		9E7E9076187B12B400AA53AC /* share_contacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_contacts@2x.png"; sourceTree = "<group>"; };
 		9E85A49616E4753C001D7C91 /* faceoverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faceoverlay.png; sourceTree = "<group>"; };
 		9E85A49716E4753C001D7C91 /* faceoverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faceoverlay@2x.png"; sourceTree = "<group>"; };
 		9E85A49B16E4756F001D7C91 /* instruct_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instruct_01.png; sourceTree = "<group>"; };
@@ -522,6 +526,8 @@
 				9E85A4D516E48DD8001D7C91 /* share_instagram@2x.png */,
 				9E85A4D616E48DD9001D7C91 /* share_twitter.png */,
 				9E85A4D716E48DD9001D7C91 /* share_twitter@2x.png */,
+				9E7E9075187B12B400AA53AC /* share_contacts.png */,
+				9E7E9076187B12B400AA53AC /* share_contacts@2x.png */,
 				9E85A4BD16E4780D001D7C91 /* ribbon_glasses.png */,
 				9E85A4BE16E4780D001D7C91 /* ribbon_glasses@2x.png */,
 				9E85A4BF16E4780D001D7C91 /* ribbon_hair.png */,
@@ -743,6 +749,7 @@
 				9E0052801697CB9D00A4983D /* Default-568h@2x.png in Resources */,
 				9ECE137C1697D3C0000055ED /* EmailLoginViewController.xib in Resources */,
 				9ECE137E1697D3C0000055ED /* PreviewController.xib in Resources */,
+				9E7E9077187B12B400AA53AC /* share_contacts.png in Resources */,
 				9ECE13831697D56A000055ED /* SignupViewController.xib in Resources */,
 				9ED0BF241699305C0059D8F3 /* LoginViewController.xib in Resources */,
 				9ED0BF29169931EA0059D8F3 /* EmailSignupViewController.xib in Resources */,
@@ -776,6 +783,7 @@
 				9E85A4A416E4764F001D7C91 /* StickerPanelSelectorViewController.xib in Resources */,
 				9E85A4AF16E476BF001D7C91 /* btn_glasses.png in Resources */,
 				9E85A4B016E476BF001D7C91 /* btn_glasses@2x.png in Resources */,
+				9E7E9078187B12B400AA53AC /* share_contacts@2x.png in Resources */,
 				9E85A4B116E476BF001D7C91 /* btn_hair.png in Resources */,
 				9E85A4B216E476BF001D7C91 /* btn_hair@2x.png in Resources */,
 				9E85A4B316E476BF001D7C91 /* btn_mystery.png in Resources */,
@@ -954,7 +962,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera Framework App/Camera Framework App-Prefix.pch";
 				INFOPLIST_FILE = "Camera Framework App/Camera Framework App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Camera Framework App/Flurry\"",
@@ -982,7 +990,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera Framework App/Camera Framework App-Prefix.pch";
 				INFOPLIST_FILE = "Camera Framework App/Camera Framework App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Camera Framework App/Flurry\"",

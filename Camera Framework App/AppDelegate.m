@@ -25,6 +25,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [application setStatusBarStyle:UIStatusBarStyleDefault];
+
     // initialize parse
     [Parse setApplicationId:PARSE_APP_ID
                   clientKey:PARSE_CLIENT_ID];
@@ -190,8 +192,8 @@
 
 -(void)continueInitForQuickStickr {
     [self.window makeKeyAndVisible];
-    CameraViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
-    self.window.rootViewController = cameraController;
+    CameraViewController *controller = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
+    self.window.rootViewController = controller;
 }
 
 -(void)incrementMysteryPackCount {
