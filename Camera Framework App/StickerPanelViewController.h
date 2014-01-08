@@ -20,16 +20,12 @@
 #define STIX_SIZE 90
 #define SCROLL_OFFSET_OFF 650
 #define SCROLL_OFFSET_ON 0
-#define STIX_FILENAMES_HAIR @"hair_afro", @"hair_blondshort", @"hair_blondwithbangs", @"hair_brownbangs", @"hair_brownlong", @"hair_celebrityboy", @"hair_curlylongblond", @"hair_dreadlocks", @"hair_eurostyle", @"hair_platinumblond", @"hair_redshorthair", @"hair_shortblondcosplayhair", @"hair_shortblondguy", @"hair_shortblue", @"hair_spikyblondcosplay", @"hipster_fauxhawk_hairstyle", @"hipster_girls_hairstyle"
-#define STIX_FILENAMES_STACHE @"stache_fumanchu",@"stache_handlebar",@"stache_horseshoe",@"stache_oldman",@"stache_pencil",@"stache_walrus",@"stache_wedge",@"stache_western",@"stache_bushy", @"stache_rich", @"beard_scruffy", @"hipster_ironic_mustache"
-#define STIX_FILENAMES_GLASSES @"eyes_crossed", @"eyes_puppy", @"glasses_3d_glasses", @"glasses_aviatorglasses", @"glasses_catglasses", @"hipster_chunkyframe_glasses", @"hipster_oversized_glasses", @"hipster_pinkshutter_glasses", @"glasses_01", @"glasses_02", @"glasses_03", @"glasses_04"
-#define STIX_FILENAMES_MYSTERY  @"hat_browncap", @"hat_brownstripedcap", @"hat_fedora", @"hat_tophat", @"hipster_bluewovencap", @"hipster_truckerhat", @"hipster_tweed_fedora", @"nerdytie", @"furryears", @"kiss", @"mouth_buckteeth", @"mouth_toothy", @"mouth_toothy2", @"mouth_vampirefangs", @"fail", @"ftw", @"lol", @"yolo", @"omg", @"hearts1", @"heartsplenty", @"pink_splash", @"green_splash", @"blue_splash", @"musicnote", @"redfireball", @"blueflower", @"flowerpower", @"starexplode", @"swirlyribbons", @"yellowflowers", @"abstractbubbles", @"bunchofstars"
+#define STIX_FILENAMES_CUTE @"1-babypenguin", @"2-giraffe", @"3-hippo", @"4-littlebear", @"5-panda2", @"6-panda3", @"7-bluepenguin", @"8-cherryblossomrabbits", @"9-babychick2", @"10-ladybug", @"11-mole", @"12-realteddybear", @"13-teddy", @"14-pawprint", @"15-pinkballoon", @"16-purplebutterfly", @"17-rainbow", @"18-bubble"
+#define STIX_FILENAMES_HEART @"1-hearts1", @"2-heartsplenty", @"3-120_heart", @"4-red_glowing_heart", @"5-bemine", @"6-kiss", @"7-blueflower", @"8-flowerpower", @"9-redrose", @"10-tulip", @"11-yellowflowers", @"12-bunchofstars", @"13-pinkstar", @"14-starexplode", @"15-swirlyribbons", @"16-pinkflower"
 
 enum eStickerCollections {
-    STICKER_COLLECTION_HAIR = 0,
-    STICKER_COLLECTION_GLASSES,
-    STICKER_COLLECTION_STACHE,
-    STICKER_COLLECTION_MYSTERY,
+    STICKER_COLLECTION_HEART = 0,
+    STICKER_COLLECTION_CUTE,
     STICKER_COLLECTION_MAX
     };
 
@@ -72,10 +68,9 @@ enum eStickerCollections {
 //@property (nonatomic, weak) IBOutlet UIButton * buttonAddMore;
 @property (nonatomic, weak) IBOutlet UIButton * buttonSave;
 
-@property (nonatomic, weak) IBOutlet UIButton * buttonHair;
-@property (nonatomic, weak) IBOutlet UIButton * buttonGlasses;
-@property (nonatomic, weak) IBOutlet UIButton * buttonStache;
-@property (nonatomic, weak) IBOutlet UIButton * buttonMystery;
+@property (nonatomic, weak) IBOutlet UIButton * buttonCute;
+@property (nonatomic, weak) IBOutlet UIButton * buttonHeart;
+@property (nonatomic, weak) IBOutlet UIButton * buttonText;
 
 @property (nonatomic, strong) NSMutableArray * allStickerViews;
 @property (nonatomic, weak) id delegate;

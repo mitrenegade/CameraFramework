@@ -31,7 +31,7 @@
 @synthesize progress;
 @synthesize parseObjectID;
 
-@synthesize buttonGlasses, buttonHair, buttonMystery, buttonSave, buttonStache;
+@synthesize buttonSave;
 @synthesize moreView, panelView, collectionName;
 @synthesize shareViewController;
 @synthesize accountsArray;
@@ -72,13 +72,10 @@ static AppDelegate * appDelegate;
     [self.stixView setDelegate:self];
     [self.stixView setBMultiStixMode:YES];
     
-    [buttonMystery setEnabled:NO];
-    [buttonMystery setAlpha:.8];
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     int ct = [defaults integerForKey:@"mysteryPackCount"];
     if (ct >= MYSTERY_PACK_UNLOCK_COUNT) {
-        [buttonMystery setEnabled:YES];
-        [buttonMystery setAlpha:1];
+        // no mystery pack
     }
 
     BOOL firstTimeInstructionsClosed = [defaults boolForKey:@"firstTimeInstructions2"];
@@ -126,23 +123,15 @@ static AppDelegate * appDelegate;
     [self.allStickerViews removeAllObjects];
 
     NSArray * stickerFilenames;
-    if (stickerCollection == STICKER_COLLECTION_HAIR) {
-        stickerFilenames = @[STIX_FILENAMES_HAIR];
+    if (stickerCollection == STICKER_COLLECTION_HEART) {
+        stickerFilenames = @[STIX_FILENAMES_HEART];
         [collectionName setImage:[UIImage imageNamed:@"ribbon_hair"]];
     }
-    else if (stickerCollection == STICKER_COLLECTION_GLASSES) {
-        stickerFilenames = @[STIX_FILENAMES_GLASSES];
+    else if (stickerCollection == STICKER_COLLECTION_CUTE) {
+        stickerFilenames = @[STIX_FILENAMES_CUTE];
         [collectionName setImage:[UIImage imageNamed:@"ribbon_glasses"]];
     }
-    else if (stickerCollection == STICKER_COLLECTION_STACHE) {
-        stickerFilenames = @[STIX_FILENAMES_STACHE];
-        [collectionName setImage:[UIImage imageNamed:@"ribbon_staches"]];
-    }
-    else if (stickerCollection == STICKER_COLLECTION_MYSTERY) {
-        stickerFilenames = @[STIX_FILENAMES_MYSTERY];
-        [collectionName setImage:[UIImage imageNamed:@"ribbon_bonus"]];
-    }
-    
+
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"Stickers" ofType:@"bundle"];
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
     
@@ -214,28 +203,22 @@ static AppDelegate * appDelegate;
     [self.instructionsView setHidden:YES];
     
     UIButton * button = (UIButton*)sender;
-    if (button == buttonHair) {
-        stickerCollection = STICKER_COLLECTION_HAIR;
+    if (button == self.buttonCute) {
+        stickerCollection = STICKER_COLLECTION_HEART;
 #if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Hair", @"CollectionName", nil]];
 #endif
     }
-    else if (button == buttonGlasses) {
-        stickerCollection = STICKER_COLLECTION_GLASSES;
+    else if (button == self.buttonHeart) {
+        stickerCollection = STICKER_COLLECTION_CUTE;
 #if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Glasses", @"CollectionName", nil]];
 #endif
     }
-    else if (button == buttonStache) {
-        stickerCollection = STICKER_COLLECTION_STACHE;
+    else if (button == self.buttonText) {
+        stickerCollection = STICKER_COLLECTION_MAX;
 #if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Stache", @"CollectionName", nil]];
-#endif
-    }
-    else if (button == buttonMystery) {
-        stickerCollection = STICKER_COLLECTION_MYSTERY;
-#if !TESTING
-        [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Mystery", @"CollectionName", nil]];
 #endif
     }
     [self togglePanel:YES];
@@ -253,15 +236,11 @@ static AppDelegate * appDelegate;
 -(void)tapGestureHandler:(UITapGestureRecognizer*) sender {
 //    NSArray * stickerDescriptions = @[STIX_DESCRIPTIONS];
     NSArray * stickerFilenames;
-    if (stickerCollection == STICKER_COLLECTION_HAIR)
-        stickerFilenames = @[STIX_FILENAMES_HAIR];
-    else if (stickerCollection == STICKER_COLLECTION_GLASSES)
-        stickerFilenames = @[STIX_FILENAMES_GLASSES];
-    else if (stickerCollection == STICKER_COLLECTION_STACHE)
-        stickerFilenames = @[STIX_FILENAMES_STACHE];
-    else if (stickerCollection == STICKER_COLLECTION_MYSTERY)
-        stickerFilenames = @[STIX_FILENAMES_MYSTERY];
-    
+    if (stickerCollection == STICKER_COLLECTION_HEART)
+        stickerFilenames = @[STIX_FILENAMES_HEART];
+    else if (stickerCollection == STICKER_COLLECTION_CUTE)
+        stickerFilenames = @[STIX_FILENAMES_CUTE];
+
     if (sender.state == UIGestureRecognizerStateEnded) {
         // so tap is not continuously sent
         
@@ -817,6 +796,7 @@ static AppDelegate * appDelegate;
 }
 
 -(void)unlockMysteryPack {
+    /*
     if (isDisplayingMysteryMessage)
         return;
     isDisplayingMysteryMessage = YES;
@@ -832,6 +812,7 @@ static AppDelegate * appDelegate;
 #if !TESTING
     [Flurry logEvent:@"MYSTERY PACK UNLOCKED"];
 #endif
+     */
 }
 
 #pragma mark Contacts share
