@@ -902,7 +902,7 @@ static AppDelegate * appDelegate;
     }
     NSString *oldComments = details;
     details = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    if ([details length] > 100) {
+    if ([details length] > 65) {
         details = oldComments;
         textView.text = oldComments;
         return NO;

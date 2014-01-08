@@ -64,13 +64,13 @@
                         <action selector="didClickDelete:" destination="-1" eventType="touchUpInside" id="44"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="scaleToFill" textAlignment="center" id="XZ9-hb-5bZ">
-                    <rect key="frame" x="0.0" y="430" width="320" height="35"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="center" id="XZ9-hb-5bZ">
+                    <rect key="frame" x="0.0" y="430" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="x5j-7E-sc6"/>
