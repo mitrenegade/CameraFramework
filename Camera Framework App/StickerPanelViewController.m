@@ -88,6 +88,13 @@ static AppDelegate * appDelegate;
     UISwipeGestureRecognizer * swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeDown:)];
     [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.panelView addGestureRecognizer:swipeGesture];
+
+    [self.textViewComments setHidden:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    textPosition = self.textViewComments.frame.origin.y;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -100,6 +107,11 @@ static AppDelegate * appDelegate;
     [self.stixView initializeWithImage:self.baseImage];
     NSLog(@"StixView frame: %f %f", stixView.frame.size.width, stixView.frame.size.height);
     NSLog(@"BaseImage size: %f %f", self.baseImage.size.width, self.baseImage.size.height);
+
+    if ([self.textViewComments.text length] == 0)
+        [self.textViewComments setHidden:YES];
+    else
+        [self.textViewComments setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,11 +137,13 @@ static AppDelegate * appDelegate;
     NSArray * stickerFilenames;
     if (stickerCollection == STICKER_COLLECTION_HEART) {
         stickerFilenames = @[STIX_FILENAMES_HEART];
-        [collectionName setImage:[UIImage imageNamed:@"ribbon_hair"]];
+        [collectionName setImage:[UIImage imageNamed:@"ribbon_red"]];
+        [self.labelRibbon setText:@"Hearts"];
     }
     else if (stickerCollection == STICKER_COLLECTION_CUTE) {
         stickerFilenames = @[STIX_FILENAMES_CUTE];
-        [collectionName setImage:[UIImage imageNamed:@"ribbon_glasses"]];
+        [collectionName setImage:[UIImage imageNamed:@"ribbon_blue"]];
+        [self.labelRibbon setText:@"Cute"];
     }
 
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"Stickers" ofType:@"bundle"];
@@ -205,30 +219,35 @@ static AppDelegate * appDelegate;
     UIButton * button = (UIButton*)sender;
     if (button == self.buttonCute) {
         stickerCollection = STICKER_COLLECTION_HEART;
+        [self togglePanel:YES];
 #if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Hair", @"CollectionName", nil]];
 #endif
     }
     else if (button == self.buttonHeart) {
         stickerCollection = STICKER_COLLECTION_CUTE;
+        [self togglePanel:YES];
 #if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Glasses", @"CollectionName", nil]];
 #endif
     }
     else if (button == self.buttonText) {
-        stickerCollection = STICKER_COLLECTION_MAX;
 #if !TESTING
         [Flurry logEvent:@"OPEN STICKER PANEL" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Stache", @"CollectionName", nil]];
 #endif
+
+        [self.textViewComments setHidden:NO];
+        [self.textViewComments becomeFirstResponder];
     }
-    [self togglePanel:YES];
 }
 
 -(IBAction)didClickClosePanel:(id)sender {
+    // closes panel that displays sticker selection
     [self togglePanel:NO];
 }
 
 -(IBAction)didClickCancel:(id)sender {
+    // cancels current photo/editing process
     [delegate closeStixPanel];
 }
 #pragma mark tapGestureRecognizer
@@ -836,5 +855,52 @@ static AppDelegate * appDelegate;
 -(void)didLoginPFUser:(PFUser *)user withUserInfo:(UserInfo *)userInfo {
     NSLog(@"Logged in");
 }
+
+#pragma mark TextViewDelegate
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text.length == 0)
+        [self.textViewComments setHidden:YES];
+}
+
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+
+    if ([text isEqualToString:@"\n"]) {
+        // Be sure to test for equality using the "isEqualToString" message
+        [textView resignFirstResponder];
+
+        // Return FALSE so that the final '\n' character doesn't get added
+        return NO;
+    }
+    NSString *oldComments = details;
+    details = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if ([details length] > 100) {
+        details = oldComments;
+        textView.text = oldComments;
+        return NO;
+    }
+
+    return YES;
+}
+
+#pragma mark Keyboard
+#pragma mark scrollview and keyboard
+- (void)keyboardWillShow:(NSNotification *)n
+{
+    NSDictionary * userInfo = [n userInfo];
+
+    // get the sizshouldbegine of the keyboard
+    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    // resize the noteView
+    CGRect viewFrame = self.view.frame;
+    CGRect frame = self.textViewComments.frame;
+    frame.origin.y = viewFrame.size.height - (keyboardSize.height) - self.textViewComments.frame.size.height;
+
+    [UIView animateWithDuration:.3 animations:^{
+        self.textViewComments.frame = frame;
+    } completion:^(BOOL finished) {
+    }];
+}
+
 @end
 

@@ -37,7 +37,7 @@ enum eStickerCollections {
 
 //typedef void (^userSelectionCallback)(NSString *);
 
-@interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate, StixViewDelegate, FBHelperDelegate, ShareViewDelegate, UIActionSheetDelegate, EmailLoginDelegate>
+@interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate, StixViewDelegate, FBHelperDelegate, ShareViewDelegate, UIActionSheetDelegate, EmailLoginDelegate, UITextViewDelegate>
 {
     BOOL didInitializeImage; // because image is initialized on viewDidAppear
     BOOL didBurnImage; // whether image/stix was burned and uploaded to parse
@@ -59,10 +59,14 @@ enum eStickerCollections {
     ACAccount * twitterAccount;
 
     ParseTag *currentParseTag;
+    NSString *details;
+    float textPosition;
 }
 @property (nonatomic, weak) IBOutlet UIView * panelView;
 @property (nonatomic, weak) IBOutlet UIScrollView * scrollView;
 @property (nonatomic, weak) IBOutlet UIImageView * collectionName;
+@property (weak, nonatomic) IBOutlet UILabel *labelRibbon;
+@property (weak, nonatomic) IBOutlet UITextView *textViewComments;
 
 @property (nonatomic, weak) IBOutlet UIView * moreView;
 //@property (nonatomic, weak) IBOutlet UIButton * buttonAddMore;

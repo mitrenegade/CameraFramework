@@ -13,10 +13,12 @@
                 <outlet property="buttonText" destination="16" id="j7w-9V-azB"/>
                 <outlet property="collectionName" destination="18" id="35"/>
                 <outlet property="instructionsView" destination="40" id="41"/>
+                <outlet property="labelRibbon" destination="PSA-xe-qFi" id="DTh-1X-du7"/>
                 <outlet property="moreView" destination="8" id="24"/>
                 <outlet property="panelView" destination="7" id="36"/>
                 <outlet property="scrollView" destination="13" id="26"/>
                 <outlet property="stixView" destination="6" id="27"/>
+                <outlet property="textViewComments" destination="XZ9-hb-5bZ" id="CHU-LR-3XJ"/>
                 <outlet property="view" destination="1" id="28"/>
             </connections>
         </placeholder>
@@ -30,8 +32,8 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="12" userLabel="Button - close stix view">
-                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="12" userLabel="Button - cancel current photo">
+                    <rect key="frame" x="0.0" y="0.0" width="53" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -62,6 +64,18 @@
                         <action selector="didClickDelete:" destination="-1" eventType="touchUpInside" id="44"/>
                     </connections>
                 </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="scaleToFill" textAlignment="center" id="XZ9-hb-5bZ">
+                    <rect key="frame" x="0.0" y="430" width="320" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="x5j-7E-sc6"/>
+                    </connections>
+                </textView>
                 <view contentMode="scaleToFill" id="7" userLabel="View - sticker panel">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -75,13 +89,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="Vsq-82-YCe"/>
+                            </connections>
                         </scrollView>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="ribbon_glasses.png" id="18">
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="ribbon_red.png" id="18">
                             <rect key="frame" x="16" y="26" width="289" height="47"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="37">
-                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="37" userLabel="Button - close stix view">
+                            <rect key="frame" x="0.0" y="0.0" width="58" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -96,6 +113,13 @@
                                 <action selector="didClickClosePanel:" destination="-1" eventType="touchUpInside" id="38"/>
                             </connections>
                         </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hearts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PSA-xe-qFi">
+                            <rect key="frame" x="53" y="32" width="214" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -185,10 +209,11 @@
         <image name="btn_save.png" width="77" height="39"/>
         <image name="btn_text.png" width="53" height="53"/>
         <image name="cancel_edit.png" width="30" height="30"/>
+        <image name="cancel_edit.png" width="30" height="30"/>
         <image name="choosesticker_slider_new.png" width="320" height="480"/>
         <image name="delete.png" width="48" height="48"/>
         <image name="instruct_02.png" width="183" height="56"/>
-        <image name="ribbon_glasses.png" width="289" height="47"/>
+        <image name="ribbon_red.png" width="289" height="47"/>
         <image name="takephoto_bar.png" width="320" height="53"/>
     </resources>
 </document>
