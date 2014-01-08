@@ -133,11 +133,8 @@
 		9EE0CB471704F8C100A3039A /* ribbon_bonus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0CB451704F8C100A3039A /* ribbon_bonus.png */; };
 		9EE0CB481704F8C100A3039A /* ribbon_bonus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0CB461704F8C100A3039A /* ribbon_bonus@2x.png */; };
 		9EE7CE7F16BA1EF40053D78F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE7CE7C16BA1EF40053D78F /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9EE927F116C88A1A005B4CCC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F016C88A1A005B4CCC /* Default@2x.png */; };
 		9EE927F316C88A92005B4CCC /* StickerApp57.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F216C88A92005B4CCC /* StickerApp57.png */; };
-		9EE927F516C88A9F005B4CCC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */; };
 		9EE927F716C88B2C005B4CCC /* StickerApp114.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927F616C88B2C005B4CCC /* StickerApp114.png */; };
-		9EE927F816C88C07005B4CCC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE927ED16C889F5005B4CCC /* Default.png */; };
 		9EF1ECDD16ED1563003219FA /* MGInstagram.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EF1ECDC16ED1563003219FA /* MGInstagram.m */; };
 /* End PBXBuildFile section */
 
@@ -311,10 +308,7 @@
 		9EE7CE7B16BA1EF40053D78F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		9EE7CE7C16BA1EF40053D78F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		9EE7CE7D16BA1EF40053D78F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		9EE927ED16C889F5005B4CCC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		9EE927F016C88A1A005B4CCC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9EE927F216C88A92005B4CCC /* StickerApp57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StickerApp57.png; sourceTree = "<group>"; };
-		9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9EE927F616C88B2C005B4CCC /* StickerApp114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StickerApp114.png; sourceTree = "<group>"; };
 		9EF1ECDB16ED1563003219FA /* MGInstagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGInstagram.h; sourceTree = "<group>"; };
 		9EF1ECDC16ED1563003219FA /* MGInstagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGInstagram.m; sourceTree = "<group>"; };
@@ -368,8 +362,6 @@
 				9EE927F616C88B2C005B4CCC /* StickerApp114.png */,
 				9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */,
 				9EE927F216C88A92005B4CCC /* StickerApp57.png */,
-				9EE927F016C88A1A005B4CCC /* Default@2x.png */,
-				9EE927ED16C889F5005B4CCC /* Default.png */,
 				9EAD9BFE16BE1A9200362D17 /* AssetsLibrary.framework */,
 				9E9EB2FA16B2610600693867 /* CoreMedia.framework */,
 				9E9EB2F816B260FA00693867 /* AVFoundation.framework */,
@@ -733,11 +725,8 @@
 				9EAD9C0416BE1AF100362D17 /* flash_off.png in Resources */,
 				9EAD9C0516BE1AF100362D17 /* flash.png in Resources */,
 				9EAD9C0716BE1AFA00362D17 /* switch_camera.png in Resources */,
-				9EE927F116C88A1A005B4CCC /* Default@2x.png in Resources */,
 				9EE927F316C88A92005B4CCC /* StickerApp57.png in Resources */,
-				9EE927F516C88A9F005B4CCC /* Default-568h@2x.png in Resources */,
 				9EE927F716C88B2C005B4CCC /* StickerApp114.png in Resources */,
-				9EE927F816C88C07005B4CCC /* Default.png in Resources */,
 				9EC0836516CF0BBD00C7AEE4 /* photo 2.JPG in Resources */,
 				9E85A49816E4753C001D7C91 /* faceoverlay.png in Resources */,
 				9E85A49916E4753C001D7C91 /* faceoverlay@2x.png in Resources */,
