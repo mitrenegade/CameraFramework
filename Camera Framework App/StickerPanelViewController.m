@@ -89,6 +89,9 @@ static AppDelegate * appDelegate;
     [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.panelView addGestureRecognizer:swipeGesture];
 
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [self.view addGestureRecognizer:panGesture];
+
     [self.textViewComments setHidden:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -250,8 +253,29 @@ static AppDelegate * appDelegate;
     // cancels current photo/editing process
     [delegate closeStixPanel];
 }
-#pragma mark tapGestureRecognizer
 
+#pragma mark PanGestureRecognizer
+-(void)handleGesture:(UIGestureRecognizer *)sender {
+    UIGestureRecognizer *gesture = (UIGestureRecognizer *)sender;
+    if ([gesture isKindOfClass:[UIPanGestureRecognizer class]]) {
+        CGPoint point = [gesture locationInView:self.view];
+        if (gesture.state == UIGestureRecognizerStateBegan) {
+            if (CGRectContainsPoint(self.textViewComments.frame, point)) {
+                draggingTextBox = YES;
+                textBoxDragOffset = self.textViewComments.frame.origin.y - point.y;
+            }
+        }
+        else if (gesture.state == UIGestureRecognizerStateChanged) {
+            textPosition = point.y - textBoxDragOffset;
+            CGRect frame = self.textViewComments.frame;
+            frame.origin.y = textPosition;
+            self.textViewComments.frame = frame;
+        }
+        else if (gesture.state == UIGestureRecognizerStateEnded)
+            draggingTextBox = NO;
+    }
+}
+#pragma mark tapGestureRecognizer
 -(void)tapGestureHandler:(UITapGestureRecognizer*) sender {
 //    NSArray * stickerDescriptions = @[STIX_DESCRIPTIONS];
     NSArray * stickerFilenames;
@@ -860,6 +884,11 @@ static AppDelegate * appDelegate;
 -(void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.text.length == 0)
         [self.textViewComments setHidden:YES];
+    CGRect frame = self.textViewComments.frame;
+    frame.origin.y = textPosition;
+    [UIView animateWithDuration:.3 animations:^{
+        self.textViewComments.frame = frame;
+    }];
 }
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{

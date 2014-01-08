@@ -209,7 +209,6 @@
         <image name="btn_save.png" width="77" height="39"/>
         <image name="btn_text.png" width="53" height="53"/>
         <image name="cancel_edit.png" width="30" height="30"/>
-        <image name="cancel_edit.png" width="30" height="30"/>
         <image name="choosesticker_slider_new.png" width="320" height="480"/>
         <image name="delete.png" width="48" height="48"/>
         <image name="instruct_02.png" width="183" height="56"/>

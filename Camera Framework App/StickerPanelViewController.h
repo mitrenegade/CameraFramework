@@ -61,6 +61,8 @@ enum eStickerCollections {
     ParseTag *currentParseTag;
     NSString *details;
     float textPosition;
+    BOOL draggingTextBox;
+    float textBoxDragOffset;
 }
 @property (nonatomic, weak) IBOutlet UIView * panelView;
 @property (nonatomic, weak) IBOutlet UIScrollView * scrollView;
