@@ -142,7 +142,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9E0052651697CB9D00A4983D /* FaceFXCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceFXCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E0052651697CB9D00A4983D /* InstaHeart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaHeart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0052691697CB9D00A4983D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E00526B1697CB9D00A4983D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E00526D1697CB9D00A4983D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -398,7 +398,7 @@
 		9E0052661697CB9D00A4983D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E0052651697CB9D00A4983D /* FaceFXCam.app */,
+				9E0052651697CB9D00A4983D /* InstaHeart.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -670,7 +670,7 @@
 			);
 			name = CameraFramework;
 			productName = "Camera Framework App";
-			productReference = 9E0052651697CB9D00A4983D /* FaceFXCam.app */;
+			productReference = 9E0052651697CB9D00A4983D /* InstaHeart.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -681,6 +681,11 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = Neroh;
+				TargetAttributes = {
+					9E0052641697CB9D00A4983D = {
+						DevelopmentTeam = H799H8B8DD;
+					};
+				};
 			};
 			buildConfigurationList = 9E00525F1697CB9C00A4983D /* Build configuration list for PBXProject "Camera Framework App" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -925,7 +930,7 @@
 					"\"$(SRCROOT)/Camera Framework App/Flurry\"",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
-				PRODUCT_NAME = FaceFXCam;
+				PRODUCT_NAME = InstaHeart;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -934,7 +939,7 @@
 		9E0052991697CB9D00A4983D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bobby Ren (UQA7D88UV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Camera\\ Framework\\ App\\\"",
@@ -953,7 +958,7 @@
 					"\"$(SRCROOT)/Camera Framework App/Flurry\"",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
-				PRODUCT_NAME = FaceFXCam;
+				PRODUCT_NAME = InstaHeart;
 				PROVISIONING_PROFILE = "B476373F-323A-4391-909E-BA747AF7104C";
 				WRAPPER_EXTENSION = app;
 			};
