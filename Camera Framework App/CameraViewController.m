@@ -39,17 +39,19 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setCaptureManager:[[CaptureSessionManager alloc] init]];
+#if !TARGET_IPHONE_SIMULATOR
     int flashMode = [captureManager initializeCamera];
-
     [[self.view layer] insertSublayer:[self.captureManager previewLayer] atIndex:0];
+#endif
 
     // add a notification for completion of capture
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCaptureImage) name:kImageCapturedSuccessfully object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureImageDidFail:) name:kImageCaptureFailed object:nil];
-    
+#if !TARGET_IPHONE_SIMULATOR
     [self startCamera];
     [self toggleFlashMode:0];
     [captureManager switchDevices]; // set to front facing
+#endif
 
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     BOOL firstTimeInstructionsClosed = [defaults boolForKey:@"firstTimeInstructions"];
