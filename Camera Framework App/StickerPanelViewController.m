@@ -91,6 +91,7 @@ static AppDelegate * appDelegate;
     [self.panelView addGestureRecognizer:swipeGesture];
 
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [panGesture setDelegate:self]; // enables shouldReceiveGesture
     [self.view addGestureRecognizer:panGesture];
 
     [self.textViewComments setHidden:YES];
@@ -267,15 +268,30 @@ static AppDelegate * appDelegate;
             }
         }
         else if (gesture.state == UIGestureRecognizerStateChanged) {
-            textPosition = point.y - textBoxDragOffset;
-            CGRect frame = self.textViewComments.frame;
-            frame.origin.y = textPosition;
-            self.textViewComments.frame = frame;
+            if (draggingTextBox) {
+                if (point.y > self.view.frame.size.height - 60)
+                    return;
+                textPosition = point.y - textBoxDragOffset;
+                CGRect frame = self.textViewComments.frame;
+                frame.origin.y = textPosition;
+                self.textViewComments.frame = frame;
+            }
         }
         else if (gesture.state == UIGestureRecognizerStateEnded)
             draggingTextBox = NO;
     }
 }
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        if ([self.textViewComments isHidden])
+            return NO;
+        if (CGRectContainsPoint(self.textViewComments.frame, [touch locationInView:self.view]) == NO)
+            return NO;
+    }
+    return YES;
+}
+
 #pragma mark tapGestureRecognizer
 -(void)tapGestureHandler:(UITapGestureRecognizer*) sender {
 //    NSArray * stickerDescriptions = @[STIX_DESCRIPTIONS];
