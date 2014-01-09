@@ -99,11 +99,12 @@ static AppDelegate * appDelegate;
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-    textPosition = self.textViewComments.frame.origin.y;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    textPosition = self.textViewComments.frame.origin.y;
+
     // add stixview
     if (didInitializeImage)
         return;
@@ -922,6 +923,8 @@ static AppDelegate * appDelegate;
     if (textView.text.length == 0)
         [self.textViewComments setHidden:YES];
     CGRect frame = self.textViewComments.frame;
+    if (textPosition > self.view.frame.size.height - 60)
+        textPosition = self.view.frame.size.height - 80 - self.textViewComments.frame.size.height;
     frame.origin.y = textPosition;
     [UIView animateWithDuration:.3 animations:^{
         self.textViewComments.frame = frame;
