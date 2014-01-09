@@ -697,8 +697,12 @@ static AppDelegate * appDelegate;
     [Flurry logEvent:@"SHARE BUTTON PRESSED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Twitter", @"Channel", nil]];
 #endif
     self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    UIView *blankView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.progress.customView = blankView;
+    self.progress.mode = MBProgressHUDModeCustomView;
+    self.progress.animationType = MBProgressHUDAnimationZoom;
     [self.progress setLabelText:@"Uploading to Twitter..."];
-    
+
     // twitterAuth
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0){
         if ([TWTweetComposeViewController canSendTweet]){
@@ -771,16 +775,20 @@ static AppDelegate * appDelegate;
                     }
                 }
                 else {
-                    progress.mode = MBProgressHUDModeText;
-                    [self.progress setLabelText:@"Could not access Twitter accounts!"];
+                    UIView *blankView = [[UIView alloc] initWithFrame:CGRectZero];
+                    self.progress.customView = blankView;
+                    self.progress.mode = MBProgressHUDModeCustomView;
+                    [self.progress setLabelText:@"Could not access Twitter!"];
                     [self.progress hide:YES afterDelay:1.5];
                 }
             }];
         }
         else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't access Twitter" message:@"Please download the Twitter app or register your account in the iPhone Settings" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            progress.mode = MBProgressHUDModeText;
-            [self.progress setLabelText:@"Please download the Twitter app or register your account in the iPhone Settings"];
+            UIView *blankView = [[UIView alloc] initWithFrame:CGRectZero];
+            self.progress.customView = blankView;
+            self.progress.mode = MBProgressHUDModeCustomView;
+            self.progress.labelText = @"Could not access Twitter";
+            [self.progress setDetailsLabelText:@"Please download the Twitter app or register your account in the iPhone Settings"];
             [self.progress hide:YES afterDelay:3];
 #if !TESTING
             [Flurry logEvent:@"SHARE INCOMPLETE" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Twitter", @"Channel", nil]];
