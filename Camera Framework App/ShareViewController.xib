@@ -23,7 +23,11 @@
                     <autoresizingMask key="autoresizingMask"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9">
+<<<<<<< HEAD
                     <rect key="frame" x="25" y="332" width="85" height="85"/>
+=======
+                    <rect key="frame" x="32" y="334" width="80" height="80"/>
+>>>>>>> switched hearts and cute buttons; removed contacts button
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" backgroundImage="share_instagram.png">
@@ -38,7 +42,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="19">
+<<<<<<< HEAD
                     <rect key="frame" x="118" y="332" width="85" height="85"/>
+=======
+                    <rect key="frame" x="120" y="334" width="80" height="80"/>
+>>>>>>> switched hearts and cute buttons; removed contacts button
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" backgroundImage="share_facebook.png">
@@ -53,7 +61,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="24">
+<<<<<<< HEAD
                     <rect key="frame" x="211" y="332" width="85" height="85"/>
+=======
+                    <rect key="frame" x="208" y="334" width="80" height="80"/>
+>>>>>>> switched hearts and cute buttons; removed contacts button
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" backgroundImage="share_twitter.png">
