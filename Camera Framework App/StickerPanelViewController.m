@@ -18,6 +18,7 @@
 #import "Constants.h"
 #import "ParseHelper.h"
 #import "EmailLoginViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation StickerPanelViewController
 
@@ -346,7 +347,44 @@ static AppDelegate * appDelegate;
         }
         UIImage * stixLayer = [tag tagToUIImageUsingBase:NO retainStixLayer:YES useHighRes:YES];
         self.burnedImage = [tag tagToUIImageUsingBase:YES retainStixLayer:YES useHighRes:YES];
-        [self didClickSaveWithResult:self.burnedImage];
+
+        // HACK: complicated way to burn in other layers
+        float scale = stixLayer.size.width / 320;
+        CGRect frameLabel = self.textViewComments.frame;
+        CGPoint center = self.textViewComments.center;
+        center.x *= scale;
+        center.y *= scale;
+        UILabel *label = [[UILabel alloc] initWithFrame:frameLabel];
+        label.backgroundColor = [UIColor blackColor];
+        label.alpha = .6;
+        label.textColor = [UIColor whiteColor];
+        label.font = self.textViewComments.font;
+        label.text = self.textViewComments.text;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale);
+        label.center = center;
+
+        UIView *parent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, stixLayer.size.width, stixLayer.size.height)];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:stixLayer];
+        [parent addSubview:imageView];
+        [parent addSubview:label];
+        UIGraphicsBeginImageContext(parent.frame.size);
+        [parent.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        stixLayer = newImage;
+
+        parent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, stixLayer.size.width, stixLayer.size.height)];
+        imageView = [[UIImageView alloc] initWithImage:self.burnedImage];
+        [parent addSubview:imageView];
+        [parent addSubview:label];
+        UIGraphicsBeginImageContext(parent.frame.size);
+        [parent.layer renderInContext:UIGraphicsGetCurrentContext()];
+        newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        self.burnedImage = newImage;
+
+        [self didClickSaveWithResult:newImage];
 
         ParseTag * parseTag = [[ParseTag alloc] init];
         currentParseTag = parseTag;
