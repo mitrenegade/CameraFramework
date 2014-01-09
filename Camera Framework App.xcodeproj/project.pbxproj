@@ -137,7 +137,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9E0052651697CB9D00A4983D /* InstaHeart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaHeart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E0052651697CB9D00A4983D /* Heart FX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Heart FX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0052691697CB9D00A4983D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E00526B1697CB9D00A4983D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E00526D1697CB9D00A4983D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -386,7 +386,7 @@
 		9E0052661697CB9D00A4983D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E0052651697CB9D00A4983D /* InstaHeart.app */,
+				9E0052651697CB9D00A4983D /* Heart FX.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -664,7 +664,7 @@
 			);
 			name = CameraFramework;
 			productName = "Camera Framework App";
-			productReference = 9E0052651697CB9D00A4983D /* InstaHeart.app */;
+			productReference = 9E0052651697CB9D00A4983D /* Heart FX.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -920,7 +920,7 @@
 					"\"$(SRCROOT)/Camera Framework App/Flurry\"",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
-				PRODUCT_NAME = InstaHeart;
+				PRODUCT_NAME = "Heart FX";
 				PROVISIONING_PROFILE = "842E362C-8FC9-436F-AC7F-6298D9E769A6";
 				WRAPPER_EXTENSION = app;
 			};
@@ -949,7 +949,7 @@
 					"\"$(SRCROOT)/Camera Framework App/Flurry\"",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
-				PRODUCT_NAME = InstaHeart;
+				PRODUCT_NAME = "Heart FX";
 				PROVISIONING_PROFILE = "792DAFC7-B073-4ECA-888A-8FE151C5E609";
 				WRAPPER_EXTENSION = app;
 			};
