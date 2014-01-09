@@ -36,7 +36,7 @@
     // check for defaults
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
     if ([userDefaults objectForKey:@"FirstTimeSaveMessageDone"] == nil) {
-        [[UIAlertView alertViewWithTitle:@"Earn a bonus!" message:@"Share three times on Facebook, Twitter or Instagram to gain a Mystery Pack!" cancelButtonTitle:@"Go!" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
+        [[UIAlertView alertViewWithTitle:@"Show the world" message:@"Share on Facebook, Twitter or Instagram!" cancelButtonTitle:@"Go!" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
         } onCancel:^{
             [userDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"FirstTimeSaveMessageDone"];
         }] show];

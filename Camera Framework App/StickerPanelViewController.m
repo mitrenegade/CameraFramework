@@ -893,23 +893,6 @@ static AppDelegate * appDelegate;
 }
 
 -(void)unlockMysteryPack {
-    /*
-    if (isDisplayingMysteryMessage)
-        return;
-    isDisplayingMysteryMessage = YES;
-    
-    [self.buttonMystery setEnabled:YES];
-    [buttonMystery setAlpha:1];
-    [[UIAlertView alertViewWithTitle:@"Mystery pack unlocked!" message:@"You have received a new sticker pack to play with!" cancelButtonTitle:@"Yay!" otherButtonTitles:nil onDismiss:^(int buttonIndex) {
-        
-    } onCancel:^{
-        isDisplayingMysteryMessage = NO;
-    }] show];
-
-#if !TESTING
-    [Flurry logEvent:@"MYSTERY PACK UNLOCKED"];
-#endif
-     */
 }
 
 #pragma mark Contacts share

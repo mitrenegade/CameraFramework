@@ -209,25 +209,7 @@
 }
 
 -(void)incrementMysteryPackCount {
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    int ct = [defaults integerForKey:@"mysteryPackCount"];
-    if (ct >= MYSTERY_PACK_UNLOCK_COUNT)
-        return;
-#if !TESTING
-    [Flurry logEvent:@"MYSTERY PACK INCREMENTED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:ct+1], @"Share count", nil]];
-#endif
-    [defaults setInteger:ct+1 forKey:@"mysteryPackCount"];
-    if (ct < MYSTERY_PACK_UNLOCK_COUNT-1) {
-        NSLog(@"Sharing the image incremented mystery box count! %d of 3 shares complete.", ct+1);
-        int n = 3 - (ct+1);
-        [UIAlertView alertViewWithTitle:@"Thanks for sharing" message:[NSString stringWithFormat:@"Share %d more times and you'll get a gift!", n]];
-    }
-    else {
-        // unlock mystery box
-        NSLog(@"Sharing the image unlocked mystery box!");
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDidUnlockMysteryPackNotification object:nil];
-    }
-    [defaults synchronize];
+    [UIAlertView alertViewWithTitle:@"Sharing complete" message:nil];
 }
 
 #if 0
