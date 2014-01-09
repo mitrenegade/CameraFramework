@@ -764,7 +764,7 @@ static AppDelegate * appDelegate;
                             // show from our table view (pops up in the middle of the table)
                         }
                         else {
-                            if (!parseObjectID) {
+                            if (!self.burnedImage) {
                                 NSLog(@"No object id yet! set a callback!");
                                 twitterShareCallback = @selector(iosSendTweet);
                             }
@@ -859,6 +859,8 @@ static AppDelegate * appDelegate;
         });
     }];
 }
+
+
 
 -(void)iosReceivedReplyWithResponse: (NSHTTPURLResponse*)response error: (NSError*) error {
     NSLog(@"Response: %@ error: %@", response, error);
