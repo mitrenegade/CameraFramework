@@ -76,6 +76,8 @@
     //putObjectRequest.filename = filename;
     putObjectRequest.data = data;
     putObjectRequest.delegate = self;
+    putObjectRequest.cannedACL = [S3CannedACL publicRead];
+    [putObjectRequest setContentType:@"image/jpeg"];
     
     [[AWSHelper s3] putObject:putObjectRequest];
 }

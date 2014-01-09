@@ -531,11 +531,11 @@ static AppDelegate * appDelegate;
     NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", IMAGE_URL_BUCKET, parseObjectID];
     NSString * thumbLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", THUMBNAIL_IMAGE_URL_BUCKET, parseObjectID];
     NSString * storeLink = @"http://bit.ly/ZIGKqr";
-    NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:storeLink, @"link",
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                    imageLink, @"link",
                                     thumbLink, @"picture",
-                                    //@"My Face Fx Pic", @"name",
-                                    @"My Face Fx Pic: %@", @"name",
-                                    [NSString stringWithFormat:@"3 in 1 photobooth! #facefxcam %@", thumbLink], @"caption",
+                                    @"My pic from Face FX Cam", @"name",
+                                    @"3 in 1 photobooth! #facefxcam", @"caption",
                                     //                                        @"Description", @"description",
                                     nil];
     [FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST"
