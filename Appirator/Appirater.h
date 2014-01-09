@@ -47,7 +47,7 @@ extern NSString *const kAppiraterReminderRequestDate;
 /*
  Place your Apple generated software id here.
  */
-#define APPIRATER_APP_ID				622947617 // NOW SET IN Stixx-info.plist
+#define APPIRATER_APP_ID				794147347 // NOW SET IN Stixx-info.plist
 
 /*
  Your app's name.
@@ -58,7 +58,7 @@ extern NSString *const kAppiraterReminderRequestDate;
  This is the message your users will see once they've passed the day+launches
  threshold.
  */
-#define APPIRATER_LOCALIZED_MESSAGE     NSLocalizedString(@"Please rate %@ in the App store!", @"Rate us")
+#define APPIRATER_LOCALIZED_MESSAGE     NSLocalizedString(@"Do you love %@? Rate us in the App store!", @"Rate us")
 
 #define APPIRATER_MESSAGE				[NSString stringWithFormat:APPIRATER_LOCALIZED_MESSAGE, APPIRATER_APP_NAME]
 
@@ -88,7 +88,7 @@ extern NSString *const kAppiraterReminderRequestDate;
  Users will need to have the same version of your app installed for this many
  days before they will be prompted to rate it.
  */
-#define APPIRATER_DAYS_UNTIL_PROMPT		1		// double
+#define APPIRATER_DAYS_UNTIL_PROMPT		0		// double
 
 /*
  An example of a 'use' would be if the user launched the app. Bringing the app
@@ -120,7 +120,7 @@ extern NSString *const kAppiraterReminderRequestDate;
  'Remind me later'. This value specifies how long (in days) Appirater
  will wait before reminding them.
  */
-#define APPIRATER_TIME_BEFORE_REMINDING		2	// double
+#define APPIRATER_TIME_BEFORE_REMINDING		1	// double
 
 /*
  'YES' will show the Appirater alert everytime. Useful for testing how your message
