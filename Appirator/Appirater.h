@@ -58,7 +58,7 @@ extern NSString *const kAppiraterReminderRequestDate;
  This is the message your users will see once they've passed the day+launches
  threshold.
  */
-#define APPIRATER_LOCALIZED_MESSAGE     NSLocalizedString(@"Do you love %@? Rate us in the App store!", @"Rate us")
+#define APPIRATER_LOCALIZED_MESSAGE     NSLocalizedString(@"Do you <3 %@? Rate us in the App store!", @"Rate us")
 
 #define APPIRATER_MESSAGE				[NSString stringWithFormat:APPIRATER_LOCALIZED_MESSAGE, APPIRATER_APP_NAME]
 
