@@ -614,8 +614,8 @@ static AppDelegate * appDelegate;
     NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                     imageLink, @"link",
                                     thumbLink, @"picture",
-                                    @"My pic from Face FX Cam", @"name",
-                                    @"3 in 1 photobooth! #facefxcam", @"caption",
+                                    @"My Heart FX Pic", @"name",
+                                    @"Love and Peace #heartfx", @"caption",
                                     //                                        @"Description", @"description",
                                     nil];
     [FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST"
@@ -828,7 +828,7 @@ static AppDelegate * appDelegate;
 }
 
 -(void)iosSendTweetWithImage:(ACAccount *)twitterAccount image:(UIImage *)image {
-    NSString *shareMessage = @"This is my favorite selfie! #facefxcam"; // limited to 140
+    NSString *shareMessage = @"This is my favorite selfie! #heartfx"; // limited to 140
     NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"
                   @"/1.1/statuses/update_with_media.json"];
     NSDictionary *params = @{@"status" : shareMessage};
@@ -891,7 +891,7 @@ static AppDelegate * appDelegate;
         self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.progress setLabelText:@"Opening in Instagram..."];
         [self.progress hide:YES afterDelay:1.5];
-        [MGInstagram postImage:self.burnedImage withCaption:@"#facefxcam 3 in 1 photobooth: http://bit.ly/ZIGKqr" inView:self.view];
+        [MGInstagram postImage:self.burnedImage withCaption:@"#heartfx" inView:self.view];
 #if !TESTING
         [Flurry logEvent:@"SHARE COMPLETED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Instagram", @"Channel", nil]];
 #endif
