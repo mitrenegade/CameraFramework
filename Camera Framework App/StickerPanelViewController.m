@@ -271,7 +271,7 @@ static AppDelegate * appDelegate;
             if (draggingTextBox) {
                 if (point.y > self.view.frame.size.height - 60)
                     return;
-                textPosition = point.y - textBoxDragOffset;
+                textPosition = point.y + textBoxDragOffset;
                 CGRect frame = self.textViewComments.frame;
                 frame.origin.y = textPosition;
                 self.textViewComments.frame = frame;
