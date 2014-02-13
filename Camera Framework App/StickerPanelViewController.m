@@ -19,6 +19,8 @@
 #import "ParseHelper.h"
 #import "EmailLoginViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "StoreKitHelper.h"
+#import "Appirater.h"
 
 @implementation StickerPanelViewController
 
@@ -32,7 +34,6 @@
 @synthesize progress;
 @synthesize parseObjectID;
 
-@synthesize buttonSave;
 @synthesize moreView, panelView, collectionName;
 @synthesize shareViewController;
 @synthesize accountsArray;
@@ -338,7 +339,15 @@ static AppDelegate * appDelegate;
     didBurnImage = NO;
 }
 
--(IBAction)didClickSave:(id)sender {
+-(IBAction)didClickShare:(id)sender {
+    [self save:0];
+}
+-(IBAction)didClickSend:(id)sender {
+    [self save:1];
+}
+
+-(void)save:(int)sendOrShare{
+    // 0 = share, 1 = send
     NSMutableArray * auxStixViews = [stixView auxStixViews];
     int ct = [auxStixViews count];
 #if !TESTING
@@ -401,7 +410,7 @@ static AppDelegate * appDelegate;
         UIGraphicsEndImageContext();
         self.burnedImage = newImage;
 
-        [self didClickSaveWithResult:newImage];
+        [self didClickSaveWithResult:newImage sendOrShare:sendOrShare];
 
         ParseTag * parseTag = [[ParseTag alloc] init];
         currentParseTag = parseTag;
@@ -428,7 +437,7 @@ static AppDelegate * appDelegate;
         didBurnImage = YES;
     }
     else {
-        [self didClickSaveWithResult:self.burnedImage];
+        [self didClickSaveWithResult:self.burnedImage sendOrShare:sendOrShare];
     }
 }
 
@@ -496,11 +505,14 @@ static AppDelegate * appDelegate;
     return nil;
 }
 
--(void)didClickSaveWithResult:(UIImage*)result {
+-(void)didClickSaveWithResult:(UIImage*)result sendOrShare:(int)sendOrShare {
+    // 0 = share, 1 = send
+
     [self togglePanel:NO];
     [self.moreView setHidden:YES];
     
 #if 0
+    /*
     [UIActionSheet actionSheetWithTitle:nil message:nil buttons:[NSArray arrayWithObjects:@"Save to Album", @"Facebook", @"Twitter", @"Instagram", nil] showInView:self.view onDismiss:^(int buttonIndex) {
         
         if (buttonIndex == 0) {
@@ -523,7 +535,9 @@ static AppDelegate * appDelegate;
     } onCancel:^{
         [delegate closeStixPanel];
     }];
+     */
 #elif 0
+    /*
     // save to album
     NSString * title = @"Save to album";
     self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -545,15 +559,114 @@ static AppDelegate * appDelegate;
 //            [self presentModalViewController:shareViewController animated:YES];
         }
     }];
+     */
 #else
     // use activity sheet
-    NSString *textToShare = nil;
-    UIImage *imageToShare = result;
+    /*
+     Activity types:
+     NSString *const UIActivityTypePostToFacebook;
+     NSString *const UIActivityTypePostToTwitter;
+     NSString *const UIActivityTypePostToWeibo;
+     NSString *const UIActivityTypeMessage;
+     NSString *const UIActivityTypeMail;
+     NSString *const UIActivityTypePrint;
+     NSString *const UIActivityTypeCopyToPasteboard;
+     NSString *const UIActivityTypeAssignToContact;
+     NSString *const UIActivityTypeSaveToCameraRoll;
+     NSString *const UIActivityTypeAddToReadingList;
+     NSString *const UIActivityTypePostToFlickr;
+     NSString *const UIActivityTypePostToVimeo;
+     NSString *const UIActivityTypePostToTencentWeibo;
+     NSString *const UIActivityTypeAirDrop;
+     */
+
+    if (sendOrShare == ACTION_SHARE) {
+        NSString *textToShare = @"@heartfx";
+        UIImage *imageToShare = result;
+        NSArray *itemsToShare = @[textToShare, imageToShare];
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+        activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeMessage, UIActivityTypeMail, UIActivityTypeAirDrop]; //or whichever you don't need
+        [self presentViewController:activityVC animated:YES completion:nil];
+    }
+    else if (sendOrShare == ACTION_SEND) {
+        resultToSend = result;
+        if (![StoreKitHelper hasPostage] && ![StoreKitHelper hasLicense]) {
+            [self promptForPurchase];
+        }
+        else {
+            [self doActionSend];
+        }
+    }
+#endif
+}
+
+-(void)doActionSend {
+    UIImage *imageToShare = resultToSend;
     NSArray *itemsToShare = @[imageToShare];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
-    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList]; //or whichever you don't need
+    activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeCopyToPasteboard, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo]; //or whichever you don't need
+    activityVC.completionHandler = ^(NSString *activityType, BOOL completed) {
+        if ([StoreKitHelper hasLicense]) {
+            NSLog(@"YAY");
+            if (!completed) {
+                [UIAlertView alertViewWithTitle:@"Send cancelled" message:@"You have the forever stamp. Click Send to send more valentines."];
+            }
+            else {
+                [UIAlertView alertViewWithTitle:@"You sent a valentine." message:@"You have the forever stamp. Click Send to send more valentines."];
+                [Appirater userDidSignificantEvent:YES];
+            }
+        }
+        else if ([StoreKitHelper hasPostage]) {
+            if (!completed) {
+                int postageLeft = [StoreKitHelper postageCount];
+                [UIAlertView alertViewWithTitle:@"Send cancelled" message:[NSString stringWithFormat:@"You still have %d postage stamps left", postageLeft]];
+            }
+            else {
+                int postageLeft = [StoreKitHelper deductPostage];
+                NSString *message = [NSString stringWithFormat:@"You still have %d postage stamps left", postageLeft];
+                if (postageLeft == 0)
+                    message = @"You have no more postage left.";
+                [UIAlertView alertViewWithTitle:@"Thanks for sending!" message:message];
+
+                [Appirater userDidSignificantEvent:YES];
+            }
+        }
+    };
     [self presentViewController:activityVC animated:YES completion:nil];
-#endif
+}
+
+-(void)promptForPurchase {
+    [UIAlertView alertViewWithTitle:@"Purchase postage." message:@"Buy a stamp to send a valentine by email or text?" cancelButtonTitle:@"No thanks" otherButtonTitles:@[@"Send one email or text for $.99", @"Send unlimited valentines for $1.99"] onDismiss:^(int buttonIndex) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreKitHelperProductFailedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFailPurchase:) name:StoreKitHelperProductFailedNotification object:nil];
+
+        if (buttonIndex == 0) {
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreKitHelperProductPurchasedNotification object:[StoreKitHelper postage].productIdentifier];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPurchase:) name:StoreKitHelperProductPurchasedNotification object:[StoreKitHelper postage].productIdentifier];
+
+            // one purchase of postage
+            [[StoreKitHelper sharedInstance] buyProduct:[StoreKitHelper postage]];
+        }
+        else if (buttonIndex == 1) {
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreKitHelperProductPurchasedNotification object:[StoreKitHelper license].productIdentifier];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPurchase:) name:StoreKitHelperProductPurchasedNotification object:[StoreKitHelper license].productIdentifier];
+
+            // one license
+            [[StoreKitHelper sharedInstance] buyProduct:[StoreKitHelper license]];
+        }
+    } onCancel:nil];
+}
+
+-(void)didPurchase:(NSNotification *)notification {
+    NSString * productIdentifier = notification.object;
+    NSLog(@"Purchased: %@ license count: %d postage cont %d", productIdentifier, [StoreKitHelper hasLicense], [StoreKitHelper postageCount]);
+
+    [self doActionSend];
+}
+
+-(void)didFailPurchase:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSLog(@"Failed purchase: %@", userInfo[@"error"]);
 }
 
 -(IBAction)didClickDelete:(id)sender {

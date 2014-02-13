@@ -206,6 +206,10 @@
     [self.window makeKeyAndVisible];
     CameraViewController *controller = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
     self.window.rootViewController = controller;
+
+    // initialize and listen for products
+    [StoreKitHelper sharedInstance];
+    [[StoreKitHelper sharedInstance] restoreCompletedTransactions];
 }
 
 -(void)incrementMysteryPackCount {
