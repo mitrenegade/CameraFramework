@@ -523,7 +523,7 @@ static AppDelegate * appDelegate;
     } onCancel:^{
         [delegate closeStixPanel];
     }];
-#else
+#elif 0
     // save to album
     NSString * title = @"Save to album";
     self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -545,6 +545,14 @@ static AppDelegate * appDelegate;
 //            [self presentModalViewController:shareViewController animated:YES];
         }
     }];
+#else
+    // use activity sheet
+    NSString *textToShare = nil;
+    UIImage *imageToShare = result;
+    NSArray *itemsToShare = @[imageToShare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList]; //or whichever you don't need
+    [self presentViewController:activityVC animated:YES completion:nil];
 #endif
 }
 
