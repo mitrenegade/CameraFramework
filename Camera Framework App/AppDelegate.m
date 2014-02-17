@@ -209,7 +209,6 @@
 
     // initialize and listen for products
     [StoreKitHelper sharedInstance];
-    [[StoreKitHelper sharedInstance] restoreCompletedTransactions];
 }
 
 -(void)incrementMysteryPackCount {

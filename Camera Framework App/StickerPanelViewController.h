@@ -39,6 +39,7 @@ enum eStickerCollections {
 @end
 
 //typedef void (^userSelectionCallback)(NSString *);
+@class MBProgressHUD;
 
 @interface StickerPanelViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate, StixViewDelegate, FBHelperDelegate, ShareViewDelegate, UIActionSheetDelegate, EmailLoginDelegate, UITextViewDelegate>
 {

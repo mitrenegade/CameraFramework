@@ -12,6 +12,8 @@
 @end
 NSString *const StoreKitHelperProductPurchasedNotification = @"StoreKitHelperProductPurchasedNotification";
 NSString *const StoreKitHelperProductFailedNotification = @"StoreKitHelperProductFailedNotification";
+NSString *const StoreKitHelperProductRestoredNotification = @"StoreKitHelperProductRestoredNotification";
+NSString *const StoreKitHelperProductRestoreFailedNotification = @"StoreKitHelperProductRestoreFailedNotification";
 
 @implementation StoreKitHelper
 {
@@ -174,6 +176,10 @@ NSString *const StoreKitHelperProductFailedNotification = @"StoreKitHelperProduc
                 break;
             case SKPaymentTransactionStateRestored:
                 [self restoreTransaction:transaction];
+                break;
+            case SKPaymentTransactionStatePurchasing:
+                NSLog(@"Purchasing");
+                break;
             default:
                 break;
         }
@@ -192,6 +198,8 @@ NSString *const StoreKitHelperProductFailedNotification = @"StoreKitHelperProduc
 
     [self provideContentForProductIdentifier:transaction.originalTransaction.payment.productIdentifier];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:StoreKitHelperProductRestoredNotification object:nil];
 }
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction {
@@ -242,4 +250,14 @@ NSString *const StoreKitHelperProductFailedNotification = @"StoreKitHelperProduc
     int count = [_purchasedProducts[PRODUCT_ID_POSTAGE] intValue];
     return count;
 }
+
+-(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+    NSLog(@"Finished");
+}
+
+-(void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
+    NSLog(@"Erorr");
+    [[NSNotificationCenter defaultCenter] postNotificationName:StoreKitHelperProductRestoreFailedNotification object:nil];
+}
+
 @end

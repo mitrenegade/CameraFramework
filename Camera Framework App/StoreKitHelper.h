@@ -11,6 +11,8 @@
 
 UIKIT_EXTERN NSString *const StoreKitHelperProductPurchasedNotification;
 UIKIT_EXTERN NSString *const StoreKitHelperProductFailedNotification;
+UIKIT_EXTERN NSString *const StoreKitHelperProductRestoredNotification;
+UIKIT_EXTERN NSString *const StoreKitHelperProductRestoreFailedNotification;
 
 #define PRODUCT_ID_POSTAGE @"com.neroh.heartfx.postage"
 #define PRODUCT_ID_LICENSE @"com.neroh.heartfx.license"

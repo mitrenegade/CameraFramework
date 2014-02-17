@@ -591,7 +591,7 @@ static AppDelegate * appDelegate;
     else if (sendOrShare == ACTION_SEND) {
         resultToSend = result;
         if (![StoreKitHelper hasPostage] && ![StoreKitHelper hasLicense]) {
-            [self promptForPurchase];
+            [self promptForPurchase:nil];
         }
         else {
             [self doActionSend];
@@ -635,8 +635,11 @@ static AppDelegate * appDelegate;
     [self presentViewController:activityVC animated:YES completion:nil];
 }
 
--(void)promptForPurchase {
-    [UIAlertView alertViewWithTitle:@"Purchase postage." message:@"Buy a stamp to send a valentine by email or text?" cancelButtonTitle:@"No thanks" otherButtonTitles:@[@"Send one email or text for $.99", @"Send unlimited valentines for $1.99"] onDismiss:^(int buttonIndex) {
+-(void)promptForPurchase:(NSString *)msg {
+    NSString *message = msg;
+    if (!message)
+        message = @"Buy a stamp to send a valentine by email or text?";
+    [UIAlertView alertViewWithTitle:@"Purchase postage" message:message cancelButtonTitle:@"No thanks" otherButtonTitles:@[@"Send one email or text for $.99", @"Send unlimited valentines for $1.99", @"Reload existing license"] onDismiss:^(int buttonIndex) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreKitHelperProductFailedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFailPurchase:) name:StoreKitHelperProductFailedNotification object:nil];
 
@@ -654,6 +657,21 @@ static AppDelegate * appDelegate;
             // one license
             [[StoreKitHelper sharedInstance] buyProduct:[StoreKitHelper license]];
         }
+        else {
+            if (!self.progress) {
+                self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                self.progress.mode = MBProgressHUDModeIndeterminate;
+            }
+            self.progress.labelText = @"Loading past purchases...";
+            // listen for
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreKitHelperProductRestoredNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restoreCompletedTransactionsFinished) name:StoreKitHelperProductRestoredNotification object:nil];
+
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreKitHelperProductRestoreFailedNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restoreCompletedTransactionsFailed) name:StoreKitHelperProductRestoreFailedNotification object:nil];
+
+            [[StoreKitHelper sharedInstance] restoreCompletedTransactions];
+        }
     } onCancel:nil];
 }
 
@@ -667,6 +685,33 @@ static AppDelegate * appDelegate;
 -(void)didFailPurchase:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     NSLog(@"Failed purchase: %@", userInfo[@"error"]);
+}
+
+-(void)restoreCompletedTransactionsFinished {
+    NSLog(@"Restored");
+    [self hideProgress];
+    if (![StoreKitHelper hasPostage] && ![StoreKitHelper hasLicense]) {
+        [self promptForPurchase:nil];
+    }
+    else {
+        [self doActionSend];
+    }
+}
+
+-(void)restoreCompletedTransactionsFailed {
+    NSLog(@"Failed");
+    [self hideProgress];
+    if (![StoreKitHelper hasPostage] && ![StoreKitHelper hasLicense]) {
+        [self promptForPurchase:@"Could not restore your old purchases"];
+    }
+    else {
+        [self doActionSend];
+    }
+}
+
+-(void)hideProgress {
+    [self.progress hide:YES];
+    self.progress = nil;
 }
 
 -(IBAction)didClickDelete:(id)sender {
