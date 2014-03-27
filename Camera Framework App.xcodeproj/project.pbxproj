@@ -934,7 +934,7 @@
 		9E0052991697CB9D00A4983D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bobby Ren (UQA7D88UV9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bobby Ren (H799H8B8DD)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Camera\\ Framework\\ App\\\"",
@@ -954,7 +954,7 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = FaceFXCam;
-				PROVISIONING_PROFILE = "B476373F-323A-4391-909E-BA747AF7104C";
+				PROVISIONING_PROFILE = "F6B9CD66-62E8-43B0-89DF-FB3B73646E9A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
