@@ -30,9 +30,21 @@
     // initialize parse
     [Parse setApplicationId:PARSE_APP_ID
                   clientKey:PARSE_CLIENT_ID];
-    
+
+    // allow current user
+    [PFUser enableAutomaticUser];
+    [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (error) {
+            NSLog(@"Anonymous login failed.");
+        } else {
+            NSLog(@"Anonymous user logged in.");
+            NSLog(@"Current user: %@", [PFUser currentUser]);
+        }
+    }];
+
     // connect to facebook via parse
-    [PFFacebookUtils initializeWithApplicationId:FACEBOOK_APP_ID];
+    //[PFFacebookUtils initializeWithApplicationId:FACEBOOK_APP_ID];
+    [PFFacebookUtils initializeFacebook];
     
     // enable twitter
     [PFTwitterUtils initializeWithConsumerKey:TWITTER_APP_CONSUMERKEY consumerSecret:TWITTER_APP_CONSUMERSECRET];

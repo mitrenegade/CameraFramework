@@ -9,7 +9,6 @@
 #import "ExploreViewController.h"
 #import <Parse/Parse.h>
 #import "AsyncImageView.h"
-#import "AWSHelper.h"
 #import "ParseTag.h"
 
 @interface ExploreViewController ()
@@ -85,12 +84,14 @@
     PFObject * object = [pfObjectArray objectAtIndex:indexPath.row];
     NSString * pfObjectID = object.objectId;
 	NSString *version =  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    NSString * thumbURL = [AWSHelper getURLForKey:[NSString stringWithFormat:@"%@", pfObjectID] inBucket:THUMBNAIL_IMAGE_URL_BUCKET];
-    // hack: old version
-    //thumbURL = [AWSHelper getURLForKey:[NSString stringWithFormat:@"%@", pfObjectID] inBucket:OLD_THUMBNAIL_IMAGE_URL_BUCKET];
-    NSLog(@"Cell %d url %@", indexPath.row, thumbURL);
-    [imageView setImageURL:[NSURL URLWithString:thumbURL]];
-    
+
+    PFFile *imageFile = object[@"thumbnail"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error) {
+            UIImage *img = [UIImage imageWithData:data];
+            [imageView setImage:img];
+        }
+    }];
     [cell.contentView addSubview:imageView];
     
     if (indexPath.row == [pfObjectArray count] - 1) {
@@ -111,11 +112,13 @@
     PFObject * object = [pfObjectArray objectAtIndex:indexPath.row];
     NSString * pfObjectID = object.objectId;
 	NSString *version =  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    NSString * thumbURL = [AWSHelper getURLForKey:[NSString stringWithFormat:@"%@", pfObjectID] inBucket:IMAGE_URL_BUCKET];
-    // hack: old version
-    //thumbURL = [AWSHelper getURLForKey:[NSString stringWithFormat:@"%@", pfObjectID] inBucket:OLD_IMAGE_URL_BUCKET];
-    NSLog(@"Cell %d url %@", indexPath.row, thumbURL);
-    [imageView setImageURL:[NSURL URLWithString:thumbURL]];
+    PFFile *imageFile = object[@"thumbnail"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error) {
+            UIImage *img = [UIImage imageWithData:data];
+            [imageView setImage:img];
+        }
+    }];
 
     UIViewController * viewController = [[UIViewController alloc] init];
     [viewController.view setBackgroundColor:[UIColor whiteColor]];
@@ -165,7 +168,7 @@
 #pragma mark - Table view delegate
 
 -(void)loadMore:(NSDate*)date {
-    NSString * className = @"StixTag";
+    NSString * className = @"ParseTag";
     PFQuery * query = [PFQuery queryWithClassName:className];
     [query whereKey:@"createdAt" lessThan:date];
     [query orderByDescending:@"createdAt"];
@@ -175,7 +178,8 @@
             [pfObjectArray addObjectsFromArray:objects];
             NSLog(@"Loaded %d objects, total objects %d", [objects count], [pfObjectArray count]);
         }
-        [self.tableView reloadData];
+        if ([objects count])
+            [self.tableView reloadData];
     }];
 }
 

@@ -20,19 +20,10 @@
 #define PARSE_APP_ID @"uFNlSDmQiNUBAbRpK0atWADrK9c7AjZAybEUyOtp"
 #define PARSE_CLIENT_ID @"tNPVkIuSNiSghL6gdupsqE7esx8WH6wZ48gXgzjC"
 
-//#define AWS_PHOTO_BUCKET @"com.neroh.cameraframework"
-#define AWS_PHOTO_BUCKET @"com.neroh.nerohcam3in1"
-#define IMAGE_URL_BUCKET @"com.neroh.nerohcam3in1.parse.tags"
-#define HIRES_IMAGE_URL_BUCKET @"com.neroh.nerohcam3in1.parse.tags.highres"
-#define STIXLAYER_IMAGE_URL_BUCKET @"com.neroh.nerohcam3in1.parse.tags.stixlayer"
-#define THUMBNAIL_IMAGE_URL_BUCKET @"com.neroh.nerohcam3in1.parse.tags.thumbnail"
-#define OLD_THUMBNAIL_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags.thumbnail"
-#define OLD_IMAGE_URL_BUCKET @"com.neroh.quickstickr.parse.tags"
-
 #define FLURRY_APP_KEY @"6GZSF69CDVS9QTBFDR95"
 
 #define USE_LOGIN 0
-#define TESTING 0
+#define TESTING 1
 
 @interface Constants : NSObject
 

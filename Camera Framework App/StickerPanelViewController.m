@@ -332,10 +332,10 @@ static AppDelegate * appDelegate;
         [parseTag setStixLayer:stixLayer];
         CGSize thumbSize = CGSizeMake(96, 155);
         [parseTag setThumbnail:[self.burnedImage resizedImage:thumbSize interpolationQuality:kCGInterpolationHigh]];
-        [parseTag uploadWithBlock:^(NSString *newObjectID, BOOL didUploadImage) {
-            if (didUploadImage) {
-                NSLog(@"Uploaded new picture object to Parse with new objectID: %@...still uploading images to AWS in background", newObjectID);
-                parseObjectID = newObjectID;
+        //[parseTag uploadWithBlock:^(NSString *newObjectID, BOOL didUploadImage) {
+        [parseTag saveOrUpdateToParseWithCompletion:^(BOOL success) {
+            if (success) {
+                parseObjectID = parseTag.pfObject.objectId;
                 if (facebookShareCallback) {
                     [self performSelector:facebookShareCallback];
                 }
@@ -344,7 +344,7 @@ static AppDelegate * appDelegate;
                 }
             }
             else
-                NSLog(@"Could not upload image to AWS! Parse objectID %@", newObjectID);
+                NSLog(@"Could not upload image to AWS! Parse objectID %@", parseTag.pfObject.objectId);
         }];
         
         didBurnImage = YES;
