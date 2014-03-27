@@ -23,7 +23,7 @@
 #define FLURRY_APP_KEY @"6GZSF69CDVS9QTBFDR95"
 
 #define USE_LOGIN 0
-#define TESTING 1
+#define TESTING 0
 
 @interface Constants : NSObject
 

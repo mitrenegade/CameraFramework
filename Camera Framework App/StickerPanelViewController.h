@@ -14,6 +14,7 @@
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
 #import "EmailLoginViewController.h"
+#import "ParseTag.h"
 
 #define STIX_PER_ROW 3
 #define STIX_SIZE 90
@@ -60,6 +61,8 @@ enum eStickerCollections {
     BOOL isDisplayingMysteryMessage;
     
     ACAccount * twitterAccount;
+
+    ParseTag *currentParseTag;
 }
 @property (nonatomic, weak) IBOutlet UIView * panelView;
 @property (nonatomic, weak) IBOutlet UIScrollView * scrollView;

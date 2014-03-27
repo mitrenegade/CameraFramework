@@ -327,6 +327,7 @@ static AppDelegate * appDelegate;
         [self didClickSaveWithResult:self.burnedImage];
 
         ParseTag * parseTag = [[ParseTag alloc] init];
+        currentParseTag = parseTag;
         //[parseTag setImage:stixView.image];
         [parseTag setImage:self.burnedImage];
         [parseTag setStixLayer:stixLayer];
@@ -528,8 +529,10 @@ static AppDelegate * appDelegate;
 - (void)publishStory
 {
     NSLog(@"Upload to facebook publishing story");
-    NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", IMAGE_URL_BUCKET, parseObjectID];
-    NSString * thumbLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", THUMBNAIL_IMAGE_URL_BUCKET, parseObjectID];
+    PFFile *image = currentParseTag.pfObject[@"image"];
+    PFFile *thumb = currentParseTag.pfObject[@"thumbnail"];
+    NSString * imageLink = [image url];
+    NSString * thumbLink = [thumb url];
     NSString * storeLink = @"http://bit.ly/ZIGKqr";
     NSMutableDictionary * params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                     imageLink, @"link",
@@ -729,16 +732,35 @@ static AppDelegate * appDelegate;
 }
 
 -(void)iosSendTweet {
-    NSString * imageLink = [NSString stringWithFormat:@"https://s3.amazonaws.com/%@/%@", IMAGE_URL_BUCKET, parseObjectID];
-    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"This is me after too many drinks %@ #facefxcam http://bit.ly/ZIGKqr", imageLink] forKey:@"status"] requestMethod:TWRequestMethodPOST];
-    
-    // Set the account used to post the tweet.
-    [postRequest setAccount:twitterAccount];
-    
-    // Perform the request created above and create a handler block to handle the response.
-    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+    PFFile *imageFile = currentParseTag.pfObject[@"image"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error) {
+            UIImage *img = [UIImage imageWithData:data];
+            // image can now be set on a UIImageView
+            [self iosSendTweetWithImage:twitterAccount image:img];
+        }
+    }];
+}
+
+-(void)iosSendTweetWithImage:(ACAccount *)twitterAccount image:(UIImage *)image {
+    NSString *shareMessage = @"This is my favorite selfie! #facefxcam"; // limited to 140
+    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"
+                  @"/1.1/statuses/update_with_media.json"];
+    NSDictionary *params = @{@"status" : shareMessage};
+    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                            requestMethod:SLRequestMethodPOST
+                                                      URL:url
+                                               parameters:params];
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.f);
+    [request addMultipartData:imageData
+                     withName:@"media[]"
+                         type:@"image/jpeg"
+                     filename:@"image.jpg"];
+    [request setAccount:twitterAccount];
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            NSLog(@"Twitter sent!");
+            [self performSelector:@selector(iosReceivedReplyWithResponse:error:) withObject:urlResponse withObject:error ];
+
             progress.mode = MBProgressHUDModeText;
             [self.progress setLabelText:@"Done!"];
             [self.progress hide:YES afterDelay:1.5];
