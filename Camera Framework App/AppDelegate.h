@@ -10,8 +10,14 @@
 #import <Parse/Parse.h>
 #import "UserInfo.h"
 #import "MBProgressHUD.h"
+#import <FacebookSDK/FacebookSDK.h>
+//#import "Instagram.h"
 
 static NSString* const kMyUserInfoDidChangeNotification= @"kMyUserInfoDidChangeNotification";
+static NSString* const kInstagramAuthSuccessNotification= @"kInstagramAuthSuccessNotification";
+static NSString* const kDidUnlockMysteryPackNotification= @"kDidUnlockMysteryPackNotification";
+
+#define MYSTERY_PACK_UNLOCK_COUNT 3
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
@@ -21,6 +27,10 @@ static NSString* const kMyUserInfoDidChangeNotification= @"kMyUserInfoDidChangeN
 
 @property (strong, atomic) UserInfo * myUserInfo;
 
+//@property (nonatomic, strong) Instagram * instagram;
+
 -(void)didLoginPFUser:(PFUser *)user withUserInfo:(UserInfo*)userInfo;
 
+//-(void)instagramAuth;
+-(void)incrementMysteryPackCount;
 @end

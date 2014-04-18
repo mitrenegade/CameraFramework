@@ -7,33 +7,63 @@
 //
 
 #import "AppDelegate.h"
-#import "FirstViewController.h"
-#import "SecondViewController.h"
 #import <Parse/Parse.h>
 #import "ParseHelper.h"
 #import "PreviewController.h"
 #import "ProfileViewController.h"
 #import "CameraViewController.h"
+#import "Constants.h"
+#import "Flurry.h"
+#import <Crashlytics/Crashlytics.h>
+#import "UIAlertView+MKBlockAdditions.h"
+#import "Appirater.h"
 
 @implementation AppDelegate
 
 @synthesize myUserInfo;
+//@synthesize instagram;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [application setStatusBarStyle:UIStatusBarStyleDefault];
+
     // initialize parse
-    [Parse setApplicationId:@"uFNlSDmQiNUBAbRpK0atWADrK9c7AjZAybEUyOtp"
-                  clientKey:@"tNPVkIuSNiSghL6gdupsqE7esx8WH6wZ48gXgzjC"];
-    
+    [Parse setApplicationId:PARSE_APP_ID
+                  clientKey:PARSE_CLIENT_ID];
+
+    // allow current user
+    [PFUser enableAutomaticUser];
+    [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (error) {
+            NSLog(@"Anonymous login failed.");
+        } else {
+            NSLog(@"Anonymous user logged in.");
+            NSLog(@"Current user: %@", [PFUser currentUser]);
+        }
+    }];
+
     // connect to facebook via parse
-    [PFFacebookUtils initializeWithApplicationId:FACEBOOK_APP_ID];
+    //[PFFacebookUtils initializeWithApplicationId:FACEBOOK_APP_ID];
+    [PFFacebookUtils initializeFacebook];
     
     // enable twitter
     [PFTwitterUtils initializeWithConsumerKey:TWITTER_APP_CONSUMERKEY consumerSecret:TWITTER_APP_CONSUMERSECRET];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    // flurry
+	NSString *version =  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    [Flurry setAppVersion:version];
+    [Flurry startSession:FLURRY_APP_KEY];
+    
+    // appirater
+    [Appirater appLaunched];
+
+    // crashlytics
+    [Crashlytics startWithAPIKey:@"747b4305662b69b595ac36f88f9c2abe54885ba3"];
+    
     // try login process
+#if USE_LOGIN
     PFUser * currentUser = [PFUser currentUser];
     if (currentUser) {
         NSLog(@"Current PFUser exists.");
@@ -76,6 +106,9 @@
         self.window.rootViewController = previewController;
         [self.window makeKeyAndVisible];
     }
+#else
+    [self continueInitForQuickStickr];
+#endif
     
     return YES;
 }
@@ -95,11 +128,13 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //[FBSession.activeSession handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -107,9 +142,31 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+/*
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSLog(@"access token: %@", self.instagram.accessToken);
+    return [self.instagram handleOpenURL:url];
+}
+*/
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+#if USE_LOGIN
     return [PFFacebookUtils handleOpenURL:url];
+#else
+    NSLog(@"URL Scheme: %@", url.scheme);
+    if ([url.scheme rangeOfString:FACEBOOK_APP_ID].location != NSNotFound) {
+        NSLog(@"Facebook scheme redirect!");
+        return [FBSession.activeSession handleOpenURL:url];
+    }
+    else if ([url.scheme rangeOfString:INSTAGRAM_CLIENT_ID].location != NSNotFound) {
+        /*
+        NSLog(@"Instagram scheme redirect!");
+        NSLog(@"access token: %@", self.instagram.accessToken);
+        return [self.instagram handleOpenURL:url];
+         */
+    }
+#endif
 }
 
 /*
@@ -131,30 +188,104 @@
     
     // dismiss login process
     [self.window.rootViewController dismissModalViewControllerAnimated:YES];
-    
-    UIViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
+    self.myUserInfo = userInfo;
+
+    [self continueInit];
+}
+
+-(void)continueInit {
+    CameraViewController *cameraController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
     ProfileViewController * profileController = [[ProfileViewController alloc] init];
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[cameraController, profileController];
     
     self.window.rootViewController = self.tabBarController;
-
-    self.myUserInfo = userInfo;
-    /*
-    // get userInfo
-    [UserInfo GetUserInfoForPFUser:user withBlock:^(UserInfo * userInfo, NSError * error) {
-        if (error) {
-            NSLog(@"GetUserInfoForPFUser failed: error: %@", error);
-        }
-        else {
-            
-        }
-    }];
-     */
-    [self continueInit];
 }
 
--(void)continueInit {
-
+-(void)continueInitForQuickStickr {
+    [self.window makeKeyAndVisible];
+    CameraViewController *controller = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
+    self.window.rootViewController = controller;
 }
+
+-(void)incrementMysteryPackCount {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    int ct = [defaults integerForKey:@"mysteryPackCount"];
+    if (ct >= MYSTERY_PACK_UNLOCK_COUNT)
+        return;
+#if !TESTING
+    [Flurry logEvent:@"MYSTERY PACK INCREMENTED" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:ct+1], @"Share count", nil]];
+#endif
+    [defaults setInteger:ct+1 forKey:@"mysteryPackCount"];
+    if (ct < MYSTERY_PACK_UNLOCK_COUNT-1) {
+        NSLog(@"Sharing the image incremented mystery box count! %d of 3 shares complete.", ct+1);
+        int n = 3 - (ct+1);
+        [UIAlertView alertViewWithTitle:@"Thanks for sharing" message:[NSString stringWithFormat:@"Share %d more times and you'll get a gift!", n]];
+    }
+    else {
+        // unlock mystery box
+        NSLog(@"Sharing the image unlocked mystery box!");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDidUnlockMysteryPackNotification object:nil];
+    }
+    [defaults synchronize];
+}
+
+#if 0
+// instagram auth not needed since we use app through document handler
+/*
+-(void)instagramAuth {
+    self.instagram = [[Instagram alloc] initWithClientId:INSTAGRAM_CLIENT_ID
+                                                delegate:nil];
+    // here i can set accessToken received on previous login
+    self.instagram.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    self.instagram.sessionDelegate = self;
+    NSLog(@"access token: %@", self.instagram.accessToken);
+    if ([self.instagram isSessionValid]) {
+        NSLog(@"Has valid instagram!");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramAuthSuccessNotification object:nil];
+    } else {
+        [self.instagram authorize:[NSArray arrayWithObjects:@"comments", @"likes", nil]];
+    }
+}
+
+#pragma - IGSessionDelegate
+
+-(void)igDidLogin {
+    NSLog(@"Instagram did login");
+    // here i can store accessToken
+    [[NSUserDefaults standardUserDefaults] setObject:self.instagram.accessToken forKey:@"accessToken"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramAuthSuccessNotification object:nil];
+}
+
+-(void)igDidNotLogin:(BOOL)cancelled {
+    NSLog(@"Instagram did not login");
+    NSString* message = nil;
+    if (cancelled) {
+        message = @"Access cancelled!";
+    } else {
+        message = @"Access denied!";
+    }
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+    [alertView show];
+}
+
+-(void)igDidLogout {
+    NSLog(@"Instagram did logout");
+    // remove the accessToken
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"accessToken"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)igSessionInvalidated {
+    NSLog(@"Instagram session was invalidated");
+}
+ */
+#endif
+
 @end

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CaptureSessionManager.h"
+#import "StickerPanelViewController.h"
+#import "MBProgressHUD.h"
 
-@interface CameraViewController : UIViewController
+@interface CameraViewController : UIViewController <StickerPanelDelegate>
 
 // CaptureSessionManager
 @property (assign) BOOL isCapturing;
@@ -19,6 +21,11 @@
 @property (nonatomic, weak) IBOutlet UIButton * buttonTakePicture;
 @property (nonatomic, weak) IBOutlet UIButton * buttonFlash;
 @property (nonatomic, weak) IBOutlet UIButton * buttonDevice;
+
+@property (nonatomic, weak) IBOutlet UIView * aperture;
+@property (nonatomic, strong) MBProgressHUD * progress;
+
+@property (nonatomic, weak) IBOutlet UIImageView * instructionsView;
 
 -(IBAction)toggleFlashMode:(id)sender;
 -(IBAction)toggleCameraDevice:(id)sender;

@@ -18,5 +18,5 @@
 -(IBAction)didClickTwitterSignup:(id)sender;
 -(IBAction)didClickEmailSignup:(id)sender;
 
-#endif
 @end
+#endif

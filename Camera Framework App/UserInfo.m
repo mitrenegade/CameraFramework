@@ -7,7 +7,6 @@
 //
 
 #import "UserInfo.h"
-#import "AWSHelper.h"
 #import "Constants.h"
 
 @implementation UserInfo
@@ -195,10 +194,9 @@
     // AWSHelper uploadImage must always be on main thread!
     NSString * name =[NSString stringWithFormat:@"%@", self.username];
     if (newPhoto) {
-        NSLog(@"SavePhotoToAWS: name %@ photo %x", name, newPhoto);
-        [AWSHelper uploadImage:newPhoto withName:name toBucket:AWS_PHOTO_BUCKET withCallback:^(NSString *url) {
-            NSLog(@"New URL for photo: %@", url);
-            self.photoURL = url;
+        NSData *data = UIImageJPEGRepresentation(newPhoto, .8);
+        PFFile *imageFile = [PFFile fileWithData:data];
+        [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             self.photo = newPhoto;
             photoSaved(YES);
         }];
@@ -210,23 +208,14 @@
         UIImage * newPhoto = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
         // AWSHelper uploadImage must always be on main thread!
         dispatch_async(dispatch_get_main_queue(), ^{
-            [AWSHelper uploadImage:newPhoto withName:nameKey toBucket:AWS_PHOTO_BUCKET withCallback:^(NSString *url) {
-                NSLog(@"New URL for photo: %@", url);
-                self.photoURL = url;
+            NSData *data = UIImageJPEGRepresentation(newPhoto, .8);
+            PFFile *imageFile = [PFFile fileWithData:data];
+            [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 self.photo = newPhoto;
                 photoSaved(YES);
             }];
         });
     });
-}
-
--(NSString*)photoURL {
-    if (photoURL == nil) {
-        // generate new link from amazon
-        photoURL = [AWSHelper getURLForKey:self.username inBucket:AWS_PHOTO_BUCKET];
-        NSLog(@"New photoURL generated from AWS: %@", photoURL);
-    }
-    return photoURL;
 }
 
 @end
