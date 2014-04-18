@@ -431,7 +431,7 @@ static AppDelegate * appDelegate;
                 }
             }
             else
-                NSLog(@"Could not upload image to AWS! Parse objectID %@", parseTag.pfObject.objectId);
+                NSLog(@"Could not upload image to Parse! Parse objectID %@", parseTag.pfObject.objectId);
         }];
         
         didBurnImage = YES;

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #define FACEBOOK_APP_ID @"432816350135387"
-#define FACEBOOK_APP_SECRET @"b88fde3caa91adc70fdb8da145f95f75"
 
 #define TWITTER_APP_CONSUMERKEY @"TGqIwGetsrJYAoPYsthQ"
 #define TWITTER_APP_CONSUMERSECRET @"EMVxBTllAHbTSFbS91BqplipZYq14J76Pn9QPCUWxk"

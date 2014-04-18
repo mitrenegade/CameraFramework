@@ -41,6 +41,7 @@
 		9E761E2016F63CA700AEF2F9 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E761E1E16F63CA700AEF2F9 /* delete@2x.png */; };
 		9E761E2916F64E7400AEF2F9 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E761E2816F64E7400AEF2F9 /* libFlurry.a */; };
 		9E761E4216F6661D00AEF2F9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E761E4116F6661D00AEF2F9 /* Crashlytics.framework */; };
+		9E7E0B7A19018571001FE583 /* StoreKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7E0B7919018571001FE583 /* StoreKitHelper.m */; };
 		9E7E9077187B12B400AA53AC /* share_contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7E9075187B12B400AA53AC /* share_contacts.png */; };
 		9E7E9078187B12B400AA53AC /* share_contacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7E9076187B12B400AA53AC /* share_contacts@2x.png */; };
 		9E85A49816E4753C001D7C91 /* faceoverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E85A49616E4753C001D7C91 /* faceoverlay.png */; };
@@ -188,6 +189,8 @@
 		9E761E2716F64E7400AEF2F9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		9E761E2816F64E7400AEF2F9 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		9E761E4116F6661D00AEF2F9 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		9E7E0B7819018571001FE583 /* StoreKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreKitHelper.h; sourceTree = "<group>"; };
+		9E7E0B7919018571001FE583 /* StoreKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreKitHelper.m; sourceTree = "<group>"; };
 		9E7E9075187B12B400AA53AC /* share_contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_contacts.png; sourceTree = "<group>"; };
 		9E7E9076187B12B400AA53AC /* share_contacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_contacts@2x.png"; sourceTree = "<group>"; };
 		9E85A49616E4753C001D7C91 /* faceoverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faceoverlay.png; sourceTree = "<group>"; };
@@ -356,7 +359,6 @@
 				9E761E4116F6661D00AEF2F9 /* Crashlytics.framework */,
 				9E67421216E9F9CE00748BCD /* Twitter.framework */,
 				9EE927F616C88B2C005B4CCC /* StickerApp114.png */,
-				9EE927F416C88A9F005B4CCC /* Default-568h@2x.png */,
 				9EE927F216C88A92005B4CCC /* StickerApp57.png */,
 				9EAD9BFE16BE1A9200362D17 /* AssetsLibrary.framework */,
 				9E9EB2FA16B2610600693867 /* CoreMedia.framework */,
@@ -591,6 +593,8 @@
 				9EAD9BEB16BCC9B400362D17 /* UIImage+RoundedCorner.m */,
 				9EAD9BFB16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.h */,
 				9EAD9BFC16BE160E00362D17 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
+				9E7E0B7819018571001FE583 /* StoreKitHelper.h */,
+				9E7E0B7919018571001FE583 /* StoreKitHelper.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -827,6 +831,7 @@
 				9E49FF8518E48D0500567497 /* ParseUserInfo.m in Sources */,
 				9EC0835B16CF02F400C7AEE4 /* FBHelper.m in Sources */,
 				9E85A4D016E48D93001D7C91 /* ShareViewController.m in Sources */,
+				9E7E0B7A19018571001FE583 /* StoreKitHelper.m in Sources */,
 				9EF1ECDD16ED1563003219FA /* MGInstagram.m in Sources */,
 				9E27946B16F67C93009142F1 /* Appirater.m in Sources */,
 				9E3A344C17062749002B6C15 /* ExploreViewController.m in Sources */,
