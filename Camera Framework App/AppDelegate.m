@@ -17,6 +17,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import "UIAlertView+MKBlockAdditions.h"
 #import "Appirater.h"
+#import "StoreKitHelper.h"
 
 @implementation AppDelegate
 
